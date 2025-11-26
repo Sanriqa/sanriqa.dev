@@ -118,7 +118,6 @@
             opacity: 0;
             display: flex;
             justify-content: flex-start;
-            /* Soldan başla */
             animation: fadeInLine 0.1s ease-out 0.5s forwards;
         }
 
@@ -126,11 +125,9 @@
             width: 100%;
             height: 100%;
             background: #fff;
-            /* Neon Parlama */
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 20px rgba(255, 255, 255, 0.5);
             transform-origin: left;
             transform: scaleX(0);
-            /* Glitch Animasyonu */
             animation: glitchLoad 2.5s linear forwards;
         }
 
@@ -140,7 +137,6 @@
             pointer-events: none;
         }
 
-        /* Yükleme Animasyonları Keyframes */
         @keyframes fadeInUpLogo {
             0% {
                 opacity: 0;
@@ -170,56 +166,44 @@
                 transform: scaleX(0.1);
             }
 
-            /* Yavaş başla */
             20% {
                 transform: scaleX(0.4);
             }
 
-            /* Aniden %40 */
             25% {
                 transform: scaleX(0.2);
             }
 
-            /* HOP! Geri sar */
             40% {
                 transform: scaleX(0.45);
             }
 
-            /* Yavaş ilerle */
             50% {
                 transform: scaleX(0.45);
             }
 
-            /* Takıl (Bekle) */
             60% {
                 transform: scaleX(0.8);
             }
 
-            /* Hızlıca %80 */
             70% {
                 transform: scaleX(0.6);
             }
 
-            /* Tekrar geri sar */
             80% {
                 transform: scaleX(0.9);
             }
 
-            /* Neredeyse bitti */
             90% {
                 transform: scaleX(0.85);
             }
 
-            /* Son bir kararsızlık */
             100% {
                 transform: scaleX(1);
             }
-
-            /* BOOM! Bitti. */
         }
 
         /* --- ANA CSS --- */
-
         body::before {
             content: "";
             position: fixed;
@@ -400,7 +384,6 @@
             left: 0;
             z-index: 1000;
             background: transparent;
-            /* Navigasyon biraz daha geç gelsin ki splash bitmiş olsun */
             animation: slideDownIn 0.7s ease-out forwards;
             animation-delay: 2.8s;
             transform: translateY(-100%);
@@ -537,13 +520,6 @@
             font-weight: 500;
         }
 
-        @media (max-width: 768px) {
-            .language-selector {
-                margin-left: auto;
-                margin-right: 0;
-            }
-        }
-
         @keyframes fadeInSlideUp {
             from {
                 opacity: 0;
@@ -586,7 +562,6 @@
             opacity: 0;
             animation: fadeInSlideUp 0.8s ease-out forwards;
             animation-delay: 2.8s;
-            /* Splash screen delay */
         }
 
         .hero-title {
@@ -601,7 +576,6 @@
             opacity: 0;
             animation: fadeInSlideUp 0.8s ease-out forwards;
             animation-delay: 3s;
-            /* Splash screen delay */
         }
 
         .hero-arrow-container {
@@ -681,7 +655,6 @@
             opacity: 0;
             animation: fadeInSlideUp 0.8s ease-out forwards;
             animation-delay: 3.2s;
-            /* Splash delay */
             margin-bottom: 1.5rem;
         }
 
@@ -692,7 +665,6 @@
             opacity: 0;
             animation: fadeInSlideUp 0.8s ease-out forwards;
             animation-delay: 3.4s;
-            /* Splash delay */
         }
 
         .btn {
@@ -1305,6 +1277,9 @@
             max-width: 1600px;
             margin: 0 auto;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 99;
+            background-color: #000;
         }
 
         .contact-title {
@@ -1312,6 +1287,7 @@
             font-weight: 500;
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin-bottom: 2rem;
+            word-wrap: break-word;
         }
 
         footer {
@@ -1321,6 +1297,9 @@
             justify-content: space-between;
             max-width: 1600px;
             margin: 0 auto;
+            position: relative;
+            z-index: 99;
+            background-color: #000;
         }
 
         .footer-links {
@@ -1526,10 +1505,33 @@
             }
         }
 
+        /* --- MOBİL İÇİN ÖZEL DÜZENLEMELER (BURASI GÜNCELLENDİ) --- */
         @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 1.5rem;
+            }
+
+            .hero-content {
+                margin-left: 0;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
             .hero-title {
-                font-size: 3rem;
-                letter-spacing: -1px;
+                font-size: 3.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                line-height: 1.1;
+            }
+
+            .hero-arrow-container {
+                margin: 0.5rem;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
             }
 
             .section-title {
@@ -1544,18 +1546,32 @@
                 grid-template-columns: 1fr;
             }
 
-            .col-left .project-image-container,
-            .col-right .project-image-container {
-                height: 350px !important;
+            .col-left .project-card:nth-child(1) .project-image-container,
+            .col-left .project-card:nth-child(2) .project-image-container,
+            .col-right .project-card:nth-child(1) .project-image-container,
+            .col-right .project-card:nth-child(2) .project-image-container {
+                height: 300px !important;
             }
 
             #projects.section {
-                padding-left: 2rem;
-                padding-right: 2rem;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
             }
 
+            /* NAV DÜZENLEMESİ */
             .nav-links {
                 display: none;
+                /* Linkleri gizle */
+            }
+
+            nav {
+                padding: 0 10px;
+            }
+
+            .nav-container {
+                padding: 0 20px;
+                justify-content: space-between;
+                width: 100%;
             }
 
             .about-grid {
@@ -1578,6 +1594,52 @@
             .timeline-year {
                 width: 100%;
                 text-align: left;
+            }
+
+            .testimonial-card {
+                min-width: 85vw;
+                max-width: 85vw;
+                padding: 1.5rem;
+            }
+
+            /* STICKY/CONTACT ÇAKIŞMASI DÜZELTME */
+            .sticky-container {
+                height: auto !important;
+                /* Yüksekliği serbest bırak */
+                position: static;
+            }
+
+            .why-me-card {
+                position: static !important;
+                /* Sticky özelliğini iptal et */
+                top: auto !important;
+                margin-bottom: 2rem;
+                z-index: 1 !important;
+                box-shadow: none !important;
+            }
+
+            /* BENTO GRID DÜZELTME */
+            .card-large,
+            .card-small {
+                min-height: auto;
+            }
+
+            .service-visual img {
+                height: auto !important;
+            }
+
+            .contact-title {
+                font-size: 1.8rem;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
             }
         }
 
@@ -1671,7 +1733,7 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) and (min-width: 769px) {
             .testimonial-card {
                 min-width: 300px;
                 max-width: 300px;
@@ -1807,6 +1869,7 @@
             position: relative;
             display: inline-block;
             cursor: pointer;
+            max-width: 100%;
         }
 
         .contact-title {
@@ -2380,18 +2443,12 @@
 
         <script>
             // --- SPLASH SCREEN LOGIC ---
-            // Sayfa yüklenirken scroll'u kilitle
             document.body.style.overflow = 'hidden';
 
-            // Sayfa yüklendiğinde
             window.addEventListener('load', () => {
                 const loader = document.getElementById('loader');
-
-                // Animasyon süresi kadar bekle (2500ms animasyon + biraz marj)
                 setTimeout(() => {
                     loader.classList.add('loader-hide');
-
-                    // Scroll kilidini aç
                     document.body.style.overflow = '';
                 }, 2600);
             });
