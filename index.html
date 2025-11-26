@@ -1290,11 +1290,16 @@
             word-wrap: break-word;
         }
 
+        /* --- YENİ DÜZENLENMİŞ FOOTER --- */
         footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 3rem;
+            border-top: none;
+            /* Border kaldırıldı */
+            padding: 2rem 3rem;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            /* Ortalandı */
+            align-items: center;
+            width: 100%;
             max-width: 1600px;
             margin: 0 auto;
             position: relative;
@@ -1302,15 +1307,19 @@
             background-color: #000;
         }
 
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-links a {
-            color: #999;
-            text-decoration: none;
-            font-family: 'Inter', sans-serif;
+        .footer-copyright {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-align: center;
+            /* PARLAK SİYAH / DARK CHROME EFEKTİ */
+            background: linear-gradient(180deg, #555 0%, #1a1a1a 50%, #555 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #333;
+            /* Fallback */
+            letter-spacing: 1px;
         }
 
         .services-header-row {
@@ -1505,7 +1514,7 @@
             }
         }
 
-        /* --- MOBİL İÇİN ÖZEL DÜZENLEMELER (BURASI GÜNCELLENDİ) --- */
+        /* --- MOBİL İÇİN ÖZEL DÜZENLEMELER --- */
         @media (max-width: 768px) {
             .hero {
                 padding: 3rem 1.5rem;
@@ -1558,10 +1567,8 @@
                 padding-right: 1.5rem;
             }
 
-            /* NAV DÜZENLEMESİ */
             .nav-links {
                 display: none;
-                /* Linkleri gizle */
             }
 
             nav {
@@ -1602,23 +1609,19 @@
                 padding: 1.5rem;
             }
 
-            /* STICKY/CONTACT ÇAKIŞMASI DÜZELTME */
             .sticky-container {
                 height: auto !important;
-                /* Yüksekliği serbest bırak */
                 position: static;
             }
 
             .why-me-card {
                 position: static !important;
-                /* Sticky özelliğini iptal et */
                 top: auto !important;
                 margin-bottom: 2rem;
                 z-index: 1 !important;
                 box-shadow: none !important;
             }
 
-            /* BENTO GRID DÜZELTME */
             .card-large,
             .card-small {
                 min-height: auto;
@@ -1633,13 +1636,7 @@
             }
 
             footer {
-                flex-direction: column;
-                gap: 1.5rem;
-                text-align: center;
-            }
-
-            .footer-links {
-                justify-content: center;
+                padding: 2rem 1rem;
             }
         }
 
@@ -2423,21 +2420,18 @@
 
         <section id="contact" class="contact-section reveal-on-scroll">
             <div class="email-wrapper" onclick="copyEmail()">
-                <h2 class="contact-title" style="font-weight: 800; cursor: pointer;">sanriqa@sanriqa.com</h2>
+                <h2 class="contact-title" style="font-weight: 800; cursor: pointer;">info@sanriqa.dev</h2>
                 <span id="copy-feedback" data-lang="msg_copied">Kopyalandı!</span>
             </div>
             <p style="font-size: 1.2rem; color: #999; margin-bottom: 3rem;" data-lang="contact_text">
                 Markanı bir üst seviyeye taşımaya hazır mısın? İletişime geç ve birlikte bir şeyler oluşturalım.
             </p>
-            <a href="mailto:sanriqa@sanriqa.com" class="btn btn-primary" data-lang="btn_contact">İletişime Geç →</a>
+            <a href="mailto:info@sanriqa.dev" class="btn btn-primary" data-lang="btn_contact">İletişime Geç →</a>
         </section>
 
         <footer class="reveal-on-scroll">
-            <div style="color: #999;" data-lang="footer_rights">© 2025 Sanriqa. All rights reserved.</div>
-            <div class="footer-links">
-                <a href="#">Twitter</a>
-                <a href="#">Instagram</a>
-                <a href="#">LinkedIn</a>
+            <div class="footer-container">
+                <div style="opacity: 50%;">© 2025 Sanriqa. All rights reserved.</div>
             </div>
         </footer>
 
