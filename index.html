@@ -2337,34 +2337,27 @@
             padding-bottom: 100px !important;
         }
 
+        /* --- FIVEM RETRO TASARIM (FİNAL ZIG-ZAG ve OK DÜZELTMESİ) --- */
         .fivem-layout-container {
             width: 100%;
-            max-width: 850px;
-            /* Genişlik daraltıldı */
-            height: 100%;
-            /* Modalın tüm yüksekliğini kapsasın */
-            min-height: 500px;
-            /* Minimum yükseklik */
-            margin: 0 auto;
+            max-width: 900px;
+            margin: 10px auto 0 auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            /* DİKEYDE TAM ORTALA */
             gap: 1rem;
-            /* Satırlar arası boşluk azaltıldı */
+            padding-bottom: 30px;
             font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
         }
 
         /* Üst Başlık Görseli */
         .fivem-header-img {
             display: block;
-            margin: 0 auto 0.5rem auto;
-            /* Alt boşluk iyice kısıldı */
+            margin: 0 auto 1rem auto;
             width: auto;
             height: auto;
-            max-height: 60px;
-            /* Görsel küçüldü */
-            max-width: 60%;
+            max-height: 70px;
+            max-width: 70%;
             object-fit: contain;
             filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
             animation: fadeInDown 1s ease;
@@ -2374,53 +2367,47 @@
         .fivem-row {
             display: flex;
             align-items: center;
-            /* Logoları ve yazıyı ortala */
-            gap: 1rem;
-            width: 95%;
-            /* Genişlik */
+            gap: 1.5rem;
+            /* Boşluk artırıldı */
+            width: 90%;
             opacity: 0;
             animation: fadeInUpCard 0.8s ease forwards;
             padding: 5px;
             background: transparent !important;
         }
 
-        /* SOLDAKİLER */
+        /* SOLDAKİLER (PZ ve DDZ) */
         .fivem-row.left {
             flex-direction: row;
             margin-right: auto;
+            /* Sola yapıştırır */
             text-align: left;
+            justify-content: flex-start;
         }
 
-        /* SAĞDAKİ (ZIG-ZAG) */
+        /* SAĞDAKİ (NF ROLEPLAY) - KESİN DÜZELTME */
         .fivem-row.right {
-            flex-direction: row-reverse;
-            /* Resim Sağda */
+            flex-direction: row;
+            /* Düz sıralama: [Yazı] [Logo] */
             margin-left: auto;
-            /* Kutuyu sağa yasla */
-            text-align: right;
-            /* Yazıları sağa yasla (Daha düzgün Z görünümü için) */
-        }
-
-        /* Sağdaki listenin noktalarını sağa al */
-        .fivem-row.right .retro-list li {
-            flex-direction: row-reverse;
-        }
-
-        .fivem-row.right .retro-list li::before {
-            margin-right: 0;
-            margin-left: 8px;
-            /* Ok işaretini sola al */
+            /* Kutu sağa kayar */
+            justify-content: flex-end;
+            /* İçeriği sağa yaslar */
+            text-align: left;
+            /* Yazı bloğu sola hizalı kalır (okunabilirlik) */
         }
 
         /* LOGOLAR */
         .fivem-logo {
-            width: 75px;
-            /* Logo küçüldü */
-            height: 75px;
+            width: 110px;
+            /* Büyütüldü (100px'ten 110px'e) */
+            height: 110px;
+            /* Büyütüldü */
             object-fit: contain;
             border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: none !important;
             background: transparent !important;
+            box-shadow: none !important;
             flex-shrink: 0;
         }
 
@@ -2441,14 +2428,12 @@
 
         .retro-role {
             font-size: 1rem;
-            /* Font küçüldü */
             font-weight: 700;
             color: #fff;
             margin: 0;
             line-height: 1.2;
         }
 
-        /* Proje İsmi */
         .retro-name {
             font-size: 1.1rem;
             font-weight: 800;
@@ -2459,39 +2444,19 @@
             letter-spacing: 1px;
         }
 
-        /* Liste */
-        .retro-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
 
-        .retro-list li {
-            font-size: 0.8rem;
-            /* Liste fontu küçüldü */
-            color: #bbb;
-            line-height: 1.3;
-            /* Satır aralığı kısıldı */
-            display: flex;
-            align-items: center;
-            /* Dikey ortala */
-        }
-
-        .retro-list li::before {
-            content: "> ";
-            margin-right: 6px;
-            color: #ff0000;
-            font-weight: bold;
-            font-size: 0.7rem;
-        }
 
         /* Mobil Düzen */
         @media (max-width: 768px) {
             .fivem-layout-container {
                 justify-content: flex-start;
-                /* Mobilde üstten başlasın */
                 padding-top: 20px;
                 gap: 2rem;
+            }
+
+            .fivem-row {
+                margin: 0 auto !important;
+                width: 100%;
             }
 
             .fivem-row,
@@ -2499,19 +2464,6 @@
                 flex-direction: column !important;
                 align-items: center !important;
                 text-align: center !important;
-                width: 100%;
-                margin: 0 !important;
-            }
-
-            .fivem-row.right .retro-list li {
-                flex-direction: row;
-                /* Mobilde listeyi düzelt */
-                justify-content: center;
-            }
-
-            .fivem-row.right .retro-list li::before {
-                margin-left: 0;
-                margin-right: 6px;
             }
 
             .retro-list li {
@@ -2521,7 +2473,7 @@
             .fivem-logo {
                 width: 65px;
                 height: 65px;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
             }
         }
     </style>
@@ -2645,10 +2597,10 @@
                 </div>
 
                 <div class="col-right">
-                    <div class="card project-card reveal-on-scroll delay-200" data-project-url="#"
+                    <div class="card project-card reveal-on-scroll delay-200" onclick="openModal('LudoToys')"
                         style="--delay: 0.1s;">
                         <div class="project-image-container">
-                            <img src="ludotoys.png" alt="Project Image 2" class="project-image" loading="lazy">
+                            <img src="ludotoys.png" alt="LudoToys Projects" class="project-image" loading="lazy">
                             <span class="project-arrow">→</span>
                         </div>
                     </div>
@@ -3109,7 +3061,7 @@
                 }, 1000);
             });
 
-            // --- DİL ÇEVİRİLERİ (GENEL SİTE) ---
+            // --- GENEL SİTE DİL VERİLERİ ---
             const translations = {
                 tr: {
                     msg_copied: "Kopyalandı!",
@@ -3125,7 +3077,7 @@
                     btn_contact: "İletişime Geç",
                     bubble_1_text: "“Onunla çalışmak oyunu tamamen değiştirdi!”",
                     bubble_1_author: "- Alesta",
-                    bubble_2_text: "“Dönüşümlerimizi %200 artırdık.”",
+                    bubble_2_text: "“We increased our conversions by 200%.”",
                     bubble_2_author: "- DrPlague",
                     about_badge: "● Uzman Tasarımcı",
                     about_title: "Sanriqa, Tasarımcınız",
@@ -3321,9 +3273,9 @@
                     section_projects_title: "Design <span>Dienstleistungen</span>",
                     services_main_desc: "Umfassende Designlösungen zur Stärkung Ihrer Marke.",
                     service_web_title: '<i class="fa-solid fa-window-maximize"></i> Website Design',
-                    service_web_desc: "Atemberaubende, nutzerzentrierte Websites, die perfekt zu Ihrer Marke passen und das Engagement steigern.",
+                    service_web_desc: "Atemberaubende, nutzerzentrierte Websites, die perfekt zu Ihrer Marke passen ve das Engagement steigern.",
                     service_graphic_title: '<i class="fa-solid fa-pen-nib"></i> Grafikdesign',
-                    service_graphic_desc: "Mutige, ansprechende und vielseitige Grafikdesigns, die Ihre Marke hervorheben.",
+                    service_graphic_desc: "Mutige, ansprechende ve vielseitige Grafikdesigns, die Ihre Marke hervorheben.",
                     service_logo_title: '<i class="fa-solid fa-shapes"></i> Logo Design',
                     service_logo_desc: "Unverwechselbare und skalierbare Logos, die die Identität und Vision Ihrer Marke verkörpern.",
                     service_motion_title: '<i class="fa-solid fa-play"></i> Motion Design',
@@ -3363,11 +3315,11 @@
                     whyme_3_neg_title: "Klischee Konzepte",
                     whyme_3_neg_desc: "Designs, die keine aktuellen Trends widerspiegeln.",
                     whyme_4_pos_title: "Erfahrener Profi",
-                    whyme_4_pos_desc: "Zugriff auf einen Experten mit jahrelanger Erfahrung.",
+                    whyme_4_pos_desc: "Zugriff auf einen Experten mit jahrelık Erfahrung.",
                     whyme_4_neg_title: "Amateur-Designer",
-                    whyme_4_neg_desc: "Mangelnde Erfahrung kann zu Fehlern führen.",
-                    contact_text: "Bereit, Ihre Marke auf die nächste Stufe zu heben? Kontaktieren Sie mich.",
-                    footer_rights: "© 2025 Sanriqa. Alle Rechte vorbehalten."
+                    whyme_4_neg_desc: "Mangelande Erfahrung kann zu Fehlern führen.",
+                    contact_text: "Bereit, Ihre Marke auf die nächste Stufe zu heben? Kontaktieren Sie beni.",
+                    footer_rights: "© 2025 Sanriqa. All rights reserved."
                 }
             };
 
@@ -3632,7 +3584,8 @@
                 "Other": [
                     "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/edf8a1238043723.690ca515ecda8.png"
                 ],
-                "FiveM": []
+                "FiveM": [],
+                "LudoToys": []
             };
 
             const categories = Object.keys(projectData);
@@ -3643,7 +3596,7 @@
             const modal = document.getElementById('project-modal');
             let modalTitle = document.getElementById('modal-category-title');
             const modalGrid = document.getElementById('modal-grid-content');
-            const paginationContainer = document.getElementById('pagination-container'); // Varsa
+            const paginationContainer = document.getElementById('pagination-container');
             const lightboxModal = document.getElementById('lightbox-modal');
             const lightboxImg = document.getElementById('lightbox-img');
 
@@ -3654,7 +3607,147 @@
                 wrapper.appendChild(modalTitle);
             }
 
-            // --- MODAL AÇMA FONKSİYONU (GÜNCELLENMİŞ: DİL DESTEĞİ VE İÇERİK) ---
+            // --- FIVEM İÇİN DİL VERİSİ ---
+            const fivemContent = {
+                tr: {
+                    pz: {
+                        role: "Kurucu, Baş Geliştirici",
+                        desc: [
+                            "Lua alt yapılı gelişmiş script sistemleri",
+                            "Sunucu tarafı optimizasyonu ve bug fix",
+                            "Özel UI/UX arayüz tasarımları",
+                            "SQL Veritabanı yönetimi ve güvenliği"
+                        ]
+                    },
+                    nf: {
+                        role: "Topluluk Yöneticisi, Tasarımcı",
+                        desc: [
+                            "Profesyonel topluluk yönetimi",
+                            "Görsel marka kimliği ve logo tasarımı",
+                            "Discord bot ve webhook entegrasyonları",
+                            "Oyun içi etkinlik planlaması"
+                        ]
+                    },
+                    ddz: {
+                        role: "Proje Lideri, Hikaye Sorumlusu",
+                        desc: [
+                            "Zombi temalı Roleplay kurgusu ve yönetimi",
+                            "Hikaye akışı ve event denetimi",
+                            "Kapsamlı UI/UX Fix ve iyileştirmeler",
+                            "Sunucu harita ve mekan tasarımları"
+                        ]
+                    }
+                },
+                en: {
+                    pz: {
+                        role: "Founder, Lead Developer",
+                        desc: [
+                            "Lua-based advanced script development",
+                            "Server-side optimization and bug fixing",
+                            "Custom UI/UX interface designs",
+                            "SQL Database management and security"
+                        ]
+                    },
+                    nf: {
+                        role: "Community Manager, Designer",
+                        desc: [
+                            "Professional community management",
+                            "Visual brand identity and logo design",
+                            "Discord bot and webhook integrations",
+                            "In-game event planning"
+                        ]
+                    },
+                    ddz: {
+                        role: "Project Leader, Story Supervisor",
+                        desc: [
+                            "Zombie-themed Roleplay server management",
+                            "Storyline flow and event supervision",
+                            "Comprehensive UI/UX Fixes and improvements",
+                            "Server map and location designs"
+                        ]
+                    }
+                },
+                de: {
+                    pz: {
+                        role: "Gründer, Lead Developer",
+                        desc: [
+                            "Lua-basierte Skriptentwicklung",
+                            "Serverseitige Optimierung und Fehlerbehebung",
+                            "Benutzerdefinierte UI/UX-Designs",
+                            "SQL-Datenbankverwaltung und Sicherheit"
+                        ]
+                    },
+                    nf: {
+                        role: "Community Manager, Designer",
+                        desc: [
+                            "Professionelles Community-Management",
+                            "Visuelle Markenidentität und Logo-Design",
+                            "Discord-Bot- und Webhook-Integrationen",
+                            "Planung von In-Game-Events"
+                        ]
+                    },
+                    ddz: {
+                        role: "Projektleiter, Story Supervisor",
+                        desc: [
+                            "Zombie-Themen-Roleplay-Server-Management",
+                            "Storyline-Ablauf und Event-Überwachung",
+                            "Umfassende UI/UX-Fixes und Verbesserungen",
+                            "Server-Karten- und Standortdesigns"
+                        ]
+                    }
+                }
+            };
+
+            // --- LUDO TOYS DİL VERİSİ ---
+            const ludoContent = {
+                tr: {
+                    title: "LUDO TOYS MARKALAŞMA PROJESİ",
+                    logo_focus: {
+                        title: "LOGO & KİMLİK ODAK",
+                        img: "ludologo.png",
+                        inspiration: "İlham: LEGO bloklarının modüler yapısı ve çocuksu merak.",
+                        meaning: "Çağrıştırdığı Anlam: Güvenilirlik, yapım ve keşif arzusu.",
+                        color: "Renk Paleti: Canlı sarı (Enerji), Koyu mavi (Güven)."
+                    },
+                    web_focus: {
+                        title: "WEB TASARIM & REKLAM ÇALIŞMALARI",
+                        site_desc: "Modern, ebeveyn ve çocuk dostu e-ticaret sitesi tasarımı (Figma).",
+                        ads: "Sosyal medya kampanyaları için dinamik banner ve görsel materyal üretimi."
+                    }
+                },
+                en: {
+                    title: "LUDO TOYS BRANDING PROJECT",
+                    logo_focus: {
+                        title: "LOGO & IDENTITY FOCUS",
+                        img: "ludologo.png",
+                        inspiration: "Inspiration: The modular structure of LEGO blocks and childlike curiosity.",
+                        meaning: "Connotation: Reliability, construction, and the desire for discovery.",
+                        color: "Color Palette: Vibrant yellow (Energy), Dark blue (Trust)."
+                    },
+                    web_focus: {
+                        title: "WEB DESIGN & ADVERTISING CAMPAIGNS",
+                        site_desc: "Modern, parent and child-friendly e-commerce website design (Figma).",
+                        ads: "Production of dynamic banners and visual materials for social media campaigns."
+                    }
+                },
+                de: {
+                    title: "LUDO TOYS BRANDING PROJEKT",
+                    logo_focus: {
+                        title: "LOGO & IDENTITY FOCUS",
+                        img: "ludologo.png",
+                        inspiration: "Inspiration: Die modulare Struktur von LEGO-Blöcken und kindliche Neugier.",
+                        meaning: "Konnotation: Zuverlässigkeit, Konstruktion und Entdeckungslust.",
+                        color: "Farbpalette: Lebendiges Gelb (Energie), Dunkelblau (Vertrauen)."
+                    },
+                    web_focus: {
+                        title: "WEB-DESIGN & WERBEKAMPAGNEN",
+                        site_desc: "Modernes, eltern- und kinderfreundliches E-Commerce-Website-Design (Figma).",
+                        ads: "Produktion dynamischer Banner und visueller Materialien für Social-Media-Kampagnen."
+                    }
+                }
+            };
+
+            // --- MODAL AÇMA FONKSİYONU ---
             function openModal(categoryName) {
                 const arrows = document.querySelectorAll('.nav-arrow');
                 const scrollIndicator = document.getElementById('modal-scroll-indicator');
@@ -3663,103 +3756,14 @@
                 modalGrid.scrollTop = 0;
 
                 // Grid Ayarı
-                if (categoryName === 'FiveM') {
+                if (categoryName === 'FiveM' || categoryName === 'LudoToys') {
                     modalGrid.style.display = 'block';
                 } else {
                     modalGrid.style.display = 'grid';
                 }
 
-                const fivemContent = {
-                    tr: {
-                        pz: {
-                            role: "Kurucu, Baş Geliştirici",
-                            desc: [
-                                "Lua alt yapılı gelişmiş script sistemleri",
-                                "Sunucu tarafı optimizasyonu ve bug fix",
-                                "Özel UI/UX arayüz tasarımları",
-                                "SQL Veritabanı yönetimi ve güvenliği"
-                            ]
-                        },
-                        nf: {
-                            role: "Topluluk Yöneticisi, Tasarımcı",
-                            desc: [
-                                "Profesyonel topluluk yönetimi",
-                                "Görsel marka kimliği ve logo tasarımı",
-                                "Discord bot ve webhook entegrasyonları",
-                                "Oyun içi etkinlik planlaması"
-                            ]
-                        },
-                        ddz: {
-                            role: "Proje Lideri, Hikaye Sorumlusu",
-                            desc: [
-                                "Zombi temalı Roleplay kurgusu ve yönetimi",
-                                "Hikaye akışı ve event denetimi",
-                                "Kapsamlı UI/UX Fix ve iyileştirmeler",
-                                "Sunucu harita ve mekan tasarımları"
-                            ]
-                        }
-                    },
-                    en: {
-                        pz: {
-                            role: "Founder, Lead Developer",
-                            desc: [
-                                "Lua-based advanced script development",
-                                "Server-side optimization and bug fixing",
-                                "Custom UI/UX interface designs",
-                                "SQL Database management and security"
-                            ]
-                        },
-                        nf: {
-                            role: "Community Manager, Designer",
-                            desc: [
-                                "Professional community management",
-                                "Visual brand identity and logo design",
-                                "Discord bot and webhook integrations",
-                                "In-game event planning"
-                            ]
-                        },
-                        ddz: {
-                            role: "Project Leader, Story Supervisor",
-                            desc: [
-                                "Zombie-themed Roleplay server management",
-                                "Storyline flow and event supervision",
-                                "Comprehensive UI/UX Fixes and improvements",
-                                "Server map and location designs"
-                            ]
-                        }
-                    },
-                    de: {
-                        pz: {
-                            role: "Gründer, Lead Developer",
-                            desc: [
-                                "Lua-basierte Skriptentwicklung",
-                                "Serverseitige Optimierung und Fehlerbehebung",
-                                "Benutzerdefinierte UI/UX-Designs",
-                                "SQL-Datenbankverwaltung und Sicherheit"
-                            ]
-                        },
-                        nf: {
-                            role: "Community Manager, Designer",
-                            desc: [
-                                "Professionelles Community-Management",
-                                "Visuelle Markenidentität und Logo-Design",
-                                "Discord-Bot- und Webhook-Integrationen",
-                                "Planung von In-Game-Events"
-                            ]
-                        },
-                        ddz: {
-                            role: "Projektleiter, Story Supervisor",
-                            desc: [
-                                "Zombie-Themen-Roleplay-Server-Management",
-                                "Storyline-Ablauf und Event-Überwachung",
-                                "Umfassende UI/UX-Fixes und Verbesserungen",
-                                "Server-Karten- und Standortdesigns"
-                            ]
-                        }
-                    }
-                };
-
                 if (categoryName === 'Stream') {
+                    // STREAM
                     currentMode = 'stream';
                     modalTitle.innerText = "STREAM PACKAGES";
                     arrows.forEach(arrow => arrow.style.display = 'none');
@@ -3767,6 +3771,7 @@
                     if (scrollIndicator) scrollIndicator.classList.remove('hidden');
 
                 } else if (categoryName === 'FiveM') {
+                    // FIVEM
                     currentMode = 'fivem';
                     modalTitle.innerText = "FIVEM PROJECTS";
                     arrows.forEach(arrow => arrow.style.display = 'none');
@@ -3803,7 +3808,7 @@
                     </div>
 
                     <div class="fivem-row left" style="animation-delay: 0.5s;">
-                        <img src="ddzlogo.png" alt="DoomDayZ" class="fivem-logo">
+                        <img src="ddzlogo.png" alt="DoomDayZ" class="fivem-logo ddz-small-logo">
                         <div class="fivem-content">
                             <div class="retro-year">2024 - 2025</div>
                             <h3 class="retro-role">${t.ddz.role}</h3>
@@ -3818,8 +3823,51 @@
 
                     // FiveM modunda scroll okunu gizle (Tek ekrana sığdığı için)
                     if (scrollIndicator) scrollIndicator.classList.add('hidden');
+                } else if (categoryName === 'LudoToys') {
+                    // LUDO TOYS
+                    currentMode = 'ludotoys';
+                    modalTitle.innerText = "LUDO TOYS PROJECT";
+                    arrows.forEach(arrow => arrow.style.display = 'none');
+
+                    const lang = localStorage.getItem('selectedLanguage') || 'tr';
+                    const t = ludoContent[lang] || ludoContent['tr'];
+
+                    modalGrid.innerHTML = `
+                            <div class="fivem-layout-container">
+                                <img src="ludoxsanriqa.png" alt="${t.title}" class="fivem-header-img" style="max-height: 100px;">
+                                
+                                <h3 class="ludo-section-title retro-name" style="text-align: center; margin: 10px auto;">${t.title}</h3>
+
+                                <div class="fivem-row left" style="width: 85%; margin: 0 auto; gap: 3rem;">
+                                    <img src="ludologo.png" alt="LudoToys Logo" class="fivem-logo" style="width: 160px; height: 160px;">
+                                    <div class="fivem-content" style="max-width: 60%;">
+                                        <h4 class="retro-role" style="color: #fff; font-size: 1.2rem;">${t.logo_focus.title}</h4>
+                                        <ul class="retro-list" style="color: #bbb; padding-top: 5px;">
+                                            <li>${t.logo_focus.inspiration}</li>
+                                            <li>${t.logo_focus.meaning}</li>
+                                            <li>${t.logo_focus.color}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <hr style="width: 70%; border-color: rgba(255, 255, 255, 0.1); margin: 20px auto;">
+
+                                <div class="fivem-row" style="flex-direction: column; align-items: flex-start; width: 85%; margin: 0 auto;">
+                                    <h4 class="retro-role" style="color: #ff0000; font-size: 1.2rem; margin-bottom: 5px;">${t.web_focus.title}</h4>
+                                    <ul class="retro-list" style="text-align: left; padding-top: 5px;">
+                                        <li>${t.web_focus.site_desc}</li>
+                                        <li>${t.web_focus.ads}</li>
+                                    </ul>
+                                    
+                                    <img src="ludoprew.png" alt="Site Design Preview" style="width: 100%; max-height: 300px; object-fit: contain; margin-top: 20px;">
+                                </div>
+                            </div>
+                        `;
+                    if (scrollIndicator) scrollIndicator.classList.add('hidden');
+
 
                 } else {
+                    // HEADER (Anime, Fortnite, vb.)
                     currentMode = 'headers';
                     currentHeaderIndex = headerCategories.indexOf(categoryName);
                     if (currentHeaderIndex === -1) currentHeaderIndex = 0;
@@ -3862,7 +3910,7 @@
             // --- SCROLL EVENT ---
             const scrollIndicator = document.getElementById('modal-scroll-indicator');
             modalGrid.onscroll = () => {
-                if (currentMode === 'fivem') return;
+                if (currentMode === 'fivem' || currentMode === 'ludotoys') return;
 
                 if (modalGrid.scrollTop > 50) {
                     if (scrollIndicator) scrollIndicator.classList.add('hidden');
@@ -3877,7 +3925,7 @@
             lightboxModal.addEventListener('click', (e) => { if (e.target === lightboxModal || e.target === lightboxImg) closeLightbox(); });
 
             function changeCategory(direction) {
-                if (currentMode === 'stream' || currentMode === 'fivem') return;
+                if (currentMode === 'stream' || currentMode === 'fivem' || currentMode === 'ludotoys') return;
 
                 const oldTitle = modalTitle;
                 if (direction > 0) oldTitle.classList.add('title-slide-out-left');
@@ -3885,8 +3933,8 @@
 
                 setTimeout(() => {
                     currentHeaderIndex += direction;
-                    if (currentHeaderIndex < 0) currentHeaderIndex = headerCategories.length - 1;
-                    if (currentHeaderIndex >= headerCategories.length) currentHeaderIndex = 0;
+                    if (currentHeaderIndex < 0) currentCategoryIndex = headerCategories.length - 1;
+                    if (currentHeaderIndex >= headerCategories.length) currentCategoryIndex = 0;
 
                     const newCategoryName = headerCategories[currentHeaderIndex];
                     modalTitle.innerText = newCategoryName.toUpperCase() + " HEADERS";
