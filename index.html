@@ -2336,6 +2336,194 @@
         .modal-grid {
             padding-bottom: 100px !important;
         }
+
+        .fivem-layout-container {
+            width: 100%;
+            max-width: 850px;
+            /* Genişlik daraltıldı */
+            height: 100%;
+            /* Modalın tüm yüksekliğini kapsasın */
+            min-height: 500px;
+            /* Minimum yükseklik */
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* DİKEYDE TAM ORTALA */
+            gap: 1rem;
+            /* Satırlar arası boşluk azaltıldı */
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+
+        /* Üst Başlık Görseli */
+        .fivem-header-img {
+            display: block;
+            margin: 0 auto 0.5rem auto;
+            /* Alt boşluk iyice kısıldı */
+            width: auto;
+            height: auto;
+            max-height: 60px;
+            /* Görsel küçüldü */
+            max-width: 60%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+            animation: fadeInDown 1s ease;
+        }
+
+        /* Satır Genel Ayarı */
+        .fivem-row {
+            display: flex;
+            align-items: center;
+            /* Logoları ve yazıyı ortala */
+            gap: 1rem;
+            width: 95%;
+            /* Genişlik */
+            opacity: 0;
+            animation: fadeInUpCard 0.8s ease forwards;
+            padding: 5px;
+            background: transparent !important;
+        }
+
+        /* SOLDAKİLER */
+        .fivem-row.left {
+            flex-direction: row;
+            margin-right: auto;
+            text-align: left;
+        }
+
+        /* SAĞDAKİ (ZIG-ZAG) */
+        .fivem-row.right {
+            flex-direction: row-reverse;
+            /* Resim Sağda */
+            margin-left: auto;
+            /* Kutuyu sağa yasla */
+            text-align: right;
+            /* Yazıları sağa yasla (Daha düzgün Z görünümü için) */
+        }
+
+        /* Sağdaki listenin noktalarını sağa al */
+        .fivem-row.right .retro-list li {
+            flex-direction: row-reverse;
+        }
+
+        .fivem-row.right .retro-list li::before {
+            margin-right: 0;
+            margin-left: 8px;
+            /* Ok işaretini sola al */
+        }
+
+        /* LOGOLAR */
+        .fivem-logo {
+            width: 75px;
+            /* Logo küçüldü */
+            height: 75px;
+            object-fit: contain;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: transparent !important;
+            flex-shrink: 0;
+        }
+
+        /* --- YAZI ALANLARI --- */
+        .fivem-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0;
+        }
+
+        .retro-year {
+            font-size: 0.75rem;
+            color: #777;
+            margin-bottom: 0;
+            letter-spacing: 1px;
+        }
+
+        .retro-role {
+            font-size: 1rem;
+            /* Font küçüldü */
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        /* Proje İsmi */
+        .retro-name {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ff0000;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+            letter-spacing: 1px;
+        }
+
+        /* Liste */
+        .retro-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .retro-list li {
+            font-size: 0.8rem;
+            /* Liste fontu küçüldü */
+            color: #bbb;
+            line-height: 1.3;
+            /* Satır aralığı kısıldı */
+            display: flex;
+            align-items: center;
+            /* Dikey ortala */
+        }
+
+        .retro-list li::before {
+            content: "> ";
+            margin-right: 6px;
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 0.7rem;
+        }
+
+        /* Mobil Düzen */
+        @media (max-width: 768px) {
+            .fivem-layout-container {
+                justify-content: flex-start;
+                /* Mobilde üstten başlasın */
+                padding-top: 20px;
+                gap: 2rem;
+            }
+
+            .fivem-row,
+            .fivem-row.right {
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center !important;
+                width: 100%;
+                margin: 0 !important;
+            }
+
+            .fivem-row.right .retro-list li {
+                flex-direction: row;
+                /* Mobilde listeyi düzelt */
+                justify-content: center;
+            }
+
+            .fivem-row.right .retro-list li::before {
+                margin-left: 0;
+                margin-right: 6px;
+            }
+
+            .retro-list li {
+                justify-content: center;
+            }
+
+            .fivem-logo {
+                width: 65px;
+                height: 65px;
+                margin-bottom: 10px;
+            }
+        }
     </style>
 </head>
 
@@ -2447,10 +2635,10 @@
                         </div>
                     </div>
 
-                    <div class="card project-card reveal-on-scroll delay-300" data-project-url="#"
+                    <div class="card project-card reveal-on-scroll delay-300" onclick="openModal('FiveM')"
                         style="--delay: 0.2s;">
                         <div class="project-image-container">
-                            <img src="fivem.png" alt="Project Image 3" class="project-image" loading="lazy">
+                            <img src="fivem.png" alt="FiveM Projects" class="project-image" loading="lazy">
                             <span class="project-arrow">→</span>
                         </div>
                     </div>
@@ -2918,10 +3106,10 @@
                 setTimeout(() => {
                     loader.classList.add('loader-hide');
                     document.body.style.overflow = '';
-                }, 1000); // 1 saniye bekle
+                }, 1000);
             });
 
-            // --- DİL ÇEVİRİLERİ VE FONKSİYONLARI ---
+            // --- DİL ÇEVİRİLERİ (GENEL SİTE) ---
             const translations = {
                 tr: {
                     msg_copied: "Kopyalandı!",
@@ -3004,7 +3192,7 @@
                     whyme_3_neg_desc: "Güncel trendleri yansıtmayan tasarımlar.",
                     whyme_4_pos_title: "Deneyimli Profesyonel",
                     whyme_4_pos_desc: "Yılların deneyimine sahip bir uzmana erişin.",
-                    whyme_4_neg_title: "Amatör Tasarımcı",
+                    whyme_4_neg_title: "Amateur Tasarımcı",
                     whyme_4_neg_desc: "Deneyim eksikliği hatalara yol açabilir.",
                     contact_text: "Markanı bir üst seviyeye taşımaya hazır mısın? İletişime geç ve birlikte bir şeyler oluşturalım.",
                     footer_rights: "© 2025 Sanriqa. All rights reserved."
@@ -3358,8 +3546,6 @@
                         cursorGlow.classList.remove('project-hover');
                         cursorDot.classList.remove('project-hover');
                     });
-
-                    // Tıklama olayı HTML tarafında onclick ile hallediliyor, burası boş kalabilir veya özel link varsa kullanılır.
                 });
 
                 const clickableElements = document.querySelectorAll('a, button, .nav-links li, .scroll-indicator-arrow, .current-lang, .lang-item, .email-wrapper');
@@ -3421,7 +3607,6 @@
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/5fb4c2114935317.688e7560030e0.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/a84a63114935317.68fd64fac8561.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/b24208114935317.6095715d44eaa.png"
-                    // Buraya daha fazla Stream resmi eklendikçe aşağı doğru kayacak
                 ],
 
                 "Fortnite": [
@@ -3446,28 +3631,22 @@
 
                 "Other": [
                     "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/edf8a1238043723.690ca515ecda8.png"
-                ]
+                ],
+                "FiveM": []
             };
 
             const categories = Object.keys(projectData);
-
-            // --- KATEGORİ AYIRIMI ---
-            // Header kategorilerini (Stream HARİÇ) tanımlıyoruz
             const headerCategories = ["Anime", "Fortnite", "Valorant", "Other"];
             let currentHeaderIndex = 0;
-            let currentMode = 'headers'; // 'headers' veya 'stream'
+            let currentMode = 'headers';
 
-            // Elementleri seç
             const modal = document.getElementById('project-modal');
             let modalTitle = document.getElementById('modal-category-title');
             const modalGrid = document.getElementById('modal-grid-content');
-            const paginationContainer = document.getElementById('pagination-container');
-
-            // Lightbox Elementleri
+            const paginationContainer = document.getElementById('pagination-container'); // Varsa
             const lightboxModal = document.getElementById('lightbox-modal');
             const lightboxImg = document.getElementById('lightbox-img');
 
-            // Title wrapper kontrolü
             if (modalTitle && !modalTitle.parentElement.classList.contains('title-wrapper')) {
                 const wrapper = document.createElement('div');
                 wrapper.className = 'title-wrapper';
@@ -3475,147 +3654,252 @@
                 wrapper.appendChild(modalTitle);
             }
 
-            // --- MODAL AÇMA FONKSİYONU ---
+            // --- MODAL AÇMA FONKSİYONU (GÜNCELLENMİŞ: DİL DESTEĞİ VE İÇERİK) ---
             function openModal(categoryName) {
-                const arrows = document.querySelectorAll('.nav-arrow'); // Okları seç
+                const arrows = document.querySelectorAll('.nav-arrow');
+                const scrollIndicator = document.getElementById('modal-scroll-indicator');
 
-                // Sayfalama (Pagination) kısmını temizle (Artık scroll kullanıyoruz)
                 if (paginationContainer) paginationContainer.innerHTML = "";
-
-                // Scroll'u en başa al
                 modalGrid.scrollTop = 0;
 
+                // Grid Ayarı
+                if (categoryName === 'FiveM') {
+                    modalGrid.style.display = 'block';
+                } else {
+                    modalGrid.style.display = 'grid';
+                }
+
+                const fivemContent = {
+                    tr: {
+                        pz: {
+                            role: "Kurucu, Baş Geliştirici",
+                            desc: [
+                                "Lua alt yapılı gelişmiş script sistemleri",
+                                "Sunucu tarafı optimizasyonu ve bug fix",
+                                "Özel UI/UX arayüz tasarımları",
+                                "SQL Veritabanı yönetimi ve güvenliği"
+                            ]
+                        },
+                        nf: {
+                            role: "Topluluk Yöneticisi, Tasarımcı",
+                            desc: [
+                                "Profesyonel topluluk yönetimi",
+                                "Görsel marka kimliği ve logo tasarımı",
+                                "Discord bot ve webhook entegrasyonları",
+                                "Oyun içi etkinlik planlaması"
+                            ]
+                        },
+                        ddz: {
+                            role: "Proje Lideri, Hikaye Sorumlusu",
+                            desc: [
+                                "Zombi temalı Roleplay kurgusu ve yönetimi",
+                                "Hikaye akışı ve event denetimi",
+                                "Kapsamlı UI/UX Fix ve iyileştirmeler",
+                                "Sunucu harita ve mekan tasarımları"
+                            ]
+                        }
+                    },
+                    en: {
+                        pz: {
+                            role: "Founder, Lead Developer",
+                            desc: [
+                                "Lua-based advanced script development",
+                                "Server-side optimization and bug fixing",
+                                "Custom UI/UX interface designs",
+                                "SQL Database management and security"
+                            ]
+                        },
+                        nf: {
+                            role: "Community Manager, Designer",
+                            desc: [
+                                "Professional community management",
+                                "Visual brand identity and logo design",
+                                "Discord bot and webhook integrations",
+                                "In-game event planning"
+                            ]
+                        },
+                        ddz: {
+                            role: "Project Leader, Story Supervisor",
+                            desc: [
+                                "Zombie-themed Roleplay server management",
+                                "Storyline flow and event supervision",
+                                "Comprehensive UI/UX Fixes and improvements",
+                                "Server map and location designs"
+                            ]
+                        }
+                    },
+                    de: {
+                        pz: {
+                            role: "Gründer, Lead Developer",
+                            desc: [
+                                "Lua-basierte Skriptentwicklung",
+                                "Serverseitige Optimierung und Fehlerbehebung",
+                                "Benutzerdefinierte UI/UX-Designs",
+                                "SQL-Datenbankverwaltung und Sicherheit"
+                            ]
+                        },
+                        nf: {
+                            role: "Community Manager, Designer",
+                            desc: [
+                                "Professionelles Community-Management",
+                                "Visuelle Markenidentität und Logo-Design",
+                                "Discord-Bot- und Webhook-Integrationen",
+                                "Planung von In-Game-Events"
+                            ]
+                        },
+                        ddz: {
+                            role: "Projektleiter, Story Supervisor",
+                            desc: [
+                                "Zombie-Themen-Roleplay-Server-Management",
+                                "Storyline-Ablauf und Event-Überwachung",
+                                "Umfassende UI/UX-Fixes und Verbesserungen",
+                                "Server-Karten- und Standortdesigns"
+                            ]
+                        }
+                    }
+                };
+
                 if (categoryName === 'Stream') {
-                    // --- STREAM MODU ---
                     currentMode = 'stream';
-
-                    // Başlığı ayarla
                     modalTitle.innerText = "STREAM PACKAGES";
+                    arrows.forEach(arrow => arrow.style.display = 'none');
+                    updateModalContent('Stream');
+                    if (scrollIndicator) scrollIndicator.classList.remove('hidden');
 
-                    // Okları GİZLE
+                } else if (categoryName === 'FiveM') {
+                    currentMode = 'fivem';
+                    modalTitle.innerText = "FIVEM PROJECTS";
                     arrows.forEach(arrow => arrow.style.display = 'none');
 
-                    // İçeriği yükle (Tümü tek seferde)
-                    updateModalContent('Stream');
+                    const lang = localStorage.getItem('selectedLanguage') || 'tr';
+                    const t = fivemContent[lang] || fivemContent['tr'];
+
+                    modalGrid.innerHTML = `
+                <div class="fivem-layout-container">
+                    <img src="fivemxsanriqa.png" alt="FiveM x Sanriqa" class="fivem-header-img">
+                    
+                    <div class="fivem-row left" style="animation-delay: 0.1s;">
+                        <img src="pzlogo.png" alt="Project zeRo" class="fivem-logo">
+                        <div class="fivem-content">
+                            <div class="retro-year">2022 - 2023</div>
+                            <h3 class="retro-role">${t.pz.role}</h3>
+                            <div class="retro-name">Project zeRo</div>
+                            <ul class="retro-list">
+                                ${t.pz.desc.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="fivem-row right" style="animation-delay: 0.3s;">
+                        <div class="fivem-content">
+                            <div class="retro-year">2020 - 2021</div>
+                            <h3 class="retro-role">${t.nf.role}</h3>
+                            <div class="retro-name">NF RolePlay</div>
+                            <ul class="retro-list">
+                                ${t.nf.desc.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <img src="nflogo.png" alt="NF RolePlay" class="fivem-logo">
+                    </div>
+
+                    <div class="fivem-row left" style="animation-delay: 0.5s;">
+                        <img src="ddzlogo.png" alt="DoomDayZ" class="fivem-logo">
+                        <div class="fivem-content">
+                            <div class="retro-year">2024 - 2025</div>
+                            <h3 class="retro-role">${t.ddz.role}</h3>
+                            <div class="retro-name">Doom Day Z</div>
+                            <ul class="retro-list">
+                                ${t.ddz.desc.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+                    // FiveM modunda scroll okunu gizle (Tek ekrana sığdığı için)
+                    if (scrollIndicator) scrollIndicator.classList.add('hidden');
 
                 } else {
-                    // --- HEADER MODU ---
                     currentMode = 'headers';
-
-                    // Header listesindeki sırasını bul
                     currentHeaderIndex = headerCategories.indexOf(categoryName);
-                    if (currentHeaderIndex === -1) currentHeaderIndex = 0; // Hata önleyici
-
-                    // Başlığı ayarla
+                    if (currentHeaderIndex === -1) currentHeaderIndex = 0;
                     modalTitle.innerText = headerCategories[currentHeaderIndex].toUpperCase() + " HEADERS";
-
-                    // Okları GÖSTER
                     arrows.forEach(arrow => arrow.style.display = 'flex');
-
-                    // İçeriği yükle (Tümü tek seferde)
                     updateModalContent(headerCategories[currentHeaderIndex]);
+                    if (scrollIndicator) scrollIndicator.classList.remove('hidden');
                 }
 
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                const scrollIndicator = document.getElementById('modal-scroll-indicator');
-
-                // Modal açılınca göster
-                if (scrollIndicator) scrollIndicator.classList.remove('hidden');
-
-                // Kaydırınca gizle
-                modalGrid.onscroll = () => {
-                    if (modalGrid.scrollTop > 50) {
-                        if (scrollIndicator) scrollIndicator.classList.add('hidden');
-                    } else {
-                        if (scrollIndicator) scrollIndicator.classList.remove('hidden');
-                    }
-                };
             }
 
             function closeModal() {
                 modal.classList.remove('active');
                 document.body.style.overflow = '';
-                setTimeout(() => { modalGrid.innerHTML = ''; }, 500); // Bellek temizliği
+                setTimeout(() => { modalGrid.innerHTML = ''; }, 500);
             }
 
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
-            });
+            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-            // --- LIGHTBOX FONKSİYONLARI ---
-            function openLightbox(imgSrc) {
-                lightboxImg.src = imgSrc;
-                lightboxModal.classList.add('active');
-            }
-
-            function closeLightbox() {
-                lightboxModal.classList.remove('active');
-                setTimeout(() => { lightboxImg.src = ""; }, 300);
-            }
-
-            lightboxModal.addEventListener('click', (e) => {
-                if (e.target === lightboxModal || e.target === lightboxImg) closeLightbox();
-            });
-
-            // --- KATEGORİ DEĞİŞTİRME (SADECE HEADERS) ---
-            function changeCategory(direction) {
-                // Eğer Stream modundaysak oklar gizli ama yine de fonksiyonu durdur
-                if (currentMode === 'stream') return;
-
-                const oldTitle = modalTitle;
-                if (direction > 0) oldTitle.classList.add('title-slide-out-left');
-                else oldTitle.classList.add('title-slide-out-right');
-
-                setTimeout(() => {
-                    // Listeyi döngüsel gez
-                    currentHeaderIndex += direction;
-                    if (currentHeaderIndex < 0) currentHeaderIndex = headerCategories.length - 1;
-                    if (currentHeaderIndex >= headerCategories.length) currentHeaderIndex = 0;
-
-                    const newCategoryName = headerCategories[currentHeaderIndex];
-
-                    // Başlığı güncelle
-                    modalTitle.innerText = newCategoryName.toUpperCase() + " HEADERS";
-
-                    modalTitle.classList.remove('title-slide-out-left', 'title-slide-out-right');
-                    void modalTitle.offsetWidth; // Reflow trigger
-
-                    if (direction > 0) modalTitle.style.animation = 'slideInRight 0.4s forwards';
-                    else modalTitle.style.animation = 'slideInLeft 0.4s forwards';
-
-                    // İçeriği güncelle (Scroll başa sarılır)
-                    modalGrid.scrollTop = 0;
-                    updateModalContent(newCategoryName);
-
-                }, 300);
-            }
-
-            // --- İÇERİK YÜKLEME (SAYFALAMA YOK - SCROLL VAR) ---
+            // --- İÇERİK YÜKLEME ---
             function updateModalContent(categoryName) {
                 const images = projectData[categoryName];
                 modalGrid.innerHTML = "";
 
                 const isStream = categoryName === 'Stream';
 
-                // Tüm resimleri döngüye al (Slice yok, pagination yok)
                 images.forEach((imgSrc, index) => {
                     const div = document.createElement('div');
-
-                    // Stream ise 16:9, değilse normal header yapısı
                     div.className = isStream ? 'grid-item stream-layout' : 'grid-item';
-
                     div.style.animation = `fadeInUpCard 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards`;
                     div.style.animationDelay = `${index * 0.05}s`;
                     div.innerHTML = `<img src="${imgSrc}" loading="lazy" alt="${categoryName}" decoding="async">`;
-
                     div.onclick = () => openLightbox(imgSrc);
-
                     modalGrid.appendChild(div);
                 });
+            }
 
-                // Not: CSS'te .modal-grid için overflow-y: auto olduğu için
-                // içerik uzadıkça otomatik scroll oluşacaktır.
+            // --- SCROLL EVENT ---
+            const scrollIndicator = document.getElementById('modal-scroll-indicator');
+            modalGrid.onscroll = () => {
+                if (currentMode === 'fivem') return;
+
+                if (modalGrid.scrollTop > 50) {
+                    if (scrollIndicator) scrollIndicator.classList.add('hidden');
+                } else {
+                    if (scrollIndicator) scrollIndicator.classList.remove('hidden');
+                }
+            };
+
+            // --- LIGHTBOX & NAVIGASYON ---
+            function openLightbox(imgSrc) { lightboxImg.src = imgSrc; lightboxModal.classList.add('active'); }
+            function closeLightbox() { lightboxModal.classList.remove('active'); setTimeout(() => { lightboxImg.src = ""; }, 300); }
+            lightboxModal.addEventListener('click', (e) => { if (e.target === lightboxModal || e.target === lightboxImg) closeLightbox(); });
+
+            function changeCategory(direction) {
+                if (currentMode === 'stream' || currentMode === 'fivem') return;
+
+                const oldTitle = modalTitle;
+                if (direction > 0) oldTitle.classList.add('title-slide-out-left');
+                else oldTitle.classList.add('title-slide-out-right');
+
+                setTimeout(() => {
+                    currentHeaderIndex += direction;
+                    if (currentHeaderIndex < 0) currentHeaderIndex = headerCategories.length - 1;
+                    if (currentHeaderIndex >= headerCategories.length) currentHeaderIndex = 0;
+
+                    const newCategoryName = headerCategories[currentHeaderIndex];
+                    modalTitle.innerText = newCategoryName.toUpperCase() + " HEADERS";
+
+                    modalTitle.classList.remove('title-slide-out-left', 'title-slide-out-right');
+                    void modalTitle.offsetWidth;
+
+                    if (direction > 0) modalTitle.style.animation = 'slideInRight 0.4s forwards';
+                    else modalTitle.style.animation = 'slideInLeft 0.4s forwards';
+
+                    modalGrid.scrollTop = 0;
+                    updateModalContent(newCategoryName);
+                }, 300);
             }
         </script>
 
