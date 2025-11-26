@@ -1,0 +1,2863 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanriqa - Portfolio</title>
+    <link rel="icon" href="new-logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* --- FONT TANIMLAMALARI --- */
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 300;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
+            unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
+            unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+        }
+
+        @font-face {
+            font-family: 'Plus Jakarta Sans';
+            font-style: normal;
+            font-weight: 500;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko70yyygA.woff2) format('woff2');
+            unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+        }
+
+        @font-face {
+            font-family: 'Plus Jakarta Sans';
+            font-style: italic;
+            font-weight: 700;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIuaomQNQcsA88c7O9yZ4KMCoOg4Koz4yOqhMva.woff2) format('woff2');
+            unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Inter Placeholder', sans-serif !important;
+        }
+
+        .fa,
+        .fas,
+        .fa-solid,
+        .fa-regular,
+        .fa-brands,
+        .fab {
+            font-family: "Font Awesome 6 Free" !important;
+        }
+
+        .fa-brands,
+        .fab {
+            font-family: "Font Awesome 6 Brands" !important;
+        }
+
+        body {
+            font-family: 'Inter', 'Inter Placeholder', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            padding-top: 80px;
+            position: relative;
+        }
+
+        /* --- YÜKLEME EKRANI (SPLASH SCREEN) STİLLERİ --- */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #000;
+            z-index: 999999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+        }
+
+        .loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .loader-logo {
+            width: 100px;
+            height: auto;
+            opacity: 0;
+            animation: fadeInUpLogo 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .loader-line-container {
+            width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            opacity: 0;
+            display: flex;
+            justify-content: flex-start;
+            /* Soldan başla */
+            animation: fadeInLine 0.1s ease-out 0.5s forwards;
+        }
+
+        .loader-line {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            /* Neon Parlama */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 20px rgba(255, 255, 255, 0.5);
+            transform-origin: left;
+            transform: scaleX(0);
+            /* Glitch Animasyonu */
+            animation: glitchLoad 2.5s linear forwards;
+        }
+
+        .loader-hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Yükleme Animasyonları Keyframes */
+        @keyframes fadeInUpLogo {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.9);
+                filter: blur(10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes fadeInLine {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes glitchLoad {
+            0% {
+                transform: scaleX(0);
+            }
+
+            10% {
+                transform: scaleX(0.1);
+            }
+
+            /* Yavaş başla */
+            20% {
+                transform: scaleX(0.4);
+            }
+
+            /* Aniden %40 */
+            25% {
+                transform: scaleX(0.2);
+            }
+
+            /* HOP! Geri sar */
+            40% {
+                transform: scaleX(0.45);
+            }
+
+            /* Yavaş ilerle */
+            50% {
+                transform: scaleX(0.45);
+            }
+
+            /* Takıl (Bekle) */
+            60% {
+                transform: scaleX(0.8);
+            }
+
+            /* Hızlıca %80 */
+            70% {
+                transform: scaleX(0.6);
+            }
+
+            /* Tekrar geri sar */
+            80% {
+                transform: scaleX(0.9);
+            }
+
+            /* Neredeyse bitti */
+            90% {
+                transform: scaleX(0.85);
+            }
+
+            /* Son bir kararsızlık */
+            100% {
+                transform: scaleX(1);
+            }
+
+            /* BOOM! Bitti. */
+        }
+
+        /* --- ANA CSS --- */
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWZ5Z3JmdmdsbWNxcWpha25mNnVidzI3ZGNpaXF0dDIxaTIxb2sxaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JoVV55m3KZHdxlpFZ6/giphy.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.05;
+            filter: grayscale(100%) brightness(0.5);
+        }
+
+        [data-lang] {
+            transition: opacity 0.4s ease, filter 0.4s ease;
+            opacity: 1;
+            filter: blur(0);
+        }
+
+        .lang-changing {
+            opacity: 0 !important;
+            filter: blur(10px) !important;
+        }
+
+        .scroll-spy-nav {
+            position: fixed;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 60vh;
+            width: 2px;
+            z-index: 900;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+
+        .scroll-line-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .scroll-line-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            transition: height 0.1s linear;
+        }
+
+        .scroll-dots-container {
+            position: absolute;
+            top: 0;
+            left: -4px;
+            width: 10px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .scroll-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #111;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        .scroll-dot.active {
+            background-color: #fff;
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+            transform: scale(1.3);
+        }
+
+        .scroll-dot::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .scroll-dot:hover::after {
+            opacity: 1;
+            visibility: visible;
+            left: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .scroll-spy-nav {
+                display: none;
+            }
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-200 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-300 {
+            transition-delay: 0.3s;
+        }
+
+        .delay-400 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-500 {
+            transition-delay: 0.5s;
+        }
+
+        @keyframes slideDownIn {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: none;
+            height: 110px;
+            padding: 0 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: transparent;
+            /* Navigasyon biraz daha geç gelsin ki splash bitmiş olsun */
+            animation: slideDownIn 0.7s ease-out forwards;
+            animation-delay: 2.8s;
+            transform: translateY(-100%);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 700px;
+            width: 100%;
+            height: 60px;
+            padding: 0 30px;
+            backdrop-filter: blur(12px);
+            background-color: rgba(17, 17, 17, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 28px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            margin: 0 auto;
+        }
+
+        .nav-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .language-selector {
+            position: relative;
+            margin-left: 1.5rem;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+        }
+
+        .current-lang {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .current-lang:hover {
+            border-color: #fff;
+            transform: scale(1.1);
+        }
+
+        .current-lang img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: 50px;
+            right: -10px;
+            background: rgba(17, 17, 17, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 10px;
+            width: 90px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .lang-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .lang-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-item img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .lang-item span {
+            font-size: 0.85rem;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .language-selector {
+                margin-left: auto;
+                margin-right: 0;
+            }
+        }
+
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero {
+            min-height: 100vh;
+            padding: 5rem 3rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            margin-left: 50px;
+            margin-right: auto;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background-color: rgb(17, 17, 17);
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.4) 16px 24px 20px 8px, rgba(184, 180, 180, 0.08) 0px 2px 0px 0px inset;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            color: #fff;
+            font-weight: 500;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            opacity: 0;
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+            animation-delay: 2.8s;
+            /* Splash screen delay */
+        }
+
+        .hero-title {
+            font-size: 7rem;
+            font-weight: 300;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 0.95;
+            letter-spacing: -2px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+            animation-delay: 3s;
+            /* Splash screen delay */
+        }
+
+        .hero-arrow-container {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 70px;
+            height: 70px;
+            vertical-align: middle;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-top: 0;
+        }
+
+        .hero-arrow-container::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background-color: rgb(10, 10, 10);
+            border-radius: 1000px;
+            box-shadow: rgba(184, 180, 180, 0.14) 0px 2px 0px 0px inset;
+            transform: rotate(-35deg);
+            opacity: 1;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .arrow-icon {
+            position: relative;
+            z-index: 2;
+            font-size: 1.5rem;
+            color: #fff;
+            transform: rotate(45deg);
+            transition: transform 0.4s ease;
+            line-height: 1;
+        }
+
+        .about-me-text {
+            position: absolute;
+            bottom: -10px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #999;
+            z-index: 3;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .hero-arrow-container:hover .arrow-icon {
+            transform: rotate(45deg) translate(8px, -8px);
+        }
+
+        .hero-arrow-container:hover::before {
+            transform: rotate(-35deg) scale(1.1);
+            box-shadow: rgba(184, 180, 180, 0.3) 0px 4px 10px 0px inset;
+        }
+
+        .hero-arrow-container:hover .about-me-text {
+            opacity: 1;
+            transform: translateY(0);
+            color: #fff;
+        }
+
+        .hero-desc {
+            font-size: 0.95rem;
+            color: #999;
+            line-height: 1.8;
+            font-weight: 300;
+            font-family: 'Inter', sans-serif;
+            opacity: 0;
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+            animation-delay: 3.2s;
+            /* Splash delay */
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+            animation-delay: 3.4s;
+            /* Splash delay */
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(180deg, rgb(120, 120, 120) -382%, rgb(10, 10, 10) 100%);
+            border-radius: 100px;
+            color: white;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(180deg, rgb(255, 255, 255) 0%, rgb(120, 120, 120) 140%);
+            border-radius: 100px;
+            box-shadow: none;
+            color: black;
+        }
+
+        .testimonial-bubbles {
+            position: absolute;
+            top: 100px;
+            right: 0px;
+            z-index: 10;
+            display: block;
+            width: 400px;
+            height: 400px;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            max-width: 300px;
+            line-height: 1.4;
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+
+        .bubble1 {
+            top: -30px;
+            right: 25px;
+            transform: rotate(-5deg);
+            animation: diagonalFloat 8s ease-in-out infinite;
+        }
+
+        .bubble2 {
+            top: 150px;
+            right: 58px;
+            transform: rotate(5deg);
+            animation: diagonalFloatReverse 9s ease-in-out infinite;
+        }
+
+        .bubble p:first-child {
+            margin-bottom: 0.5rem;
+        }
+
+        .bubble p:last-child {
+            font-size: 0.75rem;
+            color: #999;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        @keyframes diagonalFloat {
+            0% {
+                transform: translate(0, 0) rotate(-5deg);
+            }
+
+            25% {
+                transform: translate(-15px, 15px) rotate(-5deg);
+            }
+
+            50% {
+                transform: translate(0, 0) rotate(-5deg);
+            }
+
+            75% {
+                transform: translate(15px, -15px) rotate(-5deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(-5deg);
+            }
+        }
+
+        @keyframes diagonalFloatReverse {
+            0% {
+                transform: translate(0, 0) rotate(5deg);
+            }
+
+            25% {
+                transform: translate(15px, -15px) rotate(5deg);
+            }
+
+            50% {
+                transform: translate(0, 0) rotate(5deg);
+            }
+
+            75% {
+                transform: translate(-15px, 15px) rotate(5deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(5deg);
+            }
+        }
+
+        .section {
+            padding: 8rem 3rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        #projects.section {
+            padding-top: 4rem;
+            max-width: 1800px;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 5rem;
+            font-weight: 500;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-desc {
+            font-size: 1.2rem;
+            color: #999;
+            max-width: 700px;
+        }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .project-collage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .col-left {
+            display: grid;
+            grid-template-rows: auto;
+            gap: 2rem;
+        }
+
+        .col-right {
+            display: grid;
+            grid-template-rows: auto;
+            gap: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            transition: all 0.5s;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .project-card {
+            padding: 0;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer !important;
+            background-color: rgb(17, 17, 17);
+            box-shadow: rgba(0, 0, 0, 0.4) 16px 24px 20px 8px, rgba(184, 180, 180, 0.08) 0px 2px 0px 0px inset;
+            border: none;
+        }
+
+        .project-card:hover {
+            background-color: rgb(25, 25, 25);
+        }
+
+        .project-image-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .col-left .project-card:nth-child(1) .project-image-container {
+            height: 450px;
+        }
+
+        .col-left .project-card:nth-child(2) .project-image-container {
+            height: 280px;
+        }
+
+        .col-right .project-card:nth-child(1) .project-image-container {
+            height: 280px;
+        }
+
+        .col-right .project-card:nth-child(2) .project-image-container {
+            height: 450px;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.5s ease;
+            filter: grayscale(100%);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .project-arrow {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: rgb(10, 10, 10);
+            border-radius: 100px;
+            transform: rotate(-35deg);
+            opacity: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .project-card:hover .project-arrow {
+            background: #fff;
+            color: #000;
+            transform: rotate(-35deg) scale(1.1);
+        }
+
+        .about-section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .expert-badge {
+            background-color: rgb(17, 17, 17);
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.4) 16px 24px 20px 8px, rgba(184, 180, 180, 0.08) 0px 2px 0px 0px inset;
+            opacity: 1;
+            color: #ccc;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .about-main-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-subtext {
+            color: #888;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .about-card {
+            background-color: rgb(17, 17, 17);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-card {
+            text-align: left;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .profile-image-wrapper {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            position: relative;
+            background-color: #000;
+            border-radius: 1.5rem 1.5rem 0 0;
+        }
+
+        .profile-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: transform 0.3s;
+        }
+
+        .profile-image-wrapper:hover img {
+            filter: grayscale(100%);
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: transparent;
+            border: none;
+            padding: 0;
+            backdrop-filter: none;
+            font-size: 0.85rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            z-index: 5;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes pulse-green {
+            0% {
+                box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 6px rgba(74, 222, 128, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+            }
+        }
+
+        .status-badge .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #4ade80;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-green 2s infinite;
+        }
+
+        .profile-info-content {
+            padding: 2rem;
+        }
+
+        .profile-info-content h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .profile-role {
+            color: #999;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .social-icons-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgb(25, 25, 25);
+            border-radius: 50%;
+            font-size: 1.2rem;
+        }
+
+        .social-icon:hover {
+            border-color: #fff;
+            color: #fff;
+            background-color: rgb(40, 40, 40);
+            transform: translateY(-3px);
+        }
+
+        .connect-btn {
+            display: inline-block;
+            width: auto;
+            padding: 0.8rem 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(180deg, rgb(40, 40, 40) 0%, rgb(10, 10, 10) 100%);
+            border-radius: 100px;
+            opacity: 1;
+            will-change: transform;
+        }
+
+        .connect-btn:hover {
+            border-color: #fff;
+            transform: scale(1.02);
+        }
+
+        .details-card {
+            justify-content: space-between;
+        }
+
+        .bio-text {
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 2rem;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .skill-tag {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            color: #999;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgb(10, 10, 10);
+            border-radius: 8px;
+            opacity: 1;
+        }
+
+        .timeline-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            background-color: rgb(13, 13, 13);
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.4) 16px 24px 20px 8px;
+            opacity: 1;
+            padding: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-role {
+            color: #777;
+            width: 30%;
+        }
+
+        .timeline-company {
+            color: #fff;
+            font-weight: 500;
+            width: 40%;
+        }
+
+        .timeline-year {
+            color: #fff;
+            text-align: right;
+            width: 30%;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 25px;
+            height: 25px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            filter: blur(8px);
+            transition: opacity 0.3s, transform 0.4s ease-out, width 0.4s ease-out, height 0.4s ease-out, background-color 0.4s ease-out;
+            opacity: 1;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-glow.interactive-hover {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(2px);
+        }
+
+        .cursor-dot {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: opacity 0.3s, transform 0.4s ease-out, width 0.4s ease-out, height 0.4s ease-out, background-color 0.4s ease-out;
+            opacity: 1;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-glow.project-hover {
+            width: 160px;
+            height: 55px;
+            border: 1px solid rgb(214, 214, 214);
+            backdrop-filter: blur(6px);
+            background-color: rgba(99, 99, 99, 0.3);
+            border-radius: 30.2172% / 90.9091%;
+            box-shadow: rgba(92, 92, 92, 0.3) 0px 0px 20px 4px;
+            filter: none;
+            opacity: 1;
+        }
+
+        .cursor-dot.project-hover {
+            background-color: transparent;
+            width: auto;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cursor-dot.project-hover::after {
+            content: "View project";
+            display: block;
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: 500;
+            color: #fff;
+            letter-spacing: 0.5px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 8rem 3rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-title {
+            font-size: 6rem;
+            font-weight: 500;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            display: flex;
+            justify-content: space-between;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .services-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .services-title-wrapper h2 {
+            font-size: 4rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .services-title-wrapper h2 span {
+            font-weight: 300;
+            color: #999;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .bento-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.3s;
+        }
+
+        .service-card.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .service-icon-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .service-icon-title i {
+            color: #ccc;
+        }
+
+        .service-desc {
+            color: #999;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 90%;
+        }
+
+        .service-visual {
+            width: 100%;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-top: auto;
+            position: relative;
+        }
+
+        .service-visual img {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0.7;
+            transition: opacity 0.4s;
+        }
+
+        .service-card:hover .service-visual img {
+            opacity: 1;
+        }
+
+        .card-large {
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-small {
+            min-height: 250px;
+        }
+
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 1rem 0;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 2rem;
+            width: max-content;
+            animation: scrollText 30s linear infinite;
+        }
+
+        .marquee-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            color: #aaa;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .marquee-tag i {
+            font-size: 0.8rem;
+            color: #fff;
+        }
+
+        @keyframes scrollText {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-title-wrapper h2 {
+                font-size: 2.5rem;
+            }
+
+            .services-header-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .why-me-card {
+                flex-direction: column;
+            }
+
+            .card-left {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            .why-me-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .testimonial-bubbles {
+                display: none;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .nav-container {
+                max-width: 700px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+                letter-spacing: -1px;
+            }
+
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .project-collage {
+                grid-template-columns: 1fr;
+            }
+
+            .col-left .project-image-container,
+            .col-right .project-image-container {
+                height: 350px !important;
+            }
+
+            #projects.section {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-main-title {
+                font-size: 2.5rem;
+            }
+
+            .timeline-item {
+                font-size: 0.85rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .timeline-role,
+            .timeline-company,
+            .timeline-year {
+                width: 100%;
+                text-align: left;
+            }
+        }
+
+        .scroll-indicator-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0;
+            margin-top: -2rem;
+            margin-bottom: 2rem;
+            z-index: 20;
+            position: relative;
+        }
+
+        .scroll-indicator-arrow {
+            color: #fff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            animation: floatDown 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator-arrow:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        @keyframes floatDown {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(10px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .testimonial-marquee-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 1rem 0;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .testimonial-track {
+            display: flex;
+            gap: 2rem;
+            width: max-content;
+            animation: scrollTestimonials 40s linear infinite;
+        }
+
+        .testimonial-track:hover {
+            animation-play-state: paused;
+        }
+
+        .testimonial-card {
+            min-width: 400px;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            flex-shrink: 0;
+            white-space: normal;
+        }
+
+        @keyframes scrollTestimonials {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-card {
+                min-width: 300px;
+                max-width: 300px;
+            }
+        }
+
+        #why-me {
+            padding: 8rem 3rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .why-me-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .why-me-tag {
+            background-color: rgb(17, 17, 17);
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.4) 16px 24px 20px 8px, rgba(184, 180, 180, 0.08) 0px 2px 0px 0px inset;
+            opacity: 1;
+            color: #ccc;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .why-me-title {
+            font-size: 4rem;
+            font-weight: 500;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .why-me-title span {
+            font-weight: 300;
+            color: #999;
+        }
+
+        .sticky-container {
+            position: relative;
+            width: 100%;
+            height: 130vh;
+        }
+
+        .why-me-card {
+            position: sticky;
+            top: 120px;
+            background-color: rgb(17, 17, 17);
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: rgba(92, 92, 92, 0.08) 0px 2px 0px 0px inset;
+            opacity: 1;
+            max-width: 1200px;
+            margin: 0 auto 4rem auto;
+            display: flex;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .why-me-card:nth-child(1) {
+            z-index: 1;
+            top: 120px;
+        }
+
+        .why-me-card:nth-child(2) {
+            z-index: 2;
+            top: 140px;
+        }
+
+        .why-me-card:nth-child(3) {
+            z-index: 3;
+            top: 160px;
+        }
+
+        .why-me-card:nth-child(4) {
+            z-index: 4;
+            top: 180px;
+        }
+
+        .card-left,
+        .card-right {
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .card-left {
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .icon-wrapper {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .icon-check {
+            background-color: rgba(74, 222, 128, 0.1);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
+
+        .icon-cross {
+            background-color: rgba(248, 113, 113, 0.1);
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .card-desc {
+            color: #999;
+            line-height: 1.6;
+        }
+
+        .email-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .contact-title {
+            font-weight: 900;
+            transition: opacity 0.3s;
+        }
+
+        .email-wrapper:active .contact-title {
+            opacity: 0.7;
+        }
+
+        #copy-feedback {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #4ade80;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        #copy-feedback.visible {
+            opacity: 1;
+            top: -50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loader-wrapper" id="loader">
+        <div class="loader-content">
+            <img src="new-logo.png" alt="Sanriqa Logo" class="loader-logo">
+            <div class="loader-line-container">
+                <div class="loader-line"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-spy-nav">
+        <div class="scroll-line-bg"></div>
+        <div class="scroll-line-progress" id="scroll-line"></div>
+        <div class="scroll-dots-container">
+            <a href="#hero" class="scroll-dot active" data-target="hero" data-tooltip="Giriş"></a>
+            <a href="#projects" class="scroll-dot" data-target="projects" data-tooltip="Projeler"></a>
+            <a href="#services" class="scroll-dot" data-target="services" data-tooltip="Hakkımda"></a>
+            <a href="#design-services" class="scroll-dot" data-target="design-services" data-tooltip="Hizmetler"></a>
+            <a href="#testimonials" class="scroll-dot" data-target="testimonials" data-tooltip="Yorumlar"></a>
+            <a href="#why-me" class="scroll-dot" data-target="why-me" data-tooltip="Neden Ben?"></a>
+            <a href="#contact" class="scroll-dot" data-target="contact" data-tooltip="İletişim"></a>
+        </div>
+    </div>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-glow"></div>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="new-logo.png" alt="sanriqa Logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#projects" data-lang="nav_projects">Projelerim</a></li>
+                <li><a href="#services" data-lang="nav_about">Hakkımda</a></li>
+                <li><a href="#testimonials" data-lang="nav_reviews">Yorumlar</a></li>
+                <li><a href="#why-me" data-lang="nav_whyme">Neden Ben</a></li>
+                <li><a href="#contact" data-lang="nav_contact">İletişim</a></li>
+            </ul>
+
+            <div class="language-selector">
+                <div class="current-lang" onclick="toggleLanguageMenu()">
+                    <img id="header-lang-flag" src="https://flagcdn.com/w40/tr.png" alt="TR">
+                </div>
+                <div class="lang-dropdown" id="lang-menu">
+                    <div class="lang-item" onclick="setLanguage('tr')">
+                        <img src="https://flagcdn.com/w40/tr.png" alt="TR"> <span>TR</span>
+                    </div>
+                    <div class="lang-item" onclick="setLanguage('en')">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="EN"> <span>EN</span>
+                    </div>
+                    <div class="lang-item" onclick="setLanguage('de')">
+                        <img src="https://flagcdn.com/w40/de.png" alt="DE"> <span>DE</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="testimonial-bubbles">
+            <div class="bubble bubble1 reveal-on-scroll">
+                <p data-lang="bubble_1_text">“Onunla çalışmak oyunu tamamen değiştirdi!”</p>
+                <p data-lang="bubble_1_author">- Alesta</p>
+            </div>
+            <div class="bubble bubble2 reveal-on-scroll delay-200">
+                <p data-lang="bubble_2_text">“Dönüşümlerimizi %200 artırdık.”</p>
+                <p data-lang="bubble_2_author">- DrPlague</p>
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <div class="tag" data-lang="hero_tag"
+                style="background-color: rgb(17, 17, 17); border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.4) 16px 24px 20px 8px, rgba(184, 180, 180, 0.08) 0px 2px 0px 0px inset;">
+                UI/UX & Grafik Tasarımcısı</div>
+
+            <h1 class="hero-title">
+                Sanriqa
+                <a href="#services" class="hero-arrow-container">
+                    <span class="arrow-icon">↗</span>
+                    <span class="about-me-text" data-lang="hero_title_sub">about me</span>
+                </a>
+            </h1>
+
+
+            <p class="hero-desc" data-lang="hero_desc">
+                Ben, işletmenizi büyütmeye yardımcı olmak için grafik, web ve ürün tasarımı alanlarında uzmanlaşmış çok
+                yönlü bir tasarımcıyım.
+                Hadi birlikte harika bir şey ortaya çıkaralım.
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary" data-lang="btn_all_projects">Tüm Projelerim</a>
+                <a href="#contact" class="btn btn-secondary" data-lang="btn_contact">İletişime Geç</a>
+            </div>
+        </div>
+
+        <section id="projects" class="section">
+            <div class="project-collage">
+
+                <div class="col-left">
+                    <div class="card project-card reveal-on-scroll delay-100" data-project-url="#" style="--delay: 0s;">
+                        <div class="project-image-container">
+                            <img src="headers.png" alt="Project Image 1" class="project-image">
+                            <span class="project-arrow">→</span>
+                        </div>
+                    </div>
+
+                    <div class="card project-card reveal-on-scroll delay-300" data-project-url="#"
+                        style="--delay: 0.2s;">
+                        <div class="project-image-container">
+                            <img src="fivem.png" alt="Project Image 3" class="project-image">
+                            <span class="project-arrow">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-right">
+                    <div class="card project-card reveal-on-scroll delay-200" data-project-url="#"
+                        style="--delay: 0.1s;">
+                        <div class="project-image-container">
+                            <img src="ludotoys.png" alt="Project Image 2" class="project-image">
+                            <span class="project-arrow">→</span>
+                        </div>
+                    </div>
+
+                    <div class="card project-card reveal-on-scroll delay-400" data-project-url="#"
+                        style="--delay: 0.3s;">
+                        <div class="project-image-container">
+                            <img src="stream.png" alt="Project Image 4" class="project-image">
+                            <span class="project-arrow">→</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="scroll-indicator-container reveal-on-scroll">
+            <a href="#services" class="scroll-indicator-arrow">
+                <i class="fa-solid fa-arrow-down"></i>
+            </a>
+        </div>
+
+
+        <section id="services" class="section">
+            <div class="about-section-header reveal-on-scroll">
+                <div class="expert-badge" data-lang="about_badge">● Uzman Tasarımcı</div>
+                <h2 class="about-main-title" data-lang="about_title">Sanriqa, Tasarımcınız</h2>
+                <p class="about-subtext" data-lang="about_sub">Kendim ve geçmiş deneyimlerim hakkında kısa bir tanıtım.
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-card profile-card reveal-on-scroll delay-100">
+                    <div class="profile-image-wrapper">
+                        <img src="riqa.png" alt="Sanriqa Profile">
+                        <div class="status-badge" data-lang="about_status_badge"><span class="dot"></span> İş için uygun
+                        </div>
+                    </div>
+
+                    <div class="profile-info-content">
+                        <h3 data-lang="about_hello">Merhaba ben Sanriqa</h3>
+                        <p class="profile-role" data-lang="about_role">Game & Web Developer & Graphic Designer
+                            TR / DE
+                        </p>
+
+                        <div class="social-icons-container">
+                            <a href="#" class="social-icon" aria-label="X (Twitter)">
+                                <i class="fa-brands fa-x-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Instagram">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Website">
+                                <i class="fa-solid fa-globe"></i>
+                            </a>
+                        </div>
+
+                        <a href="#contact" class="connect-btn" data-lang="about_connect">Benimle İletişime Geç</a>
+                    </div>
+                </div>
+
+                <div class="about-card details-card reveal-on-scroll delay-300">
+                    <p class="bio-text" data-lang="about_bio">
+                        Ben Sanriqa, dijital deneyimler yaratma konusunda tutkulu bir Web Tasarımcısı ve Geliştiriciyim.
+                        Yaratıcı tasarımı, kusursuz teknik uygulamalarla birleştirerek markanız için istisnai dijital
+                        ürünler ortaya çıkarıyorum.
+                    </p>
+
+                    <div class="tags-container">
+                        <span class="skill-tag reveal-on-scroll delay-100" data-lang="tag_product">Product Design</span>
+                        <span class="skill-tag reveal-on-scroll delay-200" data-lang="tag_ux">UX Design</span>
+                        <span class="skill-tag reveal-on-scroll delay-300" data-lang="tag_ui">UI Design</span>
+                        <span class="skill-tag reveal-on-scroll delay-400" data-lang="tag_dev">Development</span>
+                        <span class="skill-tag reveal-on-scroll delay-500" data-lang="tag_brand">Branding</span>
+                        <span class="skill-tag reveal-on-scroll delay-100" data-lang="tag_webflow">Webflow</span>
+                    </div>
+
+                    <div class="timeline-list">
+                        <div class="timeline-item reveal-on-scroll delay-100">
+                            <span class="timeline-role" data-lang="timeline_role_1">Freelance</span>
+                            <span class="timeline-company">Sanriqa Artz</span>
+                            <span class="timeline-year">2018</span>
+                        </div>
+                        <div class="timeline-item reveal-on-scroll delay-200">
+                            <span class="timeline-role" data-lang="timeline_role_2">UX/UI Designer & Developer</span>
+                            <span class="timeline-company">Sanriqa Games</span>
+                            <span class="timeline-year">2022</span>
+                        </div>
+                        <div class="timeline-item reveal-on-scroll delay-300">
+                            <span class="timeline-role" data-lang="timeline_role_3">Freelance Designer</span>
+                            <span class="timeline-company">Bionluk</span>
+                            <span class="timeline-year">2023</span>
+                        </div>
+                        <div class="timeline-item reveal-on-scroll delay-400">
+                            <span class="timeline-role" data-lang="timeline_role_4">Graphic Designer</span>
+                            <span class="timeline-company">LudoToys</span>
+                            <span class="timeline-year">2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="design-services" class="section">
+            <div class="services-header-row reveal-on-scroll">
+                <div class="services-title-wrapper">
+                    <div class="section-tag" style="margin-bottom:10px;" data-lang="section_projects_tag">● Projelerim
+                    </div>
+                    <h2 data-lang="section_projects_title">Tasarım <span>Hizmetlerim</span></h2>
+                    <p class="section-desc" data-lang="services_main_desc">Markanızı güçlendirmek için sunduğum kapsamlı
+                        tasarım çözümleri.</p>
+                </div>
+                <a href="#contact" class="btn btn-secondary" style="background:#fff; color:#000;"
+                    data-lang="btn_contact">İletişime Geç</a>
+            </div>
+
+            <div class="bento-grid">
+                <div class="bento-col">
+                    <div class="service-card card-large reveal-on-scroll delay-100" style="transition-delay: 0.1s;">
+                        <div class="service-icon-title" data-lang="service_web_title">
+                            <i class="fa-solid fa-window-maximize"></i> Website Design
+                        </div>
+                        <p class="service-desc" data-lang="service_web_desc">
+                            Markanızla mükemmel uyum sağlayan, etkileşimi ve dönüşümleri artıran, nefes kesici ve
+                            kullanıcı odaklı web siteleri.
+                        </p>
+                        <div class="service-visual">
+                            <img src="site.png" alt="Website Design"
+                                style="height: 250px; object-fit: cover; border-radius: 10px;">
+                        </div>
+                    </div>
+
+                    <div class="service-card card-small reveal-on-scroll delay-300" style="transition-delay: 0.3s;">
+                        <div class="service-icon-title" data-lang="service_graphic_title">
+                            <i class="fa-solid fa-pen-nib"></i> Graphic Design
+                        </div>
+                        <p class="service-desc" data-lang="service_graphic_desc">
+                            Markanızı yükselten ve hedef kitlenizi büyüleyen cesur, ilgi çekici ve çok yönlü grafik
+                            tasarımlar.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bento-col">
+                    <div class="service-card card-small reveal-on-scroll delay-200" style="transition-delay: 0.2s;">
+                        <div class="service-icon-title" data-lang="service_logo_title">
+                            <i class="fa-solid fa-shapes"></i> Logo Design
+                        </div>
+                        <p class="service-desc" data-lang="service_logo_desc">
+                            Markanızın kimliğini ve vizyonunu somutlaştıran, ayırt edici ve ölçeklenebilir logolar.
+                        </p>
+                    </div>
+
+                    <div class="service-card card-large reveal-on-scroll delay-400" style="transition-delay: 0.4s;">
+                        <div class="service-icon-title" data-lang="service_motion_title">
+                            <i class="fa-solid fa-play"></i> Motion Design
+                        </div>
+                        <p class="service-desc" data-lang="service_motion_desc">
+                            Statik görsellerin sınırlarını aşarak markanıza hayat verin. Logo animasyonları, açıklayıcı
+                            videolar ve Görsel Efekt (VFX) destekli kurgularla hikayenizi hareketin gücüyle anlatıyorum.
+                            Sosyal medyadan canlı yayınlara kadar her platformda dikkat çeken, ritmi yüksek ve estetik
+                            görsel deneyimler sunuyorum
+                        </p>
+                        <div class="service-visual">
+                            <img src="motion.gif" alt="Website Design"
+                                style="height: 230px; object-fit: cover; border-radius: 10px; filter: grayscale(100%);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="marquee-container reveal-on-scroll">
+                <div class="marquee-content">
+                    <div class="marquee-tag" data-lang="marquee_video"><i class="fa-solid fa-video"></i> Video & Motion
+                    </div>
+                    <div class="marquee-tag" data-lang="marquee_copy"><i class="fa-solid fa-pen"></i> Copywriting</div>
+                    <div class="marquee-tag" data-lang="marquee_posters"><i class="fa-solid fa-image"></i> Posters</div>
+                    <div class="marquee-tag" data-lang="marquee_code"><i class="fa-solid fa-code"></i> Custom Code</div>
+                    <div class="marquee-tag" data-lang="marquee_seo"><i class="fa-solid fa-magnifying-glass"></i> SEO
+                    </div>
+                    <div class="marquee-tag" data-lang="marquee_social"><i class="fa-solid fa-share-nodes"></i> Social
+                        Media</div>
+                    <div class="marquee-tag" data-lang="marquee_opt"><i class="fa-solid fa-bolt"></i> Optimization</div>
+                    <div class="marquee-tag" data-lang="marquee_video"><i class="fa-solid fa-video"></i> Video & Motion
+                    </div>
+                    <div class="marquee-tag" data-lang="marquee_copy"><i class="fa-solid fa-pen"></i> Copywriting</div>
+                    <div class="marquee-tag" data-lang="marquee_posters"><i class="fa-solid fa-image"></i> Posters</div>
+                    <div class="marquee-tag" data-lang="marquee_code"><i class="fa-solid fa-code"></i> Custom Code</div>
+                    <div class="marquee-tag" data-lang="marquee_seo"><i class="fa-solid fa-magnifying-glass"></i> SEO
+                    </div>
+                    <div class="marquee-tag" data-lang="marquee_social"><i class="fa-solid fa-share-nodes"></i> Social
+                        Media</div>
+                    <div class="marquee-tag" data-lang="marquee_opt"><i class="fa-solid fa-bolt"></i> Optimization</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section">
+            <div class="section-header reveal-on-scroll">
+                <div class="section-tag" data-lang="reviews_tag">YORUMLAR</div>
+                <h2 class="section-title" data-lang="reviews_title">Müşteri Deneyimleri</h2>
+            </div>
+
+            <div class="testimonial-marquee-container reveal-on-scroll">
+                <div class="testimonial-track">
+
+                    <div class="testimonial-card">
+                        <div style="color: #ffd700; margin-bottom: 1rem;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;" data-lang="review_1_text">
+                            "Yayın tasarımım konusunda kendisine güvendim ve ortaya mükemmel bir iş çıktı."
+                        </p>
+                        <div>
+                            <div style="font-weight: 500; color:#fff;">TheCaddy</div>
+                            <div style="font-size: 0.85rem; color: #999;" data-lang="review_role_streamer">Streamer
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div style="color: #ffd700; margin-bottom: 1rem;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-regular fa-star"></i>
+                        </div>
+                        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;" data-lang="review_2_text">
+                            "Verilen süreye tam uyuldu ve iletişim süreci çok şeffaftı. Ufak revizeler gerekse de
+                            sonuçtan çok memnun kaldık."
+                        </p>
+                        <div>
+                            <div style="font-weight: 500; color:#fff;">TheNightChe</div>
+                            <div style="font-size: 0.85rem; color: #999;" data-lang="review_role_streamer">Streamer
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div style="color: #ffd700; margin-bottom: 1rem;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;" data-lang="review_3_text">
+                            "Markamızın yüzünü tamamen modernleştirdi. Geri dönüşler harika, kesinlikle tavsiye
+                            ediyorum."
+                        </p>
+                        <div>
+                            <div style="font-weight: 500; color:#fff;">Arda T**</div>
+                            <div style="font-size: 0.85rem; color: #999;" data-lang="review_role_ceo">CEO, LudoToys
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div style="color: #ffd700; margin-bottom: 1rem;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;" data-lang="review_4_text">
+                            "Tasarım tam istediğim tarzda oldu işinin ehli."
+                        </p>
+                        <div>
+                            <div style="font-weight: 500; color:#fff;">Comusty</div>
+                            <div style="font-size: 0.85rem; color: #999;" data-lang="review_role_streamer">Streamer
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div style="color: #ffd700; margin-bottom: 1rem;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-regular fa-star"></i>
+                        </div>
+                        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;" data-lang="review_5_text">
+                            "Oldukça yaratıcı fikirlerle geldi. Proje akışı çok profesyoneldi, teşekkürler."
+                        </p>
+                        <div>
+                            <div style="font-weight: 500; color:#fff;">Mert Ç****</div>
+                            <div style="font-size: 0.85rem; color: #999;" data-lang="review_role_entrepreneur">Girişimci
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div style="color: #ffd700; margin-bottom: 1rem;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p style="margin-bottom: 1.5rem; color: #ddd; line-height: 1.6;" data-lang="review_6_text">
+                            "Sanriqa ile çalışmak projemizin kaderini değiştirdi. Tasarım gözü inanılmaz ve teknik
+                            bilgisi sayesinde kusursuz bir iş çıkardı."
+                        </p>
+                        <div>
+                            <div style="font-weight: 500; color:#fff;">Gönül ****</div>
+                            <div style="font-size: 0.85rem; color: #999;" data-lang="review_role_founder">Kurucu,
+                                MusePilates</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section id="why-me">
+            <div class="why-me-header reveal-on-scroll">
+                <div class="why-me-tag" data-lang="whyme_tag">● Neden beni seçmelisin?</div>
+                <h2 class="why-me-title" data-lang="whyme_title">Neden <span>Tasarım Ortağınız</span> Olarak Ben?</h2>
+                <p class="section-desc" data-lang="whyme_desc">Tasarım mükemmelliği için benimle ortaklık kurmanın
+                    farkını keşfedin.</p>
+            </div>
+
+            <div class="sticky-container">
+
+                <div class="why-me-card reveal-on-scroll">
+                    <div class="card-left">
+                        <div class="icon-wrapper icon-check">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h3 class="card-title" data-lang="whyme_1_pos_title">Müşteri Odaklı İşbirliği</h3>
+                        <p class="card-desc" data-lang="whyme_1_pos_desc">Vizyonunuz yol gösterir ve fikirlerinizi
+                            hassasiyetle hayata geçiririm.</p>
+                    </div>
+                    <div class="card-right">
+                        <div class="icon-wrapper icon-cross">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <h3 class="card-title" data-lang="whyme_1_neg_title">Kopuk İletişim</h3>
+                        <p class="card-desc" data-lang="whyme_1_neg_desc">İşbirliği eksikliği uyumsuz sonuçlara yol
+                            açabilir.</p>
+                    </div>
+                </div>
+
+                <div class="why-me-card reveal-on-scroll">
+                    <div class="card-left">
+                        <div class="icon-wrapper icon-check">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h3 class="card-title" data-lang="whyme_2_pos_title">Zamanında Proje Takibi</h3>
+                        <p class="card-desc" data-lang="whyme_2_pos_desc">Düzenli güncellemelerle süreçten haberdar
+                            olun.</p>
+                    </div>
+                    <div class="card-right">
+                        <div class="icon-wrapper icon-cross">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <h3 class="card-title" data-lang="whyme_2_neg_title">Düzensiz ve Güvenilmez İş</h3>
+                        <p class="card-desc" data-lang="whyme_2_neg_desc">Tutarsız zamanlamalar kaliteyi düşürebilir.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="why-me-card reveal-on-scroll">
+                    <div class="card-left">
+                        <div class="icon-wrapper icon-check">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h3 class="card-title" data-lang="whyme_3_pos_title">Geleceğe Hazır Tasarımlar</h3>
+                        <p class="card-desc" data-lang="whyme_3_pos_desc">İşletmenizle büyüyen modern tasarımlar.</p>
+                    </div>
+                    <div class="card-right">
+                        <div class="icon-wrapper icon-cross">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <h3 class="card-title" data-lang="whyme_3_neg_title">Eskimiş Kavramlar</h3>
+                        <p class="card-desc" data-lang="whyme_3_neg_desc">Güncel trendleri yansıtmayan tasarımlar.</p>
+                    </div>
+                </div>
+
+                <div class="why-me-card reveal-on-scroll">
+                    <div class="card-left">
+                        <div class="icon-wrapper icon-check">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h3 class="card-title" data-lang="whyme_4_pos_title">Deneyimli Profesyonel</h3>
+                        <p class="card-desc" data-lang="whyme_4_pos_desc">Yılların deneyimine sahip bir uzmana erişin.
+                        </p>
+                    </div>
+                    <div class="card-right">
+                        <div class="icon-wrapper icon-cross">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <h3 class="card-title" data-lang="whyme_4_neg_title">Amatör Tasarımcı</h3>
+                        <p class="card-desc" data-lang="whyme_4_neg_desc">Deneyim eksikliği hatalara yol açabilir.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section reveal-on-scroll">
+            <div class="email-wrapper" onclick="copyEmail()">
+                <h2 class="contact-title" style="font-weight: 800; cursor: pointer;">sanriqa@sanriqa.com</h2>
+                <span id="copy-feedback" data-lang="msg_copied">Kopyalandı!</span>
+            </div>
+            <p style="font-size: 1.2rem; color: #999; margin-bottom: 3rem;" data-lang="contact_text">
+                Markanı bir üst seviyeye taşımaya hazır mısın? İletişime geç ve birlikte bir şeyler oluşturalım.
+            </p>
+            <a href="mailto:sanriqa@sanriqa.com" class="btn btn-primary" data-lang="btn_contact">İletişime Geç →</a>
+        </section>
+
+        <footer class="reveal-on-scroll">
+            <div style="color: #999;" data-lang="footer_rights">© 2025 Sanriqa. All rights reserved.</div>
+            <div class="footer-links">
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </footer>
+
+        <script>
+            // --- SPLASH SCREEN LOGIC ---
+            // Sayfa yüklenirken scroll'u kilitle
+            document.body.style.overflow = 'hidden';
+
+            // Sayfa yüklendiğinde
+            window.addEventListener('load', () => {
+                const loader = document.getElementById('loader');
+
+                // Animasyon süresi kadar bekle (2500ms animasyon + biraz marj)
+                setTimeout(() => {
+                    loader.classList.add('loader-hide');
+
+                    // Scroll kilidini aç
+                    document.body.style.overflow = '';
+                }, 2600);
+            });
+
+
+            const translations = {
+                tr: {
+                    msg_copied: "Kopyalandı!",
+                    nav_projects: "Projelerim",
+                    nav_about: "Hakkımda",
+                    nav_reviews: "Yorumlar",
+                    nav_whyme: "Neden Ben",
+                    nav_contact: "İletişim",
+                    hero_tag: "● UI/UX & Grafik Tasarımcısı & Geliştirici",
+                    hero_title_sub: "hakkımda",
+                    hero_desc: "Ben, işletmenizi büyütmeye yardımcı olmak için grafik, web ve ürün tasarımı alanlarında uzmanlaşmış çok yönlü bir tasarımcıyım. Hadi birlikte harika bir şey ortaya çıkaralım.",
+                    btn_all_projects: "Tüm Projelerim",
+                    btn_contact: "İletişime Geç",
+                    bubble_1_text: "“Onunla çalışmak oyunu tamamen değiştirdi!”",
+                    bubble_1_author: "- Alesta",
+                    bubble_2_text: "“Dönüşümlerimizi %200 artırdık.”",
+                    bubble_2_author: "- DrPlague",
+                    about_badge: "● Uzman Tasarımcı",
+                    about_title: "Sanriqa, Tasarımcınız",
+                    about_sub: "Kendim ve geçmiş deneyimlerim hakkında kısa bir tanıtım.",
+                    about_status_badge: "<span class='dot'></span> İş için uygun",
+                    about_hello: "Merhaba ben Sanriqa",
+                    about_role: "Game & Web Developer & Graphic Designer TR / DE",
+                    about_connect: "Benimle İletişime Geç",
+                    about_bio: "Ben Sanriqa, dijital deneyimler yaratma konusunda tutkulu bir Web Tasarımcısı ve Geliştiriciyim. Yaratıcı tasarımı, kusursuz teknik uygulamalarla birleştirerek markanız için istisnai dijital ürünler ortaya çıkarıyorum.",
+                    tag_product: "Product Design",
+                    tag_ux: "UX Design",
+                    tag_ui: "UI Design",
+                    tag_dev: "Development",
+                    tag_brand: "Branding",
+                    tag_webflow: "Webflow",
+                    timeline_role_1: "Freelance",
+                    timeline_role_2: "UX/UI Designer & Developer",
+                    timeline_role_3: "Freelance Designer",
+                    timeline_role_4: "Graphic Designer",
+                    section_projects_tag: "● PROJELERİM",
+                    section_projects_title: "Tasarım <span>Hizmetlerim</span>",
+                    services_main_desc: "Markanızı güçlendirmek için sunduğum kapsamlı tasarım çözümleri.",
+                    service_web_title: '<i class="fa-solid fa-window-maximize"></i> Website Design',
+                    service_web_desc: "Markanızla mükemmel uyum sağlayan, etkileşimi ve dönüşümleri artıran, nefes kesici ve kullanıcı odaklı web siteleri.",
+                    service_graphic_title: '<i class="fa-solid fa-pen-nib"></i> Graphic Design',
+                    service_graphic_desc: "Markanızı yükselten ve hedef kitlenizi büyüleyen cesur, ilgi çekici ve çok yönlü grafik tasarımlar.",
+                    service_logo_title: '<i class="fa-solid fa-shapes"></i> Logo Design',
+                    service_logo_desc: "Markanızın kimliğini ve vizyonunu somutlaştıran, ayırt edici ve ölçeklenebilir logolar.",
+                    service_motion_title: '<i class="fa-solid fa-play"></i> Motion Design',
+                    service_motion_desc: "Statik görsellerin sınırlarını aşarak markanıza hayat verin. Logo animasyonları, açıklayıcı videolar ve VFX destekli kurgular.",
+                    marquee_video: '<i class="fa-solid fa-video"></i> Video & Motion',
+                    marquee_copy: '<i class="fa-solid fa-pen"></i> Copywriting',
+                    marquee_posters: '<i class="fa-solid fa-image"></i> Posters',
+                    marquee_code: '<i class="fa-solid fa-code"></i> Custom Code',
+                    marquee_seo: '<i class="fa-solid fa-magnifying-glass"></i> SEO',
+                    marquee_social: '<i class="fa-solid fa-share-nodes"></i> Social Media',
+                    marquee_opt: '<i class="fa-solid fa-bolt"></i> Optimization',
+                    reviews_tag: "YORUMLAR",
+                    reviews_title: "Müşteri Deneyimleri",
+                    review_1_text: "\"Yayın tasarımım konusunda kendisine güvendim ve ortaya mükemmel bir iş çıktı.\"",
+                    review_role_streamer: "Streamer",
+                    review_2_text: "\"Verilen süreye tam uyuldu ve iletişim süreci çok şeffaftı. Ufak revizeler gerekse de sonuçtan çok memnun kaldık.\"",
+                    review_3_text: "\"Markamızın yüzünü tamamen modernleştirdi. Geri dönüşler harika, kesinlikle tavsiye ediyorum.\"",
+                    review_role_ceo: "CEO, LudoToys",
+                    review_4_text: "\"Tasarım tam istediğim tarzda oldu işinin ehli.\"",
+                    review_5_text: "\"Oldukça yaratıcı fikirlerle geldi. Proje akışı çok profesyoneldi, teşekkürler.\"",
+                    review_role_entrepreneur: "Girişimci",
+                    review_6_text: "\"Sanriqa ile çalışmak projemizin kaderini değiştirdi. Tasarım gözü inanılmaz ve teknik bilgisi sayesinde kusursuz bir iş çıkardı.\"",
+                    review_role_founder: "Kurucu, MusePilates",
+                    whyme_tag: "● Neden beni seçmelisin?",
+                    whyme_title: "Neden <span>Tasarım Ortağınız</span> Olarak Ben?",
+                    whyme_desc: "Tasarım mükemmelliği için benimle ortaklık kurmanın farkını keşfedin.",
+                    whyme_1_pos_title: "Müşteri Odaklı İşbirliği",
+                    whyme_1_pos_desc: "Vizyonunuz yol gösterir ve fikirlerinizi hassasiyetle hayata geçiririm.",
+                    whyme_1_neg_title: "Kopuk İletişim",
+                    whyme_1_neg_desc: "İşbirliği eksikliği uyumsuz sonuçlara yol açabilir.",
+                    whyme_2_pos_title: "Zamanında Proje Takibi",
+                    whyme_2_pos_desc: "Düzenli güncellemelerle süreçten haberdar olun.",
+                    whyme_2_neg_title: "Düzensiz ve Güvenilmez İş",
+                    whyme_2_neg_desc: "Tutarsız zamanlamalar kaliteyi düşürebilir.",
+                    whyme_3_pos_title: "Geleceğe Hazır Tasarımlar",
+                    whyme_3_pos_desc: "İşletmenizle büyüyen modern tasarımlar.",
+                    whyme_3_neg_title: "Klişe Kavramlar",
+                    whyme_3_neg_desc: "Güncel trendleri yansıtmayan tasarımlar.",
+                    whyme_4_pos_title: "Deneyimli Profesyonel",
+                    whyme_4_pos_desc: "Yılların deneyimine sahip bir uzmana erişin.",
+                    whyme_4_neg_title: "Amatör Tasarımcı",
+                    whyme_4_neg_desc: "Deneyim eksikliği hatalara yol açabilir.",
+                    contact_text: "Markanı bir üst seviyeye taşımaya hazır mısın? İletişime geç ve birlikte bir şeyler oluşturalım.",
+                    footer_rights: "© 2025 Sanriqa. All rights reserved."
+                },
+                en: {
+                    msg_copied: "Copied!",
+                    nav_projects: "Projects",
+                    nav_about: "About",
+                    nav_reviews: "Reviews",
+                    nav_whyme: "Why Me",
+                    nav_contact: "Contact",
+                    hero_tag: "● UI/UX Graphic Designer & Developer",
+                    hero_title_sub: "about me",
+                    hero_desc: "I am a versatile designer specializing in graphic, web, and product design to help grow your business. Let's create something amazing together.",
+                    btn_all_projects: "All Projects",
+                    btn_contact: "Get in Touch",
+                    bubble_1_text: "“Working with him changed the game entirely!”",
+                    bubble_1_author: "- Alesta",
+                    bubble_2_text: "“We increased our conversions by 200%.”",
+                    bubble_2_author: "- DrPlague",
+                    about_badge: "● Expert Designer",
+                    about_title: "Sanriqa, Your Designer",
+                    about_sub: "A brief introduction about myself and my past experiences.",
+                    about_status_badge: "<span class='dot'></span> Available for work",
+                    about_hello: "Hello, I'm Sanriqa",
+                    about_role: "Game & Web Developer & Graphic Designer TR / DE",
+                    about_connect: "Connect With Me",
+                    about_bio: "I am Sanriqa, a Web Designer and Developer passionate about creating digital experiences. I create exceptional digital products for your brand by combining creative design with flawless technical execution.",
+                    tag_product: "Product Design",
+                    tag_ux: "UX Design",
+                    tag_ui: "UI Design",
+                    tag_dev: "Development",
+                    tag_brand: "Branding",
+                    tag_webflow: "Webflow",
+                    timeline_role_1: "Freelance",
+                    timeline_role_2: "UX/UI Designer & Developer",
+                    timeline_role_3: "Freelance Designer",
+                    timeline_role_4: "Graphic Designer",
+                    section_projects_tag: "● MY PROJECTS",
+                    section_projects_title: "Design <span>Services</span>",
+                    services_main_desc: "Comprehensive design solutions to empower your brand.",
+                    service_web_title: '<i class="fa-solid fa-window-maximize"></i> Website Design',
+                    service_web_desc: "Breathtaking, user-centric websites that align perfectly with your brand and drive engagement.",
+                    service_graphic_title: '<i class="fa-solid fa-pen-nib"></i> Graphic Design',
+                    service_graphic_desc: "Bold, engaging, and versatile graphic designs that elevate your brand and captivate your audience.",
+                    service_logo_title: '<i class="fa-solid fa-shapes"></i> Logo Design',
+                    service_logo_desc: "Distinctive and scalable logos that embody your brand's identity and vision.",
+                    service_motion_title: '<i class="fa-solid fa-play"></i> Motion Design',
+                    service_motion_desc: "Bring your brand to life beyond static images. Logo animations, explainer videos, and VFX-supported edits.",
+                    marquee_video: '<i class="fa-solid fa-video"></i> Video & Motion',
+                    marquee_copy: '<i class="fa-solid fa-pen"></i> Copywriting',
+                    marquee_posters: '<i class="fa-solid fa-image"></i> Posters',
+                    marquee_code: '<i class="fa-solid fa-code"></i> Custom Code',
+                    marquee_seo: '<i class="fa-solid fa-magnifying-glass"></i> SEO',
+                    marquee_social: '<i class="fa-solid fa-share-nodes"></i> Social Media',
+                    marquee_opt: '<i class="fa-solid fa-bolt"></i> Optimization',
+                    reviews_tag: "REVIEWS",
+                    reviews_title: "Client Experiences",
+                    review_1_text: "\"I trusted him with my stream design and the result was excellent.\"",
+                    review_role_streamer: "Streamer",
+                    review_2_text: "\"The timeline was met perfectly, and communication was transparent. Even with minor revisions, we are very happy with the result.\"",
+                    review_3_text: "\"He completely modernized the face of our brand. The feedback is great, highly recommended.\"",
+                    review_role_ceo: "CEO, LudoToys",
+                    review_4_text: "\"The design turned out exactly the style I wanted, a true master of his craft.\"",
+                    review_5_text: "\"He came up with very creative ideas. The project flow was very professional, thanks.\"",
+                    review_role_entrepreneur: "Entrepreneur",
+                    review_6_text: "\"Working with Sanriqa changed the destiny of our project. His design eye is incredible and his technical knowledge delivered flawless work.\"",
+                    review_role_founder: "Founder, MusePilates",
+                    whyme_tag: "● Why choose me?",
+                    whyme_title: "Why Me As Your <span>Design Partner?</span>",
+                    whyme_desc: "Discover the difference of partnering with me for design excellence.",
+                    whyme_1_pos_title: "Client-Centric Collaboration",
+                    whyme_1_pos_desc: "Your vision guides the way, and I bring your ideas to life with precision.",
+                    whyme_1_neg_title: "Disconnected Communication",
+                    whyme_1_neg_desc: "Lack of collaboration can lead to mismatched results.",
+                    whyme_2_pos_title: "Timely Project Tracking",
+                    whyme_2_pos_desc: "Stay informed about the process with regular updates.",
+                    whyme_2_neg_title: "Irregular & Unreliable Work",
+                    whyme_2_neg_desc: "Inconsistent timing can lower quality.",
+                    whyme_3_pos_title: "Future-Ready Designs",
+                    whyme_3_pos_desc: "Modern designs that grow with your business.",
+                    whyme_3_neg_title: "Cliche Concepts",
+                    whyme_3_neg_desc: "Designs that do not reflect current trends.",
+                    whyme_4_pos_title: "Experienced Professional",
+                    whyme_4_pos_desc: "Access an expert with years of experience.",
+                    whyme_4_neg_title: "Amateur Designer",
+                    whyme_4_neg_desc: "Lack of experience can lead to mistakes.",
+                    contact_text: "Ready to take your brand to the next level? Get in touch and let's create something together.",
+                    footer_rights: "© 2025 Sanriqa. All rights reserved."
+                },
+                de: {
+                    msg_copied: "Kopiert!",
+                    nav_projects: "Projekte",
+                    nav_about: "Über Mich",
+                    nav_reviews: "Bewertungen",
+                    nav_whyme: "Warum Ich",
+                    nav_contact: "Kontakt",
+                    hero_tag: "● UI/UX Grafikdesigner & Developer",
+                    hero_title_sub: "über mich",
+                    hero_desc: "Ich bin ein vielseitiger Designer, spezialisiert auf Grafik-, Web- und Produktdesign. Lassen Sie uns gemeinsam etwas Großartiges schaffen.",
+                    btn_all_projects: "Alle Projekte",
+                    btn_contact: "Kontaktieren",
+                    bubble_1_text: "“Die Zusammenarbeit mit ihm hat alles verändert!”",
+                    bubble_1_author: "- Alesta",
+                    bubble_2_text: "“Wir haben unsere Conversions um 200% gesteigert.”",
+                    bubble_2_author: "- DrPlague",
+                    about_badge: "● Experten Designer",
+                    about_title: "Sanriqa, Ihr Designer",
+                    about_sub: "Eine kurze Einführung über mich und meine bisherigen Erfahrungen.",
+                    about_status_badge: "<span class='dot'></span> Verfügbar für Arbeit",
+                    about_hello: "Hallo, ich bin Sanriqa",
+                    about_role: "Game & Web Developer & Graphic Designer TR / DE",
+                    about_connect: "Verbinde dich mit mir",
+                    about_bio: "Ich bin Sanriqa, ein Webdesigner und Entwickler mit einer Leidenschaft für digitale Erlebnisse. Ich erstelle außergewöhnliche digitale Produkte für Ihre Marke, indem ich kreatives Design mit makelloser technischer Ausführung kombiniere.",
+                    tag_product: "Produktdesign",
+                    tag_ux: "UX Design",
+                    tag_ui: "UI Design",
+                    tag_dev: "Entwicklung",
+                    tag_brand: "Branding",
+                    tag_webflow: "Webflow",
+                    timeline_role_1: "Freelance",
+                    timeline_role_2: "UX/UI Designer & Developer",
+                    timeline_role_3: "Freelance Designer",
+                    timeline_role_4: "Grafikdesigner",
+                    section_projects_tag: "● MEINE PROJEKTE",
+                    section_projects_title: "Design <span>Dienstleistungen</span>",
+                    services_main_desc: "Umfassende Designlösungen zur Stärkung Ihrer Marke.",
+                    service_web_title: '<i class="fa-solid fa-window-maximize"></i> Website Design',
+                    service_web_desc: "Atemberaubende, nutzerzentrierte Websites, die perfekt zu Ihrer Marke passen und das Engagement steigern.",
+                    service_graphic_title: '<i class="fa-solid fa-pen-nib"></i> Grafikdesign',
+                    service_graphic_desc: "Mutige, ansprechende und vielseitige Grafikdesigns, die Ihre Marke hervorheben.",
+                    service_logo_title: '<i class="fa-solid fa-shapes"></i> Logo Design',
+                    service_logo_desc: "Unverwechselbare und skalierbare Logos, die die Identität und Vision Ihrer Marke verkörpern.",
+                    service_motion_title: '<i class="fa-solid fa-play"></i> Motion Design',
+                    service_motion_desc: "Erwecken Sie Ihre Marke über statische Bilder hinaus zum Leben. Logo-Animationen, Erklärvideos und VFX-gestützte Bearbeitungen.",
+                    marquee_video: '<i class="fa-solid fa-video"></i> Video & Motion',
+                    marquee_copy: '<i class="fa-solid fa-pen"></i> Texten',
+                    marquee_posters: '<i class="fa-solid fa-image"></i> Poster',
+                    marquee_code: '<i class="fa-solid fa-code"></i> Custom Code',
+                    marquee_seo: '<i class="fa-solid fa-magnifying-glass"></i> SEO',
+                    marquee_social: '<i class="fa-solid fa-share-nodes"></i> Social Media',
+                    marquee_opt: '<i class="fa-solid fa-bolt"></i> Optimierung',
+                    reviews_tag: "BEWERTUNGEN",
+                    reviews_title: "Kundenerfahrungen",
+                    review_1_text: "\"Ich habe ihm mein Stream-Design anvertraut und das Ergebnis war exzellent.\"",
+                    review_role_streamer: "Streamer",
+                    review_2_text: "\"Der Zeitplan wurde perfekt eingehalten und die Kommunikation war transparent. Wir sind sehr zufrieden.\"",
+                    review_3_text: "\"Er hat das Gesicht unserer Marke komplett modernisiert. Das Feedback ist großartig, sehr zu empfehlen.\"",
+                    review_role_ceo: "CEO, LudoToys",
+                    review_4_text: "\"Das Design ist genau so geworden, wie ich es mir vorgestellt habe, ein wahrer Meister seines Fachs.\"",
+                    review_5_text: "\"Er hatte sehr kreative Ideen. Der Projektablauf war sehr professionell, danke.\"",
+                    review_role_entrepreneur: "Unternehmer",
+                    review_6_text: "\"Die Zusammenarbeit mit Sanriqa hat das Schicksal unseres Projekts verändert. Sein technisches Wissen lieferte makellose Arbeit.\"",
+                    review_role_founder: "Gründer, MusePilates",
+                    whyme_tag: "● Warum ich?",
+                    whyme_title: "Warum Ich Als Ihr <span>Designpartner?</span>",
+                    whyme_desc: "Entdecken Sie den Unterschied einer Partnerschaft mit mir für Design-Exzellenz.",
+                    whyme_1_pos_title: "Kundenorientierte Zusammenarbeit",
+                    whyme_1_pos_desc: "Ihre Vision weist den Weg, und ich setze Ihre Ideen präzise um.",
+                    whyme_1_neg_title: "Fehlende Kommunikation",
+                    whyme_1_neg_desc: "Mangelnde Zusammenarbeit kann zu unpassenden Ergebnissen führen.",
+                    whyme_2_pos_title: "Pünktliche Projektverfolgung",
+                    whyme_2_pos_desc: "Bleiben Sie durch regelmäßige Updates über den Prozess informiert.",
+                    whyme_2_neg_title: "Unregelmäßige Arbeit",
+                    whyme_2_neg_desc: "Inkonsistentes Timing kann die Qualität mindern.",
+                    whyme_3_pos_title: "Zukunftssichere Designs",
+                    whyme_3_pos_desc: "Moderne Designs, die mit Ihrem Unternehmen wachsen.",
+                    whyme_3_neg_title: "Klischee Konzepte",
+                    whyme_3_neg_desc: "Designs, die keine aktuellen Trends widerspiegeln.",
+                    whyme_4_pos_title: "Erfahrener Profi",
+                    whyme_4_pos_desc: "Zugriff auf einen Experten mit jahrelanger Erfahrung.",
+                    whyme_4_neg_title: "Amateur-Designer",
+                    whyme_4_neg_desc: "Mangelnde Erfahrung kann zu Fehlern führen.",
+                    contact_text: "Bereit, Ihre Marke auf die nächste Stufe zu heben? Kontaktieren Sie mich.",
+                    footer_rights: "© 2025 Sanriqa. Alle Rechte vorbehalten."
+                }
+            };
+
+            function toggleLanguageMenu() {
+                const menu = document.getElementById('lang-menu');
+                menu.classList.toggle('active');
+            }
+
+            function setLanguage(lang) {
+                const elements = document.querySelectorAll('[data-lang]');
+
+                elements.forEach(el => {
+                    el.classList.add('lang-changing');
+                });
+
+                setTimeout(() => {
+                    elements.forEach(el => {
+                        const key = el.getAttribute('data-lang');
+                        if (translations[lang] && translations[lang][key]) {
+                            el.innerHTML = translations[lang][key];
+                        }
+                    });
+
+                    const flagImg = document.getElementById('header-lang-flag');
+                    if (flagImg) {
+                        if (lang === 'tr') flagImg.src = 'https://flagcdn.com/w40/tr.png';
+                        else if (lang === 'en') flagImg.src = 'https://flagcdn.com/w40/gb.png';
+                        else if (lang === 'de') flagImg.src = 'https://flagcdn.com/w40/de.png';
+                    }
+
+                    elements.forEach(el => {
+                        el.classList.remove('lang-changing');
+                    });
+
+                }, 400);
+
+                document.getElementById('lang-menu').classList.remove('active');
+                localStorage.setItem('selectedLanguage', lang);
+            }
+
+            function copyEmail() {
+                const email = "sanriqa@sanriqa.com";
+                navigator.clipboard.writeText(email).then(() => {
+                    const feedback = document.getElementById('copy-feedback');
+                    feedback.classList.add('visible');
+                    setTimeout(() => {
+                        feedback.classList.remove('visible');
+                    }, 2000);
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const savedLang = localStorage.getItem('selectedLanguage') || 'tr';
+
+                const elements = document.querySelectorAll('[data-lang]');
+                elements.forEach(el => {
+                    const key = el.getAttribute('data-lang');
+                    if (translations[savedLang] && translations[savedLang][key]) {
+                        el.innerHTML = translations[savedLang][key];
+                    }
+                });
+                const flagImg = document.getElementById('header-lang-flag');
+                if (flagImg) {
+                    if (savedLang === 'tr') flagImg.src = 'https://flagcdn.com/w40/tr.png';
+                    else if (savedLang === 'en') flagImg.src = 'https://flagcdn.com/w40/gb.png';
+                    else if (savedLang === 'de') flagImg.src = 'https://flagcdn.com/w40/de.png';
+                }
+
+
+                document.addEventListener('click', (e) => {
+                    const selector = document.querySelector('.language-selector');
+                    if (selector && !selector.contains(e.target)) {
+                        const menu = document.getElementById('lang-menu');
+                        if (menu) menu.classList.remove('active');
+                    }
+                });
+
+                const scrollLine = document.getElementById('scroll-line');
+                const scrollDots = document.querySelectorAll('.scroll-dot');
+                const sections = document.querySelectorAll('section');
+
+                function updateScrollSpy() {
+                    const scrollTop = window.scrollY;
+                    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const scrollPercent = (scrollTop / docHeight) * 100;
+
+                    if (scrollLine) {
+                        scrollLine.style.height = scrollPercent + "%";
+                    }
+
+                    let currentSection = "";
+
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+
+                        if (scrollY >= (sectionTop - window.innerHeight / 3)) {
+                            currentSection = section.getAttribute("id");
+                        }
+                    });
+
+                    scrollDots.forEach(dot => {
+                        dot.classList.remove('active');
+                        if (dot.getAttribute('data-target') === currentSection) {
+                            dot.classList.add('active');
+                        }
+                    });
+                }
+
+                window.addEventListener('scroll', updateScrollSpy);
+                updateScrollSpy();
+
+
+                const revealElements = document.querySelectorAll('.reveal-on-scroll');
+
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    threshold: 0.1,
+                    rootMargin: "0px 0px -50px 0px"
+                });
+
+                revealElements.forEach(el => {
+                    revealObserver.observe(el);
+                });
+
+
+                const cursorGlow = document.querySelector('.cursor-glow');
+                const cursorDot = document.querySelector('.cursor-dot');
+                const projectCards = document.querySelectorAll('.project-card');
+
+                let mouseX = 0, mouseY = 0;
+                let glowX = 0, glowY = 0;
+                let dotX = 0, dotY = 0;
+
+                const speed = 0.08;
+
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+
+                function animateCursor() {
+                    glowX += (mouseX - glowX) * speed;
+                    glowY += (mouseY - glowY) * speed;
+
+                    dotX += (mouseX - dotX) * speed;
+                    dotY += (mouseY - dotY) * speed;
+
+                    if (cursorGlow) {
+                        cursorGlow.style.left = `${glowX}px`;
+                        cursorGlow.style.top = `${glowY}px`;
+                    }
+                    if (cursorDot) {
+                        cursorDot.style.left = `${dotX}px`;
+                        cursorDot.style.top = `${dotY}px`;
+                    }
+
+                    requestAnimationFrame(animateCursor);
+                }
+
+                animateCursor();
+
+                projectCards.forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        cursorGlow.classList.add('project-hover');
+                        cursorDot.classList.add('project-hover');
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        cursorGlow.classList.remove('project-hover');
+                        cursorDot.classList.remove('project-hover');
+                    });
+
+                    card.addEventListener('click', () => {
+                        const url = card.getAttribute('data-project-url');
+                        if (url && url !== '#') {
+                            window.open(url, '_blank');
+                        }
+                    });
+                });
+
+                const clickableElements = document.querySelectorAll('a, button, .nav-links li, .scroll-indicator-arrow, .current-lang, .lang-item, .email-wrapper');
+
+                clickableElements.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        if (!el.closest('.project-card')) {
+                            cursorGlow.classList.add('interactive-hover');
+                        }
+                    });
+
+                    el.addEventListener('mouseleave', () => {
+                        cursorGlow.classList.remove('interactive-hover');
+                    });
+                });
+
+            });
+        </script>
+</body>
+
+</html>
