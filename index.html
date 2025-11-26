@@ -48,6 +48,10 @@
 
         html {
             scroll-behavior: smooth;
+            background-color: #000;
+            /* ÖNEMLİ: Arka planı siyaha zorla */
+            height: 100%;
+            /* Yükseklik garantisi */
         }
 
         * {
@@ -75,9 +79,15 @@
             font-family: 'Inter', 'Inter Placeholder', sans-serif;
             background: #000;
             color: #fff;
-            overflow-x: hidden;
+            margin: 0;
+            /* Kenar boşluklarını sıfırla */
+            padding: 0;
+            /* İç boşlukları sıfırla */
             padding-top: 80px;
+            /* Navigasyon boşluğu */
             position: relative;
+            overscroll-behavior: none;
+            /* Mobilde lastik gibi çekmeyi engelle */
         }
 
         /* --- YÜKLEME EKRANI (SPLASH SCREEN) STİLLERİ --- */
@@ -85,14 +95,28 @@
             position: fixed;
             top: 0;
             left: 0;
+            right: 0;
+            /* Genişlik yerine sağa yasla */
+            bottom: 0;
+            /* Yükseklik yerine alta yasla */
             width: 100%;
+
+            /* Yükseklik Ayarları (Önemli Kısım) */
             height: 100vh;
+            /* Eski tarayıcılar için yedek */
+            height: 100dvh;
+            /* Yeni mobil tarayıcılar için dinamik yükseklik (adres çubuğunu hesaba katar) */
+
             background-color: #000;
             z-index: 999999;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+
+            /* Mobilde kaydırmayı ve dokunmayı engelle */
+            touch-action: none;
+            overflow: hidden;
         }
 
         .loader-content {
@@ -1886,8 +1910,9 @@
             top: -50px;
         }
 
-        /* --- PROJECT MODAL STYLES (FULL & FINAL) --- */
-        /* Scrollbar Gizleme */
+        /* --- PROJECT MODAL & LIGHTBOX STYLES (FİNAL: YAZI KESİLME SORUNU ÇÖZÜLDÜ) --- */
+
+        /* 1. Scrollbar Gizleme */
         .modal-grid::-webkit-scrollbar {
             display: none;
         }
@@ -1897,7 +1922,7 @@
             scrollbar-width: none;
         }
 
-        /* Modal Overlay & Container */
+        /* 2. Ana Modal (Siyah Arka Plan) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -1920,6 +1945,7 @@
             visibility: visible;
         }
 
+        /* 3. Modal Kutusu */
         .modal-container {
             width: 90%;
             max-width: 1400px;
@@ -1945,6 +1971,7 @@
             opacity: 1;
         }
 
+        /* Kapatma Butonu */
         .modal-close-btn {
             position: absolute;
             top: 25px;
@@ -1970,97 +1997,58 @@
             transform: rotate(90deg);
         }
 
-        /* Header & Başlık (Oklar Ortada, Başlık Tek Satır) */
+        /* 4. Başlık ve Oklar (DÜZELTİLDİ) */
         .modal-header-nav {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            /* Okları kenarlara, başlığı ortaya yay */
-            gap: 20px;
+            justify-content: center;
+            gap: 40px;
+            /* Oklar ile yazı arasındaki net boşluk */
             margin-bottom: 25px;
             margin-top: 10px;
             position: relative;
             width: 100%;
             height: 80px;
             padding: 0 10px;
-            /* Kenarlardan hafif boşluk */
         }
 
         .title-wrapper {
-            flex: 1;
-            /* Mevcut tüm boşluğu kapla */
+            /* min-width'i kaldırdık, flex-basis auto yaptık ki yazıya göre genişlesin */
+            flex: 0 1 auto;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
             height: 100%;
             overflow: hidden;
-            /* Animasyon dışına taşanları gizle */
+            /* Animasyonda kayan yazıyı gizlemek için */
+            padding: 0 10px;
+            /* Yazı kenarlara yapışmasın diye güvenlik payı */
         }
 
         #modal-category-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 800;
-            font-size: 2.5rem;
+            font-weight: 700;
+            font-size: 2.2rem;
+            /* İdeal boyut */
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 1px;
             color: #fff;
             text-align: center;
             white-space: nowrap;
             line-height: 1;
             margin: 0;
 
-            /* Animasyon için */
-            position: absolute;
-            width: 100%;
-            left: 0;
+            /* ÖNEMLİ DÜZELTME: Absolute yerine Relative */
+            /* Bu sayede yazı uzunsa kutu genişler, kısa ise daralır */
+            position: relative;
+            width: auto;
+            left: auto;
+
             display: flex;
-            /* Flex ile tam ortala */
             justify-content: center;
+            align-items: center;
             transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        /* Başlık Animasyonları */
-        .title-slide-out-left {
-            opacity: 0 !important;
-            transform: translateX(-50px) !important;
-        }
-
-        .title-slide-out-right {
-            opacity: 0 !important;
-            transform: translateX(50px) !important;
-        }
-
-        .title-slide-in-left {
-            animation: slideInLeft 0.4s forwards;
-        }
-
-        .title-slide-in-right {
-            animation: slideInRight 0.4s forwards;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .nav-arrow {
@@ -2078,7 +2066,6 @@
             justify-content: center;
             transition: all 0.3s ease;
             flex-shrink: 0;
-            /* Okların sıkışmasını engelle */
         }
 
         .nav-arrow:hover {
@@ -2087,19 +2074,50 @@
             transform: scale(1.1);
         }
 
-        @media (max-width: 768px) {
-            #modal-category-title {
-                font-size: 1.4rem;
-                letter-spacing: 1px;
+        /* Başlık Animasyonları */
+        .title-slide-out-left {
+            opacity: 0 !important;
+            transform: translateX(-30px) !important;
+        }
+
+        .title-slide-out-right {
+            opacity: 0 !important;
+            transform: translateX(30px) !important;
+        }
+
+        .title-slide-in-left {
+            animation: slideInLeft 0.4s forwards;
+        }
+
+        .title-slide-in-right {
+            animation: slideInRight 0.4s forwards;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
             }
 
-            .nav-arrow {
-                width: 40px;
-                height: 40px;
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
 
-        /* Grid Yapısı */
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* 5. Izgara (Grid) */
         .modal-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -2142,7 +2160,7 @@
             transform: scale(1.1);
         }
 
-        /* Sayfalama (Sliding Pill) */
+        /* 6. Sayfalama */
         .modal-pagination {
             margin-top: 20px;
             display: flex;
@@ -2209,7 +2227,53 @@
             }
         }
 
-        /* Mobil Uyum */
+        /* 7. Lightbox (Büyük Resim) */
+        .lightbox-overlay {
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 20000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-overlay.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-close-btn {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #f1f1f1;
+            font-size: 4rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 20001;
+        }
+
+        .lightbox-close-btn:hover {
+            color: #bbb;
+        }
+
+        /* 8. Mobil Uyum (DÜZELTİLDİ) */
         @media (max-width: 768px) {
             .modal-grid {
                 grid-template-columns: 1fr;
@@ -2219,20 +2283,51 @@
                 width: 100%;
                 height: 100vh;
                 border-radius: 0;
-                padding: 1.5rem;
+                padding: 1.5rem 1rem;
                 background: rgba(10, 10, 10, 0.95);
             }
 
             .modal-header-nav {
                 gap: 15px;
+                height: 60px;
+                margin-bottom: 15px;
             }
 
             .title-wrapper {
-                min-width: 200px;
+                width: auto;
+                flex: 1;
             }
 
             #modal-category-title {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
+                /* Mobilde fontu küçülttük */
+                letter-spacing: 0.5px;
+            }
+
+            .nav-arrow {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .modal-close-btn {
+                top: 15px;
+                right: 15px;
+                width: 35px;
+                height: 35px;
+                font-size: 1.2rem;
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .modal-pagination {
+                height: 50px;
+                margin-top: 10px;
+            }
+
+            .pagination-pill,
+            .page-number {
+                width: 40px;
+                height: 40px;
             }
         }
     </style>
@@ -2796,6 +2891,11 @@
                 </div>
             </div>
         </div>
+
+        <div id="lightbox-modal" class="modal-overlay lightbox-overlay">
+            <span class="lightbox-close-btn" onclick="closeLightbox()">&times;</span>
+            <img class="lightbox-content" id="lightbox-img" alt="Büyük Görsel">
+        </div>
         <script>
             // --- SPLASH SCREEN LOGIC ---
             document.body.style.overflow = 'hidden';
@@ -3269,9 +3369,10 @@
                 });
 
             });
+            // --- PROJECT MODAL & LIGHTBOX LOGIC (GÜNCEL) ---
+
             const projectData = {
                 "Anime": [
-                    // Buraya istediğin kadar link ekle (Virgül ile ayır)
                     "https://mir-s3-cdn-cf.behance.net/project_modules/fs/b540e5120486871.67dde6b526f6f.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/30c631120486871.60b28ce313690.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/9afe45120486871.61685afe021c4.png",
@@ -3284,23 +3385,22 @@
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/f785f9120486871.60b28ce3148e8.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/e9a649120486871.60b28ce313cb3.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/82d912120486871.60b28ce3142bd.png",
-                    // Burası 13. fotoğraf, bunu koyunca 2. sayfa açılır:
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/450db4120486871.60b28ce313092.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/072e68120486871.60b28ce31290f.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/6a9a96120486871.60b28ce312198.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/eb71f4120486871.60b28f189362a.jpg",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/c5a612120486871.60b4c8758936e.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/f76353120486871.60b4ffce2ec10.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/2d142e120486871.60c783cc44455.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/ed61bb120486871.60e21e0e16faa.png",
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/f08dc3120486871.60eb8178a4675.png",
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/448ecd120486871.60eb843485d3f.png",
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/81f275120486871.60ec89cbe1e27.png",
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/2bce50120486871.60ecc4d1a6ff8.png",
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/c5da13120486871.6171c8f7ee932.jpg",
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/2800_webp/e0b82a120486871.65e4deaba0854.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/f08dc3120486871.60eb8178a4675.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/448ecd120486871.60eb843485d3f.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/81f275120486871.60ec89cbe1e27.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/2bce50120486871.60ecc4d1a6ff8.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/c5da13120486871.6171c8f7ee932.jpg",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/e0b82a120486871.65e4deaba0854.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/5cff2d120486871.65e516c5a2f4f.png"
                 ],
-
                 "Fortnite": [
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/5131bd114890319.60b28aade1983.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/c2a13e114890319.60b28aade4120.png",
@@ -3313,14 +3413,12 @@
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/91ab29114890319.60b28aade0578.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/14aa40114890319.60fb4864da5b3.png"
                 ],
-
                 "Valorant": [
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/93b337120487029.67ec46e846053.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/514ebf120487029.60b28da65fc0b.jpg",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/c560b2120487029.60b28da6608fc.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/bfe3ea120487029.60b28da6601ec.jpg"
                 ],
-
                 "Other": [
                     "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/edf8a1238043723.690ca515ecda8.png"
                 ]
@@ -3329,11 +3427,17 @@
             const categories = Object.keys(projectData);
             let currentCategoryIndex = 0;
             let currentPage = 1;
-            const itemsPerPage = 12; // Bir sayfada kaç resim olacak?
+            const itemsPerPage = 12;
 
             // Elementleri seç
             const modal = document.getElementById('project-modal');
             let modalTitle = document.getElementById('modal-category-title');
+            const modalGrid = document.getElementById('modal-grid-content');
+            const paginationContainer = document.getElementById('pagination-container');
+
+            // Lightbox Elementleri
+            const lightboxModal = document.getElementById('lightbox-modal');
+            const lightboxImg = document.getElementById('lightbox-img');
 
             // Title wrapper kontrolü
             if (modalTitle && !modalTitle.parentElement.classList.contains('title-wrapper')) {
@@ -3343,20 +3447,15 @@
                 wrapper.appendChild(modalTitle);
             }
 
-            const modalGrid = document.getElementById('modal-grid-content');
-            const paginationContainer = document.getElementById('pagination-container');
-
+            // --- PROJECT MODAL FONKSİYONLARI ---
             function openModal(categoryName) {
                 currentCategoryIndex = categories.indexOf(categoryName) !== -1 ? categories.indexOf(categoryName) : 0;
                 currentPage = 1;
-
                 modalTitle.innerText = `${categories[currentCategoryIndex].toUpperCase()} HEADERS`;
                 updateGridContent();
                 renderPagination(projectData[categories[currentCategoryIndex]].length);
-
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
-
                 setTimeout(movePill, 100);
             }
 
@@ -3369,9 +3468,24 @@
                 if (e.target === modal) closeModal();
             });
 
+            // --- LIGHTBOX FONKSİYONLARI (YENİ) ---
+            function openLightbox(imgSrc) {
+                lightboxImg.src = imgSrc;
+                lightboxModal.classList.add('active');
+            }
+
+            function closeLightbox() {
+                lightboxModal.classList.remove('active');
+                setTimeout(() => { lightboxImg.src = ""; }, 300);
+            }
+
+            lightboxModal.addEventListener('click', (e) => {
+                if (e.target === lightboxModal || e.target === lightboxImg) closeLightbox();
+            });
+
+            // --- KATEGORİ & SAYFA DEĞİŞİMİ ---
             function changeCategory(direction) {
                 const oldTitle = modalTitle;
-
                 if (direction > 0) oldTitle.classList.add('title-slide-out-left');
                 else oldTitle.classList.add('title-slide-out-right');
 
@@ -3406,7 +3520,6 @@
             function updateGridContent() {
                 const category = categories[currentCategoryIndex];
                 const images = projectData[category];
-
                 modalGrid.innerHTML = "";
 
                 const startIndex = (currentPage - 1) * itemsPerPage;
@@ -3420,8 +3533,8 @@
                     div.style.animationDelay = `${index * 0.05}s`;
                     div.innerHTML = `<img src="${imgSrc}" loading="lazy" alt="${category}">`;
 
-                    // Tıklayınca büyük açmak istersen bu satırı aktif et:
-                    // div.onclick = () => window.open(imgSrc, '_blank');
+                    // --- TIKLAYINCA LIGHTBOX AÇ ---
+                    div.onclick = () => openLightbox(imgSrc);
 
                     modalGrid.appendChild(div);
                 });
@@ -3430,9 +3543,6 @@
             function renderPagination(totalItems) {
                 paginationContainer.innerHTML = "";
                 const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-                // Eğer 1 sayfa varsa numaraları gizle (Temiz görünüm)
-                // Eğer 1 sayfayken de "1" yazsın istiyorsan bu satırı sil.
                 if (totalPages <= 1) return;
 
                 const pill = document.createElement('div');
@@ -3452,7 +3562,6 @@
                     span.innerText = i;
                     span.className = 'page-number';
                     if (i === currentPage) span.classList.add('active');
-
                     span.onclick = () => changePage(i);
                     paginationContainer.appendChild(span);
                 }
@@ -3464,7 +3573,6 @@
             function movePill() {
                 const activeItem = paginationContainer.querySelector('.page-number.active');
                 const pill = paginationContainer.querySelector('.pagination-pill');
-
                 if (activeItem && pill) {
                     pill.style.left = `${activeItem.offsetLeft}px`;
                     pill.style.width = `${activeItem.offsetWidth}px`;
