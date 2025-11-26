@@ -2065,12 +2065,19 @@
         .modal-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(4, 1fr);
+            /* grid-template-rows satırını sildik, yerine auto-rows geldi */
+            grid-auto-rows: min-content;
+            /* Kutuların kendi yüksekliğini almasını sağlar */
             gap: 20px;
             width: 100%;
             height: 100%;
             overflow-y: auto;
+            /* İçerik uzadıkça scroll açılır */
             padding: 10px;
+            padding-bottom: 120px;
+            /* En alttaki sayfalama (pagination) çubuğu için boşluk */
+            align-content: start;
+            /* İçeriği yukarı yaslar */
         }
 
         .grid-item {
@@ -2104,20 +2111,7 @@
             transform: scale(1.1);
         }
 
-        .modal-pagination {
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0;
-            height: 60px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 5px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-            z-index: 20;
-        }
+
 
         .pagination-pill {
             position: absolute;
@@ -2271,6 +2265,77 @@
                 height: 40px;
             }
         }
+
+        .grid-item.stream-layout {
+            aspect-ratio: 16 / 9 !important;
+            /* Standart 3/1 yerine 16/9 kullan */
+        }
+
+        /* Mobilde Stream kartları çok küçülmesin diye yüksekliği ayarlayalım */
+        @media (max-width: 768px) {
+            .grid-item.stream-layout {
+                aspect-ratio: 16 / 9 !important;
+            }
+        }
+
+        .modal-scroll-hint {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            /* Fade yüksekliği */
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            /* Siyahtan şeffafa geçiş (Fade) */
+            background: linear-gradient(to top, rgba(20, 20, 20, 1) 20%, transparent 100%);
+
+            color: rgba(255, 255, 255, 0.9);
+            z-index: 50;
+            pointer-events: none;
+            /* Tıklamayı engelle */
+            border-radius: 0 0 30px 30px;
+            /* Modalın alt köşelerine uyum */
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-scroll-hint i {
+            margin-top: 5px;
+            font-size: 1.2rem;
+            animation: bounceHint 2s infinite;
+        }
+
+        .modal-scroll-hint.hidden {
+            opacity: 0;
+        }
+
+        @keyframes bounceHint {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-5px);
+            }
+
+            60% {
+                transform: translateY(-3px);
+            }
+        }
+
+        /* Grid'in en altı yazının altında kalmasın diye boşluk */
+        .modal-grid {
+            padding-bottom: 100px !important;
+        }
     </style>
 </head>
 
@@ -2400,10 +2465,10 @@
                         </div>
                     </div>
 
-                    <div class="card project-card reveal-on-scroll delay-400" data-project-url="#"
+                    <div class="card project-card reveal-on-scroll delay-400" onclick="openModal('Stream')"
                         style="--delay: 0.3s;">
                         <div class="project-image-container">
-                            <img src="stream.png" alt="Project Image 4" class="project-image" loading="lazy">
+                            <img src="stream.png" alt="Stream Designs" class="project-image" loading="lazy">
                             <span class="project-arrow">→</span>
                         </div>
                     </div>
@@ -2832,7 +2897,8 @@
                 <div class="modal-grid" id="modal-grid-content">
                 </div>
 
-                <div class="modal-pagination" id="pagination-container">
+                <div id="modal-scroll-indicator" class="modal-scroll-hint">
+                    <i class="fa-solid fa-chevron-down"></i>
                 </div>
             </div>
         </div>
@@ -2844,19 +2910,18 @@
         </div>
 
         <script>
+            // Site yükleme animasyonu ve overflow kontrolü
             document.body.style.overflow = 'hidden';
 
             window.addEventListener('load', () => {
                 const loader = document.getElementById('loader');
-                // Site yüklendikten sonra sadece 0.8 saniye (800ms) bekle.
-                // Bu süre animasyonun şık görünmesi içindir, zorunlu uzun bekleme yoktur.
                 setTimeout(() => {
                     loader.classList.add('loader-hide');
                     document.body.style.overflow = '';
-                }, 1000);
+                }, 1000); // 1 saniye bekle
             });
 
-
+            // --- DİL ÇEVİRİLERİ VE FONKSİYONLARI ---
             const translations = {
                 tr: {
                     msg_copied: "Kopyalandı!",
@@ -3294,12 +3359,7 @@
                         cursorDot.classList.remove('project-hover');
                     });
 
-                    card.addEventListener('click', () => {
-                        const url = card.getAttribute('data-project-url');
-                        if (url && url !== '#') {
-                            window.open(url, '_blank');
-                        }
-                    });
+                    // Tıklama olayı HTML tarafında onclick ile hallediliyor, burası boş kalabilir veya özel link varsa kullanılır.
                 });
 
                 const clickableElements = document.querySelectorAll('a, button, .nav-links li, .scroll-indicator-arrow, .current-lang, .lang-item, .email-wrapper');
@@ -3318,6 +3378,7 @@
 
             });
 
+            // --- PROJE DATALARI ---
             const projectData = {
                 "Anime": [
                     "https://mir-s3-cdn-cf.behance.net/project_modules/fs/b540e5120486871.67dde6b526f6f.png",
@@ -3348,6 +3409,21 @@
                     "https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/5cff2d120486871.65e516c5a2f4f.png"
                 ],
 
+                "Stream": [
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/2df935114935317.604504fe23982.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/2b198b114935317.6045576571d33.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/4200cc114935317.606764eb18ca8.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/098675114935317.60ab94e8db894.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/77a6d7114935317.659d7298e9d00.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/1eb8ad114935317.659d7298e8e05.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/dee7d1114935317.660da38dac894.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/b95272114935317.666c09a5eaaad.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/5fb4c2114935317.688e7560030e0.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/a84a63114935317.68fd64fac8561.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/b24208114935317.6095715d44eaa.png"
+                    // Buraya daha fazla Stream resmi eklendikçe aşağı doğru kayacak
+                ],
+
                 "Fortnite": [
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/5131bd114890319.60b28aade1983.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/c2a13e114890319.60b28aade4120.png",
@@ -3374,9 +3450,12 @@
             };
 
             const categories = Object.keys(projectData);
-            let currentCategoryIndex = 0;
-            let currentPage = 1;
-            const itemsPerPage = 12;
+
+            // --- KATEGORİ AYIRIMI ---
+            // Header kategorilerini (Stream HARİÇ) tanımlıyoruz
+            const headerCategories = ["Anime", "Fortnite", "Valorant", "Other"];
+            let currentHeaderIndex = 0;
+            let currentMode = 'headers'; // 'headers' veya 'stream'
 
             // Elementleri seç
             const modal = document.getElementById('project-modal');
@@ -3396,29 +3475,75 @@
                 wrapper.appendChild(modalTitle);
             }
 
-            // --- PROJECT MODAL FONKSİYONLARI ---
+            // --- MODAL AÇMA FONKSİYONU ---
             function openModal(categoryName) {
-                currentCategoryIndex = categories.indexOf(categoryName) !== -1 ? categories.indexOf(categoryName) : 0;
-                currentPage = 1;
-                modalTitle.innerText = `${categories[currentCategoryIndex].toUpperCase()} HEADERS`;
-                updateGridContent();
-                renderPagination(projectData[categories[currentCategoryIndex]].length);
+                const arrows = document.querySelectorAll('.nav-arrow'); // Okları seç
+
+                // Sayfalama (Pagination) kısmını temizle (Artık scroll kullanıyoruz)
+                if (paginationContainer) paginationContainer.innerHTML = "";
+
+                // Scroll'u en başa al
+                modalGrid.scrollTop = 0;
+
+                if (categoryName === 'Stream') {
+                    // --- STREAM MODU ---
+                    currentMode = 'stream';
+
+                    // Başlığı ayarla
+                    modalTitle.innerText = "STREAM PACKAGES";
+
+                    // Okları GİZLE
+                    arrows.forEach(arrow => arrow.style.display = 'none');
+
+                    // İçeriği yükle (Tümü tek seferde)
+                    updateModalContent('Stream');
+
+                } else {
+                    // --- HEADER MODU ---
+                    currentMode = 'headers';
+
+                    // Header listesindeki sırasını bul
+                    currentHeaderIndex = headerCategories.indexOf(categoryName);
+                    if (currentHeaderIndex === -1) currentHeaderIndex = 0; // Hata önleyici
+
+                    // Başlığı ayarla
+                    modalTitle.innerText = headerCategories[currentHeaderIndex].toUpperCase() + " HEADERS";
+
+                    // Okları GÖSTER
+                    arrows.forEach(arrow => arrow.style.display = 'flex');
+
+                    // İçeriği yükle (Tümü tek seferde)
+                    updateModalContent(headerCategories[currentHeaderIndex]);
+                }
+
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                setTimeout(movePill, 100);
+                const scrollIndicator = document.getElementById('modal-scroll-indicator');
+
+                // Modal açılınca göster
+                if (scrollIndicator) scrollIndicator.classList.remove('hidden');
+
+                // Kaydırınca gizle
+                modalGrid.onscroll = () => {
+                    if (modalGrid.scrollTop > 50) {
+                        if (scrollIndicator) scrollIndicator.classList.add('hidden');
+                    } else {
+                        if (scrollIndicator) scrollIndicator.classList.remove('hidden');
+                    }
+                };
             }
 
             function closeModal() {
                 modal.classList.remove('active');
                 document.body.style.overflow = '';
-                setTimeout(() => { modalGrid.innerHTML = ''; }, 500); // Clean up for memory
+                setTimeout(() => { modalGrid.innerHTML = ''; }, 500); // Bellek temizliği
             }
 
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) closeModal();
             });
 
-            // --- LIGHTBOX FONKSİYONLARI (YENİ) ---
+            // --- LIGHTBOX FONKSİYONLARI ---
             function openLightbox(imgSrc) {
                 lightboxImg.src = imgSrc;
                 lightboxModal.classList.add('active');
@@ -3433,102 +3558,64 @@
                 if (e.target === lightboxModal || e.target === lightboxImg) closeLightbox();
             });
 
-            // --- KATEGORİ & SAYFA DEĞİŞİMİ ---
+            // --- KATEGORİ DEĞİŞTİRME (SADECE HEADERS) ---
             function changeCategory(direction) {
+                // Eğer Stream modundaysak oklar gizli ama yine de fonksiyonu durdur
+                if (currentMode === 'stream') return;
+
                 const oldTitle = modalTitle;
                 if (direction > 0) oldTitle.classList.add('title-slide-out-left');
                 else oldTitle.classList.add('title-slide-out-right');
 
                 setTimeout(() => {
-                    currentCategoryIndex += direction;
-                    if (currentCategoryIndex < 0) currentCategoryIndex = categories.length - 1;
-                    if (currentCategoryIndex >= categories.length) currentCategoryIndex = 0;
+                    // Listeyi döngüsel gez
+                    currentHeaderIndex += direction;
+                    if (currentHeaderIndex < 0) currentHeaderIndex = headerCategories.length - 1;
+                    if (currentHeaderIndex >= headerCategories.length) currentHeaderIndex = 0;
 
-                    const newCategoryName = categories[currentCategoryIndex];
-                    modalTitle.innerText = `${newCategoryName.toUpperCase()} HEADERS`;
+                    const newCategoryName = headerCategories[currentHeaderIndex];
+
+                    // Başlığı güncelle
+                    modalTitle.innerText = newCategoryName.toUpperCase() + " HEADERS";
 
                     modalTitle.classList.remove('title-slide-out-left', 'title-slide-out-right');
-                    void modalTitle.offsetWidth;
+                    void modalTitle.offsetWidth; // Reflow trigger
 
                     if (direction > 0) modalTitle.style.animation = 'slideInRight 0.4s forwards';
                     else modalTitle.style.animation = 'slideInLeft 0.4s forwards';
 
-                    currentPage = 1;
-                    updateGridContent();
-                    renderPagination(projectData[newCategoryName].length);
+                    // İçeriği güncelle (Scroll başa sarılır)
+                    modalGrid.scrollTop = 0;
+                    updateModalContent(newCategoryName);
 
                 }, 300);
             }
 
-            function changePage(pageNum) {
-                if (pageNum === currentPage) return;
-                currentPage = pageNum;
-                updateGridContent();
-                renderPagination(projectData[categories[currentCategoryIndex]].length);
-            }
-
-            function updateGridContent() {
-                const category = categories[currentCategoryIndex];
-                const images = projectData[category];
+            // --- İÇERİK YÜKLEME (SAYFALAMA YOK - SCROLL VAR) ---
+            function updateModalContent(categoryName) {
+                const images = projectData[categoryName];
                 modalGrid.innerHTML = "";
 
-                const startIndex = (currentPage - 1) * itemsPerPage;
-                const endIndex = startIndex + itemsPerPage;
-                const currentImages = images.slice(startIndex, endIndex);
+                const isStream = categoryName === 'Stream';
 
-                currentImages.forEach((imgSrc, index) => {
+                // Tüm resimleri döngüye al (Slice yok, pagination yok)
+                images.forEach((imgSrc, index) => {
                     const div = document.createElement('div');
-                    div.className = 'grid-item';
+
+                    // Stream ise 16:9, değilse normal header yapısı
+                    div.className = isStream ? 'grid-item stream-layout' : 'grid-item';
+
                     div.style.animation = `fadeInUpCard 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards`;
                     div.style.animationDelay = `${index * 0.05}s`;
-                    div.innerHTML = `<img src="${imgSrc}" loading="lazy" alt="${category}" decoding="async">`;
+                    div.innerHTML = `<img src="${imgSrc}" loading="lazy" alt="${categoryName}" decoding="async">`;
 
-                    // --- TIKLAYINCA LIGHTBOX AÇ ---
                     div.onclick = () => openLightbox(imgSrc);
 
                     modalGrid.appendChild(div);
                 });
-            }
 
-            function renderPagination(totalItems) {
-                paginationContainer.innerHTML = "";
-                const totalPages = Math.ceil(totalItems / itemsPerPage);
-                if (totalPages <= 1) return;
-
-                const pill = document.createElement('div');
-                pill.className = 'pagination-pill';
-                paginationContainer.appendChild(pill);
-
-                let startPage = Math.max(1, currentPage - 1);
-                let endPage = Math.min(totalPages, currentPage + 1);
-                if (currentPage === 1) endPage = Math.min(totalPages, 3);
-                if (currentPage === totalPages) startPage = Math.max(1, totalPages - 2);
-
-                endPage = Math.min(endPage, totalPages);
-                startPage = Math.max(1, startPage);
-
-                for (let i = startPage; i <= endPage; i++) {
-                    const span = document.createElement('span');
-                    span.innerText = i;
-                    span.className = 'page-number';
-                    if (i === currentPage) span.classList.add('active');
-                    span.onclick = () => changePage(i);
-                    paginationContainer.appendChild(span);
-                }
-
-                requestAnimationFrame(movePill);
-                setTimeout(movePill, 100);
-            }
-
-            function movePill() {
-                const activeItem = paginationContainer.querySelector('.page-number.active');
-                const pill = paginationContainer.querySelector('.pagination-pill');
-                if (activeItem && pill) {
-                    pill.style.left = `${activeItem.offsetLeft}px`;
-                    pill.style.width = `${activeItem.offsetWidth}px`;
-                    pill.style.height = `${activeItem.offsetHeight}px`;
-                    pill.style.top = `${activeItem.offsetTop}px`;
-                }
+                // Not: CSS'te .modal-grid için overflow-y: auto olduğu için
+                // içerik uzadıkça otomatik scroll oluşacaktır.
             }
         </script>
 
