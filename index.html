@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sanriqa - Portfolio</title>
     <link rel="icon" href="new-logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -46,12 +46,12 @@
             unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
         }
 
+        /* 1. HTML ve BODY Ayarları (Siyah Arka Plan Garantisi) */
         html {
             scroll-behavior: smooth;
             background-color: #000;
-            /* ÖNEMLİ: Arka planı siyaha zorla */
+            /* Boşlukları siyah yapar */
             height: 100%;
-            /* Yükseklik garantisi */
         }
 
         * {
@@ -59,6 +59,17 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', 'Inter Placeholder', sans-serif !important;
+        }
+
+        body {
+            font-family: 'Inter', 'Inter Placeholder', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            padding-top: 80px;
+            position: relative;
+            overscroll-behavior: none;
+            /* Mobilde sayfa esnemesini engeller */
         }
 
         .fa,
@@ -75,46 +86,24 @@
             font-family: "Font Awesome 6 Brands" !important;
         }
 
-        body {
-            font-family: 'Inter', 'Inter Placeholder', sans-serif;
-            background: #000;
-            color: #fff;
-            margin: 0;
-            /* Kenar boşluklarını sıfırla */
-            padding: 0;
-            /* İç boşlukları sıfırla */
-            padding-top: 80px;
-            /* Navigasyon boşluğu */
-            position: relative;
-            overscroll-behavior: none;
-            /* Mobilde lastik gibi çekmeyi engelle */
-        }
-
-        /* --- YÜKLEME EKRANI (SPLASH SCREEN) STİLLERİ --- */
+        /* 2. YÜKLEME EKRANI (SPLASH SCREEN) - MOBİL TAM EKRAN FİX */
         .loader-wrapper {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            /* Genişlik yerine sağa yasla */
             bottom: 0;
-            /* Yükseklik yerine alta yasla */
             width: 100%;
-
-            /* Yükseklik Ayarları (Önemli Kısım) */
             height: 100vh;
-            /* Eski tarayıcılar için yedek */
+            /* Yedek */
             height: 100dvh;
-            /* Yeni mobil tarayıcılar için dinamik yükseklik (adres çubuğunu hesaba katar) */
-
+            /* Mobilde adres çubuğu sorununu çözer */
             background-color: #000;
             z-index: 999999;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
-
-            /* Mobilde kaydırmayı ve dokunmayı engelle */
             touch-action: none;
             overflow: hidden;
         }
@@ -354,8 +343,7 @@
         .reveal-on-scroll {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .reveal-on-scroll.is-visible {
@@ -1309,7 +1297,6 @@
             word-wrap: break-word;
         }
 
-        /* --- FOOTER --- */
         footer {
             border-top: none;
             padding: 2rem 3rem;
@@ -1529,7 +1516,7 @@
             }
         }
 
-        /* --- MOBİL İÇİN ÖZEL DÜZENLEMELER --- */
+        /* --- MOBİL DÜZENLEMELER --- */
         @media (max-width: 768px) {
             .hero {
                 padding: 3rem 1.5rem;
@@ -1910,9 +1897,7 @@
             top: -50px;
         }
 
-        /* --- PROJECT MODAL & LIGHTBOX STYLES (FİNAL: YAZI KESİLME SORUNU ÇÖZÜLDÜ) --- */
-
-        /* 1. Scrollbar Gizleme */
+        /* --- PROJECT MODAL & LIGHTBOX STYLES (SON HALİ) --- */
         .modal-grid::-webkit-scrollbar {
             display: none;
         }
@@ -1922,7 +1907,7 @@
             scrollbar-width: none;
         }
 
-        /* 2. Ana Modal (Siyah Arka Plan) */
+        /* Ana Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -1945,7 +1930,7 @@
             visibility: visible;
         }
 
-        /* 3. Modal Kutusu */
+        /* Modal Kutusu */
         .modal-container {
             width: 90%;
             max-width: 1400px;
@@ -1971,7 +1956,6 @@
             opacity: 1;
         }
 
-        /* Kapatma Butonu */
         .modal-close-btn {
             position: absolute;
             top: 25px;
@@ -1997,13 +1981,12 @@
             transform: rotate(90deg);
         }
 
-        /* 4. Başlık ve Oklar (DÜZELTİLDİ) */
+        /* Başlık ve Oklar */
         .modal-header-nav {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 40px;
-            /* Oklar ile yazı arasındaki net boşluk */
+            gap: 100px;
             margin-bottom: 25px;
             margin-top: 10px;
             position: relative;
@@ -2013,7 +1996,6 @@
         }
 
         .title-wrapper {
-            /* min-width'i kaldırdık, flex-basis auto yaptık ki yazıya göre genişlesin */
             flex: 0 1 auto;
             display: flex;
             justify-content: center;
@@ -2021,16 +2003,13 @@
             position: relative;
             height: 100%;
             overflow: hidden;
-            /* Animasyonda kayan yazıyı gizlemek için */
             padding: 0 10px;
-            /* Yazı kenarlara yapışmasın diye güvenlik payı */
         }
 
         #modal-category-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 700;
             font-size: 2.2rem;
-            /* İdeal boyut */
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #fff;
@@ -2038,13 +2017,9 @@
             white-space: nowrap;
             line-height: 1;
             margin: 0;
-
-            /* ÖNEMLİ DÜZELTME: Absolute yerine Relative */
-            /* Bu sayede yazı uzunsa kutu genişler, kısa ise daralır */
             position: relative;
             width: auto;
             left: auto;
-
             display: flex;
             justify-content: center;
             align-items: center;
@@ -2074,7 +2049,7 @@
             transform: scale(1.1);
         }
 
-        /* Başlık Animasyonları */
+        /* Animasyonlar */
         .title-slide-out-left {
             opacity: 0 !important;
             transform: translateX(-30px) !important;
@@ -2117,7 +2092,7 @@
             }
         }
 
-        /* 5. Izgara (Grid) */
+        /* Grid */
         .modal-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -2160,7 +2135,7 @@
             transform: scale(1.1);
         }
 
-        /* 6. Sayfalama */
+        /* Sayfalama */
         .modal-pagination {
             margin-top: 20px;
             display: flex;
@@ -2227,7 +2202,7 @@
             }
         }
 
-        /* 7. Lightbox (Büyük Resim) */
+        /* Lightbox */
         .lightbox-overlay {
             background: rgba(0, 0, 0, 0.95);
             z-index: 20000;
@@ -2273,7 +2248,7 @@
             color: #bbb;
         }
 
-        /* 8. Mobil Uyum (DÜZELTİLDİ) */
+        /* Mobil Uyum */
         @media (max-width: 768px) {
             .modal-grid {
                 grid-template-columns: 1fr;
@@ -2300,8 +2275,8 @@
 
             #modal-category-title {
                 font-size: 1.2rem;
-                /* Mobilde fontu küçülttük */
                 letter-spacing: 0.5px;
+                font-weight: 700;
             }
 
             .nav-arrow {
@@ -2436,7 +2411,7 @@
                     <div class="card project-card reveal-on-scroll delay-100" id="headers-project"
                         onclick="openModal('Anime')" style="--delay: 0s;">
                         <div class="project-image-container">
-                            <img src="headers.png" alt="Project Image 1" class="project-image">
+                            <img src="headers.png" alt="Project Image 1" class="project-image" loading="lazy">
                             <span class="project-arrow">→</span>
                         </div>
                     </div>
@@ -2444,7 +2419,7 @@
                     <div class="card project-card reveal-on-scroll delay-300" data-project-url="#"
                         style="--delay: 0.2s;">
                         <div class="project-image-container">
-                            <img src="fivem.png" alt="Project Image 3" class="project-image">
+                            <img src="fivem.png" alt="Project Image 3" class="project-image" loading="lazy">
                             <span class="project-arrow">→</span>
                         </div>
                     </div>
@@ -2454,7 +2429,7 @@
                     <div class="card project-card reveal-on-scroll delay-200" data-project-url="#"
                         style="--delay: 0.1s;">
                         <div class="project-image-container">
-                            <img src="ludotoys.png" alt="Project Image 2" class="project-image">
+                            <img src="ludotoys.png" alt="Project Image 2" class="project-image" loading="lazy">
                             <span class="project-arrow">→</span>
                         </div>
                     </div>
@@ -2462,7 +2437,7 @@
                     <div class="card project-card reveal-on-scroll delay-400" data-project-url="#"
                         style="--delay: 0.3s;">
                         <div class="project-image-container">
-                            <img src="stream.png" alt="Project Image 4" class="project-image">
+                            <img src="stream.png" alt="Project Image 4" class="project-image" loading="lazy">
                             <span class="project-arrow">→</span>
                         </div>
                     </div>
@@ -2874,6 +2849,8 @@
                 <div style="opacity: 50%;">© 2025 Sanriqa. All rights reserved.</div>
             </div>
         </footer>
+
+        <!-- PROJE MODALI -->
         <div id="project-modal" class="modal-overlay">
             <div class="modal-container">
                 <button class="modal-close-btn" onclick="closeModal()">&times;</button>
@@ -2892,10 +2869,12 @@
             </div>
         </div>
 
+        <!-- LIGHTBOX (Büyük Resim) -->
         <div id="lightbox-modal" class="modal-overlay lightbox-overlay">
             <span class="lightbox-close-btn" onclick="closeLightbox()">&times;</span>
             <img class="lightbox-content" id="lightbox-img" alt="Büyük Görsel">
         </div>
+
         <script>
             // --- SPLASH SCREEN LOGIC ---
             document.body.style.overflow = 'hidden';
@@ -3369,7 +3348,6 @@
                 });
 
             });
-            // --- PROJECT MODAL & LIGHTBOX LOGIC (GÜNCEL) ---
 
             const projectData = {
                 "Anime": [
@@ -3389,18 +3367,18 @@
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/072e68120486871.60b28ce31290f.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/6a9a96120486871.60b28ce312198.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/eb71f4120486871.60b28f189362a.jpg",
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/c5a612120486871.60b4c8758936e.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/f76353120486871.60b4ffce2ec10.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/2d142e120486871.60c783cc44455.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/ed61bb120486871.60e21e0e16faa.png",
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/f08dc3120486871.60eb8178a4675.png",
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/448ecd120486871.60eb843485d3f.png",
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/81f275120486871.60ec89cbe1e27.png",
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/2bce50120486871.60ecc4d1a6ff8.png",
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/c5da13120486871.6171c8f7ee932.jpg",
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/e0b82a120486871.65e4deaba0854.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/f08dc3120486871.60eb8178a4675.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/448ecd120486871.60eb843485d3f.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/81f275120486871.60ec89cbe1e27.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/2bce50120486871.60ecc4d1a6ff8.png",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/c5da13120486871.6171c8f7ee932.jpg",
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/2800_webp/e0b82a120486871.65e4deaba0854.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/5cff2d120486871.65e516c5a2f4f.png"
                 ],
+
                 "Fortnite": [
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/5131bd114890319.60b28aade1983.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/c2a13e114890319.60b28aade4120.png",
@@ -3413,12 +3391,14 @@
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/91ab29114890319.60b28aade0578.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/14aa40114890319.60fb4864da5b3.png"
                 ],
+
                 "Valorant": [
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/93b337120487029.67ec46e846053.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/514ebf120487029.60b28da65fc0b.jpg",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/c560b2120487029.60b28da6608fc.png",
                     "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/bfe3ea120487029.60b28da6601ec.jpg"
                 ],
+
                 "Other": [
                     "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/edf8a1238043723.690ca515ecda8.png"
                 ]
@@ -3462,6 +3442,7 @@
             function closeModal() {
                 modal.classList.remove('active');
                 document.body.style.overflow = '';
+                setTimeout(() => { modalGrid.innerHTML = ''; }, 500); // Clean up for memory
             }
 
             modal.addEventListener('click', (e) => {
@@ -3531,7 +3512,7 @@
                     div.className = 'grid-item';
                     div.style.animation = `fadeInUpCard 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards`;
                     div.style.animationDelay = `${index * 0.05}s`;
-                    div.innerHTML = `<img src="${imgSrc}" loading="lazy" alt="${category}">`;
+                    div.innerHTML = `<img src="${imgSrc}" loading="lazy" alt="${category}" decoding="async">`;
 
                     // --- TIKLAYINCA LIGHTBOX AÇ ---
                     div.onclick = () => openLightbox(imgSrc);
