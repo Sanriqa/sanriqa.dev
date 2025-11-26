@@ -60,7 +60,27 @@
             font-family: 'Inter', 'Inter Placeholder', sans-serif !important;
         }
 
+        #background-video {
+            position: fixed;
+            /* Ekran kaydırılsa bile sabit kalır */
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            /* Tüm içeriğin kesinlikle arkasında olmasını sağlar */
+            opacity: 0.045;
+            /* Düşük opaklık ayarı (İstediğiniz gibi 0.05 ile 0.20 arasında ayarlayabilirsiniz) */
+            object-fit: cover;
+            /* Video boyutunun en-boy oranını koruyarak tüm alanı kaplamasını sağlar */
+        }
+
         body {
+            position: relative;
+            /* İçeriğin z-index'i üzerinde kontrol sağlar */
+            z-index: 1;
             font-family: 'Inter', 'Inter Placeholder', sans-serif;
             background: #000;
             color: #fff;
@@ -188,12 +208,12 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWZ5Z3JmdmdsbWNxcWpha25mNnVidzI3ZGNpaXF0dDIxaTIxb2sxaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JoVV55m3KZHdxlpFZ6/giphy.gif');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0.05;
-            filter: grayscale(100%) brightness(0.5);
+            opacity: 0.1;
+            /* Düzeltme: Aşağıdaki satırı kaldırın veya "filter: none;" yapın */
+            filter: none;
         }
 
         [data-lang] {
@@ -2480,6 +2500,9 @@
 </head>
 
 <body>
+    <video id="background-video" autoplay loop muted playsinline>
+        <source src="arka3.mp4" type="video/mp4">
+    </video>
     <div class="loader-wrapper" id="loader">
         <div class="loader-content">
             <img src="new-logo.png" alt="Sanriqa Logo" class="loader-logo">
