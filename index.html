@@ -2635,6 +2635,15 @@
                             <span class="project-arrow">→</span>
                         </div>
                     </div>
+
+                    <div class="card project-card reveal-on-scroll delay-500" onclick="openModal('UyumApp')"
+                        style="--delay: 0.4s;">
+                        <div class="project-image-container">
+                            <img src="uyum.app.png" alt="Uyum.app" class="project-image" loading="lazy">
+                            <span style="position: absolute; bottom: 20px; left: 20px; font-size: 1.5rem; font-weight: 700; color: #fff; z-index: 10; text-shadow: 0 2px 10px rgba(0,0,0,0.8); font-family: 'Plus Jakarta Sans', sans-serif;">uyum.app</span>
+                            <span class="project-arrow">→</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2728,6 +2737,11 @@
                             <span class="timeline-role" data-lang="timeline_role_4">Graphic Designer</span>
                             <span class="timeline-company">LudoToys</span>
                             <span class="timeline-year">2025</span>
+                        </div>
+                        <div class="timeline-item reveal-on-scroll delay-500">
+                            <span class="timeline-role" data-lang="timeline_role_5">Founder & Developer</span>
+                            <span class="timeline-company">uyum.app</span>
+                            <span class="timeline-year">2026</span>
                         </div>
                     </div>
                 </div>
@@ -3120,6 +3134,7 @@
                     timeline_role_2: "UX/UI Designer & Developer",
                     timeline_role_3: "Freelance Designer",
                     timeline_role_4: "Graphic Designer",
+                    timeline_role_5: "Founder & Developer",
                     section_projects_tag: "● PROJELERİM",
                     section_projects_title: "Tasarım <span>Hizmetlerim</span>",
                     services_main_desc: "Markanızı güçlendirmek için sunduğum kapsamlı tasarım çözümleri.",
@@ -3206,6 +3221,7 @@
                     timeline_role_2: "UX/UI Designer & Developer",
                     timeline_role_3: "Freelance Designer",
                     timeline_role_4: "Graphic Designer",
+                    timeline_role_5: "Founder & Developer",
                     section_projects_tag: "● MY PROJECTS",
                     section_projects_title: "Design <span>Services</span>",
                     services_main_desc: "Comprehensive design solutions to empower your brand.",
@@ -3292,6 +3308,7 @@
                     timeline_role_2: "UX/UI Designer & Developer",
                     timeline_role_3: "Freelance Designer",
                     timeline_role_4: "Grafikdesigner",
+                    timeline_role_5: "Gründer & Entwickler",
                     section_projects_tag: "● MEINE PROJEKTE",
                     section_projects_title: "Design <span>Dienstleistungen</span>",
                     services_main_desc: "Umfassende Designlösungen zur Stärkung Ihrer Marke.",
@@ -3607,6 +3624,9 @@
                 "Other": [
                     "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/edf8a1238043723.690ca515ecda8.png"
                 ],
+                "UyumApp": [
+                    "uyumapp-1.png"
+                ],
                 "FiveM": [],
                 "LudoToys": []
             };
@@ -3721,6 +3741,55 @@
                 }
             };
 
+            // --- UYUM.APP DİL VERİSİ ---
+            const uyumAppContent = {
+                tr: {
+                    title: "UYUM.APP PROJESİ",
+                    logo_focus: {
+                        title: "UYGULAMA ODAĞI",
+                        img: "uyumapp.png",
+                        inspiration: "İlham: Müziğin birleştirici gücü ve ortak zevkler.",
+                        meaning: "Çağrıştırdığı Anlam: Uyum, bağlantı ve müzikal keşif.",
+                        color: "Renk Paleti: Canlı ve enerjik tonlar."
+                    },
+                    web_focus: {
+                        title: "ÖZELLİKLER & İŞLEVSELLİK",
+                        site_desc: "Spotify hesabınızı bağlayarak müzik zevkinizi analiz eder.",
+                        ads: "Sizinle aynı müzikleri dinleyen insanlarla eşleşmenizi ve tanışmanızı sağlar."
+                    }
+                },
+                en: {
+                    title: "UYUM.APP PROJECT",
+                    logo_focus: {
+                        title: "APP FOCUS",
+                        img: "uyumapp.png",
+                        inspiration: "Inspiration: The unifying power of music and shared tastes.",
+                        meaning: "Connotation: Harmony, connection, and musical discovery.",
+                        color: "Color Palette: Vibrant and energetic tones."
+                    },
+                    web_focus: {
+                        title: "FEATURES & FUNCTIONALITY",
+                        site_desc: "Analyzes your music taste by connecting your Spotify account.",
+                        ads: "Allows you to match and meet people who listen to the same music as you."
+                    }
+                },
+                de: {
+                    title: "UYUM.APP PROJEKT",
+                    logo_focus: {
+                        title: "APP-FOKUS",
+                        img: "uyumapp.png",
+                        inspiration: "Inspiration: Die verbindende Kraft der Musik und gemeinsame Vorlieben.",
+                        meaning: "Konnotation: Harmonie, Verbindung und musikalische Entdeckung.",
+                        color: "Farbpalette: Lebendige und energetische Töne."
+                    },
+                    web_focus: {
+                        title: "FUNKTIONEN & FUNKTIONALITÄT",
+                        site_desc: "Analysiert Ihren Musikgeschmack durch Verknüpfung Ihres Spotify-Kontos.",
+                        ads: "Ermöglicht es Ihnen, Menschen zu finden und kennenzulernen, die dieselbe Musik hören wie Sie."
+                    }
+                }
+            };
+
             // --- LUDO TOYS DİL VERİSİ ---
             const ludoContent = {
                 tr: {
@@ -3779,7 +3848,7 @@
                 modalGrid.scrollTop = 0;
 
                 // Grid Ayarı
-                if (categoryName === 'FiveM' || categoryName === 'LudoToys') {
+                if (categoryName === 'FiveM' || categoryName === 'LudoToys' || categoryName === 'UyumApp') {
                     modalGrid.style.display = 'block';
                 } else {
                     modalGrid.style.display = 'grid';
@@ -3792,6 +3861,48 @@
                     arrows.forEach(arrow => arrow.style.display = 'none');
                     updateModalContent('Stream');
                     if (scrollIndicator) scrollIndicator.classList.remove('hidden');
+
+                } else if (categoryName === 'UyumApp') {
+                    // UYUM.APP
+                    currentMode = 'uyumapp';
+                    modalTitle.innerText = "UYUM.APP";
+                    arrows.forEach(arrow => arrow.style.display = 'none');
+
+                    const lang = localStorage.getItem('selectedLanguage') || 'tr';
+                    const t = uyumAppContent[lang] || uyumAppContent['tr'];
+
+                    modalGrid.innerHTML = `
+                            <div class="fivem-layout-container">
+                                <img src="uyumapp.png" alt="${t.title}" class="fivem-header-img" style="max-height: 100px; object-fit: contain;">
+                                
+                                <h3 class="ludo-section-title retro-name" style="text-align: center; margin: 10px auto;">${t.title}</h3>
+
+                                <div class="fivem-row left" style="width: 85%; margin: 0 auto; gap: 3rem;">
+                                    <img src="uyumvector.png" alt="Uyum.app Logo" class="fivem-logo" style="width: 160px; height: 160px; object-fit: contain;">
+                                    <div class="fivem-content" style="max-width: 60%;">
+                                        <h4 class="retro-role" style="color: #fff; font-size: 1.2rem;">${t.logo_focus.title}</h4>
+                                        <ul class="retro-list" style="color: #bbb; padding-top: 5px;">
+                                            <li>${t.logo_focus.inspiration}</li>
+                                            <li>${t.logo_focus.meaning}</li>
+                                            <li>${t.logo_focus.color}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <hr style="width: 70%; border-color: rgba(255, 255, 255, 0.1); margin: 20px auto;">
+
+                                <div class="fivem-row" style="flex-direction: column; align-items: flex-start; width: 85%; margin: 0 auto;">
+                                    <h4 class="retro-role" style="color: #1DB954; font-size: 1.2rem; margin-bottom: 5px;">${t.web_focus.title}</h4>
+                                    <ul class="retro-list" style="text-align: left; padding-top: 5px;">
+                                        <li>${t.web_focus.site_desc}</li>
+                                        <li>${t.web_focus.ads}</li>
+                                    </ul>
+                                    
+                                    <img src="uygulama.png" alt="App Preview" style="width: 100%; max-height: 300px; object-fit: contain; margin-top: 20px;">
+                                </div>
+                            </div>
+                        `;
+                    if (scrollIndicator) scrollIndicator.classList.add('hidden');
 
                 } else if (categoryName === 'FiveM') {
                     // FIVEM
@@ -3933,7 +4044,7 @@
             // --- SCROLL EVENT ---
             const scrollIndicator = document.getElementById('modal-scroll-indicator');
             modalGrid.onscroll = () => {
-                if (currentMode === 'fivem' || currentMode === 'ludotoys') return;
+                if (currentMode === 'fivem' || currentMode === 'ludotoys' || currentMode === 'uyumapp') return;
 
                 if (modalGrid.scrollTop > 50) {
                     if (scrollIndicator) scrollIndicator.classList.add('hidden');
@@ -3948,7 +4059,7 @@
             lightboxModal.addEventListener('click', (e) => { if (e.target === lightboxModal || e.target === lightboxImg) closeLightbox(); });
 
             function changeCategory(direction) {
-                if (currentMode === 'stream' || currentMode === 'fivem' || currentMode === 'ludotoys') return;
+                if (currentMode === 'stream' || currentMode === 'fivem' || currentMode === 'ludotoys' || currentMode === 'uyumapp') return;
 
                 const oldTitle = modalTitle;
                 if (direction > 0) oldTitle.classList.add('title-slide-out-left');
