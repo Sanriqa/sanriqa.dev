@@ -448,6 +448,104 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
 .log-line .warn { color: var(--warn); }
 .log-line .err { color: var(--danger); }
 
+.side li.restricted { color: #ff9b9b; }
+.side li.restricted::after {
+    content: "НЕТ ДОСТУПА";
+    display: block;
+    font-size: 9px;
+    letter-spacing: 1.2px;
+    color: #c43c3c;
+    margin-top: 2px;
+}
+
+.pane[hidden] { display: none; }
+
+.doc {
+    background: rgba(5, 14, 32, 0.55);
+    border: 1px solid var(--card-edge);
+    border-left: 3px solid var(--accent-bright);
+    border-radius: 3px;
+    padding: 14px 18px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text);
+    margin-top: 10px;
+}
+.doc.red { border-left-color: #c43c3c; background: rgba(40, 8, 8, 0.55); }
+.doc h2 { font-size: 16px; font-weight: 600; color: #fff; margin: 4px 0 10px; }
+.doc p { margin-bottom: 8px; color: #cfdcef; }
+.doc p b { color: #fff; }
+.doc .muted { color: var(--text-dim); font-size: 11.5px; font-style: italic; }
+.doc-stamp {
+    display: inline-block;
+    font-family: "Consolas", monospace;
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    color: var(--accent-bright);
+    border: 1px dashed rgba(90, 161, 255, 0.5);
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-bottom: 8px;
+}
+.doc-stamp.red { color: #ff9b9b; border-color: rgba(196, 60, 60, 0.6); }
+.bullets { padding-left: 20px; margin: 6px 0 10px; }
+.bullets li { margin-bottom: 4px; color: #cfdcef; }
+.bullets li b { color: #fff; }
+
+.restricted-banner {
+    background: linear-gradient(180deg, rgba(196, 60, 60, 0.18), rgba(196, 60, 60, 0.06));
+    border: 1px solid rgba(196, 60, 60, 0.55);
+    border-left: 3px solid #c43c3c;
+    border-radius: 3px;
+    padding: 10px 14px;
+    color: #ffb8b8;
+    margin-bottom: 6px;
+    animation: hintIn 0.35s;
+}
+.rb-head { font-weight: 700; letter-spacing: 1.4px; font-size: 12px; color: #ff7d7d; margin-bottom: 4px; }
+.rb-body { font-size: 12px; line-height: 1.55; }
+.rb-body b { color: #fff; }
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(5, 14, 32, 0.55);
+    border: 1px solid var(--card-edge);
+    margin-top: 12px;
+    font-size: 12.5px;
+}
+.data-table th, .data-table td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); }
+.data-table th { color: var(--text-dim); font-size: 10.5px; letter-spacing: 1.2px; background: rgba(5, 14, 32, 0.6); }
+.data-table tr:hover td { background: rgba(90, 161, 255, 0.06); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; letter-spacing: 0.5px; }
+.tag.none { color: var(--text-dim); border: 1px solid var(--line); }
+.tag.warn { color: #ffce6b; border: 1px solid rgba(255, 206, 107, 0.5); background: rgba(255, 206, 107, 0.08); }
+.tag.hot { color: #ff9b9b; border: 1px solid rgba(196, 60, 60, 0.55); background: rgba(196, 60, 60, 0.12); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 12px; }
+.t-card {
+    background: rgba(5, 14, 32, 0.55);
+    border: 1px solid var(--card-edge);
+    border-radius: 3px;
+    padding: 10px 12px;
+    font-size: 12px;
+}
+.t-id { font-family: "Consolas", monospace; color: var(--accent-bright); font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
+.t-row { display: flex; justify-content: space-between; padding: 2px 0; color: var(--text-dim); }
+.t-row b { color: var(--text); }
+.t-status { margin-top: 6px; font-size: 10.5px; letter-spacing: 1px; padding: 3px 6px; border-radius: 2px; text-align: center; }
+.t-status.hot { background: rgba(196, 60, 60, 0.18); color: #ff9b9b; border: 1px solid rgba(196, 60, 60, 0.5); }
+.t-status.warn { background: rgba(255, 206, 107, 0.12); color: #ffce6b; border: 1px solid rgba(255, 206, 107, 0.4); }
+
+.settings-row {
+    display: flex; justify-content: space-between;
+    padding: 8px 4px;
+    border-bottom: 1px dashed var(--line);
+    font-size: 13px;
+    color: var(--text-dim);
+}
+.settings-row b { color: #fff; font-family: "Consolas", monospace; letter-spacing: 0.5px; }
+
 .start-menu {
     position: fixed;
     left: 0; bottom: var(--taskbar-h);
@@ -636,9 +734,9 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
                     <path d="M12 58 C 14 44, 50 44, 52 58 Z" fill="#e8f1ff"/>
                 </svg>
                 <div class="user-info">
-                    <div class="user-name">Администратор</div>
-                    <div class="user-domain">APEX\SYSTEM</div>
-                    <div class="user-meta">Последний вход: 13.03.2016 23:11</div>
+                    <div class="user-name">Игорь Морозов</div>
+                    <div class="user-domain">APEX\ОПЕРАТИВНИК-3</div>
+                    <div class="user-meta">Последний вход: 13.03.2016 22:47 · табельный №08812</div>
                 </div>
             </div>
 
@@ -696,7 +794,7 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
             </form>
 
             <div class="card-footer">
-                <span>Сертификат: <b>APEX Root CA · действителен до 09.2017</b></span>
+                <span>Уровень допуска: <b>3 / закрытый</b> · профиль: оперативник</span>
             </div>
         </section>
 
@@ -770,11 +868,13 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
     </div>
 
     <div class="sticky-note">
-        <div class="sticky-head">📌 Заметка · 14.03.2016</div>
+        <div class="sticky-head">📌 Напоминание · 14.03.2016</div>
         <div class="sticky-body">
-            Не забыть позвонить В. в Кремль до 18:00.<br>
-            Карта APEX в верхнем ящике.<br>
-            — Волков
+            Состоятельные сотрудники APEX<br>
+            прибывают <b>последними</b> к яхте<br>
+            у пирса. Принять достойно —<br>
+            шампанское, икра, конверт.<br>
+            <span style="font-size:11px">— зам. Профессора</span>
         </div>
     </div>
 
@@ -782,7 +882,7 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
         <div class="window-title">
             <div class="wt-left">
                 <svg viewBox="0 0 16 16" width="14" height="14"><path fill="#5aa1ff" d="M8 1 14 14h-2L8 6 4 14H2L8 1Z"/></svg>
-                <span>APEX Центр управления — [АДМИНИСТРАТОР]</span>
+                <span id="winTitle">APEX Полевой Терминал — [ОПЕРАТИВНИК-3]</span>
             </div>
             <div class="wt-buttons">
                 <button class="wt-btn min">—</button>
@@ -795,57 +895,171 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
         </div>
         <div class="window-body">
             <aside class="side">
-                <div class="side-title">НАВИГАЦИЯ</div>
-                <ul>
-                    <li class="active">📊 Сводка системы</li>
-                    <li>🗂 Журналы доступа</li>
-                    <li>🛰 Сетевые узлы</li>
-                    <li>🔐 Ключи шифрования</li>
-                    <li>👥 Пользователи</li>
-                    <li>⚙ Параметры APEX</li>
+                <div class="side-title">ПАПКА: ПОЛЕВЫЕ ФАЙЛЫ</div>
+                <ul id="fileList">
+                    <li class="active" data-file="brief">🏙 Городская миссия</li>
+                    <li data-file="dna">🧬 Образцы ДНК</li>
+                    <li data-file="targets">📇 Картотека целей</li>
+                    <li data-file="log">🗂 Журнал наблюдений</li>
+                    <li data-file="experiment" class="restricted">🔒 Детали эксперимента</li>
+                    <li data-file="settings">⚙ Параметры терминала</li>
                 </ul>
             </aside>
-            <section class="content">
-                <div class="content-head">
-                    <h1>Добро пожаловать, <span id="userName">а. волков</span></h1>
-                    <p>Сеанс начат: <b id="sessionTime">14.03.2016 07:42</b> · IP: 10.4.12.88</p>
+            <section class="content" id="content">
+
+                <!-- BRIEFING -->
+                <div class="pane" data-pane="brief">
+                    <div class="content-head">
+                        <h1>Здравствуйте, <span id="userName">и. морозов</span></h1>
+                        <p>Смена начата: <b id="sessionTime">14.03.2016 07:42</b> · IP: 10.4.12.88 · сектор 4-Б</p>
+                    </div>
+
+                    <div class="doc">
+                        <div class="doc-stamp">ПОЛЕВОЙ БРИФИНГ · ОПЕРАТИВНИКУ-3</div>
+                        <h2>Городская миссия № 14/03-А</h2>
+                        <p><b>Цель.</b> Перемещение по городу под прикрытием. Изучение районной планировки, ключевых артерий, точек скопления гражданских.</p>
+                        <p><b>Задача.</b> Незаметный сбор отпечатков пальцев у встреченных лиц (рукопожатие, общественные поручни, столы кафе, прилавки). Все образцы — в полевой кейс APEX, маркер №08.</p>
+                        <p><b>Цель цели.</b> Лаборатория Профессора проверяет каждый образец на <b>совместимость ДНК</b> с активным протоколом. Совпадение → дальнейшая работа группы изъятия.</p>
+                        <p><b>Прикрытие.</b> Корреспондент газеты «Заря». Удостоверение — карман куртки. Не светить значок APEX в публичных местах.</p>
+                        <p class="muted">Согласовано: зам. Профессора · 13.03.2016</p>
+                    </div>
+
+                    <div class="grid-stats">
+                        <div class="stat-card">
+                            <div class="stat-label">ОТПЕЧАТКИ ЗА СУТКИ</div>
+                            <div class="stat-val">47<span class="unit">обр.</span></div>
+                            <div class="stat-bar"><span style="width:62%"></span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">СОВПАДЕНИЯ ДНК</div>
+                            <div class="stat-val">2<span class="unit">/ 47</span></div>
+                            <div class="stat-bar"><span style="width:4%;background:#ffce6b"></span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">КВОТА ДНЯ</div>
+                            <div class="stat-val">60<span class="unit">обр.</span></div>
+                            <div class="stat-bar"><span style="width:78%"></span></div>
+                        </div>
+                        <div class="stat-card alert">
+                            <div class="stat-label">ВНИМАНИЕ</div>
+                            <div class="stat-val">1<span class="unit">хвост?</span></div>
+                            <div class="stat-bar"><span style="width:18%;background:#c43c3c"></span></div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid-stats">
-                    <div class="stat-card">
-                        <div class="stat-label">УЗЛОВ В СЕТИ</div>
-                        <div class="stat-val">142<span class="unit">/ 150</span></div>
-                        <div class="stat-bar"><span style="width:94%"></span></div>
+                <!-- DNA SAMPLES -->
+                <div class="pane" data-pane="dna" hidden>
+                    <div class="content-head">
+                        <h1>Образцы ДНК · смена 14.03</h1>
+                        <p>Кейс №08 · маркер APEX-08812</p>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-label">ЗАГРУЗКА ЦП</div>
-                        <div class="stat-val">23<span class="unit">%</span></div>
-                        <div class="stat-bar"><span style="width:23%"></span></div>
+                    <table class="data-table">
+                        <thead><tr><th>№</th><th>Время</th><th>Источник</th><th>Возраст ≈</th><th>Совпадение</th></tr></thead>
+                        <tbody>
+                            <tr><td>014</td><td>09:12</td><td>поручень трамвая, ул. Пушкина</td><td>30–40</td><td><span class="tag none">нет</span></td></tr>
+                            <tr><td>015</td><td>09:41</td><td>прилавок, рынок «Северный»</td><td>50+</td><td><span class="tag none">нет</span></td></tr>
+                            <tr><td>022</td><td>10:18</td><td>детская площадка, кв. 4-Б</td><td>8</td><td><span class="tag hot">★ совпадение</span></td></tr>
+                            <tr><td>028</td><td>11:02</td><td>стакан в кафе «Чайка»</td><td>25</td><td><span class="tag none">нет</span></td></tr>
+                            <tr><td>035</td><td>12:30</td><td>школьная парта, шк. №7</td><td>11</td><td><span class="tag hot">★ совпадение</span></td></tr>
+                            <tr><td>041</td><td>13:14</td><td>скамейка, парк Горького</td><td>60+</td><td><span class="tag none">нет</span></td></tr>
+                            <tr><td>047</td><td>13:55</td><td>дверная ручка, библиотека</td><td>14</td><td><span class="tag warn">проверка</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- TARGETS -->
+                <div class="pane" data-pane="targets" hidden>
+                    <div class="content-head">
+                        <h1>Картотека · подтверждённые цели</h1>
+                        <p>Передано в группу изъятия. <b>Не контактировать.</b></p>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-label">ШИФР. ТРАФИК</div>
-                        <div class="stat-val">4.8<span class="unit">ТБ/сут</span></div>
-                        <div class="stat-bar"><span style="width:67%;background:#ffce6b"></span></div>
-                    </div>
-                    <div class="stat-card alert">
-                        <div class="stat-label">УГРОЗЫ</div>
-                        <div class="stat-val">3<span class="unit">актив.</span></div>
-                        <div class="stat-bar"><span style="width:30%;background:#c43c3c"></span></div>
+                    <div class="cards">
+                        <div class="t-card">
+                            <div class="t-id">№022 · ★</div>
+                            <div class="t-row"><span>возраст</span><b>8 лет</b></div>
+                            <div class="t-row"><span>пол</span><b>м</b></div>
+                            <div class="t-row"><span>район</span><b>4-Б, кв. 17</b></div>
+                            <div class="t-row"><span>совмест.</span><b>97.4%</b></div>
+                            <div class="t-status hot">передано в Л-2</div>
+                        </div>
+                        <div class="t-card">
+                            <div class="t-id">№035 · ★</div>
+                            <div class="t-row"><span>возраст</span><b>11 лет</b></div>
+                            <div class="t-row"><span>пол</span><b>ж</b></div>
+                            <div class="t-row"><span>район</span><b>школа №7</b></div>
+                            <div class="t-row"><span>совмест.</span><b>91.8%</b></div>
+                            <div class="t-status hot">передано в Л-2</div>
+                        </div>
+                        <div class="t-card">
+                            <div class="t-id">№047</div>
+                            <div class="t-row"><span>возраст</span><b>14 лет</b></div>
+                            <div class="t-row"><span>пол</span><b>м</b></div>
+                            <div class="t-row"><span>район</span><b>библиотека</b></div>
+                            <div class="t-row"><span>совмест.</span><b>—</b></div>
+                            <div class="t-status warn">ожидает анализа</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="log-panel">
-                    <div class="log-head">
-                        <span>СИСТЕМНЫЙ ЖУРНАЛ · в реальном времени</span>
-                        <span class="log-live">● LIVE</span>
+                <!-- LOG -->
+                <div class="pane" data-pane="log" hidden>
+                    <div class="content-head">
+                        <h1>Журнал наблюдений</h1>
+                        <p>Личные записи оперативника · не для отчёта</p>
                     </div>
-                    <div class="log-body" id="logBody">
-                        <div class="log-line"><span class="t">07:42:01</span> <span class="ok">[OK]</span> Сеанс пользователя <b>a.volkov</b> установлен.</div>
-                        <div class="log-line"><span class="t">07:42:02</span> <span class="info">[INFO]</span> Применение политики GPO-APEX-ADMIN-01.</div>
-                        <div class="log-line"><span class="t">07:42:03</span> <span class="info">[INFO]</span> Подключение к узлу RU-MSK-DC3 · туннель AES-256.</div>
-                        <div class="log-line"><span class="t">07:42:05</span> <span class="warn">[WARN]</span> Обнаружена попытка сканирования с 91.214.*.*. Заблокировано.</div>
-                        <div class="log-line"><span class="t">07:42:09</span> <span class="ok">[OK]</span> Синхронизация с архивом «Кремль-Узел-7» завершена.</div>
-                        <div class="log-line"><span class="t">07:42:14</span> <span class="info">[INFO]</span> Карта APEX №08812 активирована.</div>
+                    <div class="log-panel">
+                        <div class="log-head"><span>СОБЫТИЯ СМЕНЫ</span><span class="log-live">● LIVE</span></div>
+                        <div class="log-body" id="logBody">
+                            <div class="log-line"><span class="t">07:42:01</span> <span class="ok">[OK]</span> Сеанс <b>i.morozov</b> открыт.</div>
+                            <div class="log-line"><span class="t">08:10:22</span> <span class="info">[INFO]</span> Выход на маршрут № 4-Б.</div>
+                            <div class="log-line"><span class="t">10:18:44</span> <span class="ok">[OK]</span> Образец №022 — совпадение 97.4%.</div>
+                            <div class="log-line"><span class="t">11:55:09</span> <span class="warn">[WARN]</span> Возможный хвост: серая «Волга», номер скрыт.</div>
+                            <div class="log-line"><span class="t">12:30:11</span> <span class="ok">[OK]</span> Образец №035 — совпадение 91.8%.</div>
+                            <div class="log-line"><span class="t">13:14:00</span> <span class="info">[INFO]</span> Контакт со связным у пирса в 17:30.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXPERIMENT (restricted) -->
+                <div class="pane" data-pane="experiment" hidden>
+                    <div class="restricted-banner">
+                        <div class="rb-head">⚠ НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП</div>
+                        <div class="rb-body">
+                            Уровень файла: <b>5 / СОВ. СЕКРЕТНО</b>. Ваш допуск: 3.<br>
+                            Просмотр <b>зафиксирован</b>. Запрос отправлен в Службу Безопасности APEX.
+                        </div>
+                    </div>
+                    <div class="doc red">
+                        <div class="doc-stamp red">ДЕЛО «АПЕКС-Х» · ТОЛЬКО ПРОФЕССОР</div>
+                        <h2>Детали эксперимента — внутренний меморандум</h2>
+                        <p><b>Цель программы.</b> Подбор биологически совместимых носителей под активный протокол Профессора. Совместимость определяется по маркерам, выявленным из образцов ДНК (отпечатки, слюна, волос).</p>
+                        <p><b>Требования к носителю.</b></p>
+                        <ul class="bullets">
+                            <li>Совместимость по маркерам APX-1 / APX-4 не ниже <b>90%</b>.</li>
+                            <li>Отсутствие хронических патологий, обнаруживаемых по экспресс-анализу.</li>
+                            <li><b>Предпочтительный возраст: 7–12 лет.</b> На этом возрастном диапазоне внутренние показатели программы существенно выше — данные приведены в приложении А.</li>
+                            <li>Низкая социальная заметность (детдом, неполная семья, район 4-Б).</li>
+                        </ul>
+                        <p><b>Обоснование возрастного диапазона.</b> Аналитика отдела Л-2 за период 2014–2015 гг. указывает, что у несовершеннолетних носителей наблюдается более высокая приживаемость и стабильность результатов программы. Старший возраст даёт значительный отсев на этапе адаптации.</p>
+                        <p><b>Процедура передачи.</b> Оперативник доставляет совпавший образец в Л-2. Дальнейший контакт с носителем — только через группу изъятия. Оперативнику <b>знать имя носителя запрещено</b>.</p>
+                        <p class="muted">Подпись: Профессор · печать APEX-Х · 02.2016</p>
+                        <p class="muted">Документ дублирован для архива «Кремль-Узел-7».</p>
+                    </div>
+                </div>
+
+                <!-- SETTINGS -->
+                <div class="pane" data-pane="settings" hidden>
+                    <div class="content-head">
+                        <h1>Параметры терминала</h1>
+                        <p>Оперативник-3 · права на изменение ограничены</p>
+                    </div>
+                    <div class="doc">
+                        <div class="settings-row"><span>Язык интерфейса</span><b>Русский</b></div>
+                        <div class="settings-row"><span>Часовой пояс</span><b>МСК (UTC+3)</b></div>
+                        <div class="settings-row"><span>Шифрование канала</span><b>AES-256</b></div>
+                        <div class="settings-row"><span>Удалённая отладка</span><b>отключено</b></div>
+                        <div class="settings-row"><span>Маркер кейса</span><b>APEX-08812</b></div>
                     </div>
                 </div>
             </section>
@@ -854,10 +1068,10 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
 
     <div class="start-menu" id="startMenu" hidden>
         <div class="sm-user">
-            <div class="sm-avatar">АВ</div>
+            <div class="sm-avatar">ИМ</div>
             <div>
-                <div class="sm-name" id="smName">а. волков</div>
-                <div class="sm-role">APEX\АДМИНИСТРАТОР</div>
+                <div class="sm-name" id="smName">и. морозов</div>
+                <div class="sm-role">APEX\ОПЕРАТИВНИК-3</div>
             </div>
         </div>
         <div class="sm-grid">
@@ -911,7 +1125,7 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
 (function () {
     "use strict";
 
-    const CREDENTIALS = { username: "a.volkov", password: "Kreml1n#2016" };
+    const CREDENTIALS = { username: "i.morozov", password: "i.morozov" };
 
     const MONTHS_RU = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
     const DAYS_RU = ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"];
@@ -1058,20 +1272,42 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
             document.querySelectorAll(".icon.selected").forEach(s => s.classList.remove("selected"));
         });
 
+        // File switching (sidebar)
+        const winTitle = document.getElementById("winTitle");
+        const FILE_TITLES = {
+            brief:      "APEX Полевой Терминал — [ОПЕРАТИВНИК-3]",
+            dna:        "Образцы ДНК — кейс №08",
+            targets:    "Картотека целей — Л-2",
+            log:        "Журнал наблюдений",
+            experiment: "⚠ Детали эксперимента — НЕТ ДОСТУПА",
+            settings:   "Параметры терминала"
+        };
+        document.querySelectorAll("#fileList li").forEach(li => {
+            li.addEventListener("click", () => {
+                const f = li.dataset.file;
+                document.querySelectorAll("#fileList li").forEach(x => x.classList.remove("active"));
+                li.classList.add("active");
+                document.querySelectorAll(".pane").forEach(p => p.hidden = (p.dataset.pane !== f));
+                winTitle.textContent = FILE_TITLES[f] || winTitle.textContent;
+                document.getElementById("content").scrollTop = 0;
+            });
+        });
+
         // Live log
         const logBody = document.getElementById("logBody");
         const LOG_POOL = [
-            { lvl: "info", msg: "Опрос узла RU-SPB-DC2 · 18 мс." },
-            { lvl: "ok",   msg: "Резервная копия БД <b>apex_core</b> создана." },
-            { lvl: "info", msg: "Получено сообщение от диспетчера «Кремль-Узел-7»." },
-            { lvl: "warn", msg: "Аномальная активность с 195.182.*.* — отслеживается." },
-            { lvl: "ok",   msg: "Проверка целостности файлов APEX: 0 ошибок." },
-            { lvl: "info", msg: "Карта APEX №08812 подтверждена СБ." },
-            { lvl: "warn", msg: "Сертификат узла RU-EKB-DC1 истекает через 47 дней." },
+            { lvl: "info", msg: "Маршрут 4-Б · точка контроля №3 пройдена." },
+            { lvl: "ok",   msg: "Образец отправлен в Л-2 на анализ." },
+            { lvl: "info", msg: "Связной у пирса подтвердил время — 17:30." },
+            { lvl: "warn", msg: "Серая «Волга» снова в зеркале. Меняю маршрут." },
+            { lvl: "ok",   msg: "Прикрытие «корреспондент» — проверка пройдена." },
+            { lvl: "info", msg: "Карта APEX №08812 — отметка времени." },
+            { lvl: "warn", msg: "Гражданская заметила контакт у рынка. Отход." },
             { lvl: "ok",   msg: "Сеанс продлён · токен обновлён." },
         ];
         let logIdx = 0;
         logTimer = setInterval(() => {
+            if (!logBody) return;
             const now = new Date();
             const t = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
             const entry = LOG_POOL[logIdx % LOG_POOL.length];
@@ -1086,9 +1322,9 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
 
         statTimer = setInterval(() => {
             document.querySelectorAll(".stat-bar span").forEach((b, i) => {
-                const base = [94, 23, 67, 30][i] || 50;
+                const base = [62, 4, 78, 18][i] || 50;
                 const jitter = base + (Math.random() * 6 - 3);
-                b.style.width = Math.max(5, Math.min(99, jitter)) + "%";
+                b.style.width = Math.max(2, Math.min(99, jitter)) + "%";
             });
         }, 2000);
     }
