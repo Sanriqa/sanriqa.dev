@@ -664,6 +664,83 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
 .term-cursor { display: inline-block; color: #c8d4e4; animation: term-blink 1s steps(1) infinite; }
 @keyframes term-blink { 50% { opacity: 0; } }
 
+.note-form {
+    margin-top: 10px;
+    background: rgba(5, 14, 32, 0.55);
+    border: 1px solid var(--card-edge);
+    border-radius: 3px;
+    padding: 10px;
+}
+.note-form textarea {
+    width: 100%;
+    background: rgba(2, 8, 18, 0.7);
+    border: 1px solid rgba(120, 170, 230, 0.2);
+    border-radius: 3px;
+    color: var(--text);
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 13px;
+    resize: vertical;
+    outline: 0;
+    min-height: 60px;
+}
+.note-form textarea:focus { border-color: var(--accent-bright); box-shadow: 0 0 0 2px rgba(90,161,255,0.18); }
+.note-actions {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 8px; gap: 10px;
+}
+.muted-info { font-size: 11px; color: var(--text-dim); letter-spacing: 0.5px; }
+
+.notes-feed { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+.note-card {
+    background: rgba(5, 14, 32, 0.55);
+    border: 1px solid var(--card-edge);
+    border-left: 3px solid var(--accent-bright);
+    border-radius: 3px;
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+.note-card.svya { border-left-color: #ffce6b; }
+.note-card.igor { border-left-color: #4ad17a; }
+.note-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 4px;
+    font-size: 11px; letter-spacing: 0.8px;
+    color: var(--text-dim);
+}
+.note-head b { color: #fff; font-weight: 600; letter-spacing: 1px; }
+.note-text { white-space: pre-wrap; color: var(--text); }
+.note-del {
+    background: transparent; border: 0;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 2px;
+}
+.note-del:hover { color: #ff7d7d; background: rgba(196,60,60,0.12); }
+.empty-feed {
+    text-align: center;
+    color: var(--text-dim);
+    padding: 30px 10px;
+    font-size: 12px;
+    font-style: italic;
+}
+.server-info {
+    display: flex; align-items: flex-start; gap: 8px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: rgba(58, 110, 178, 0.10);
+    border: 1px solid rgba(90, 161, 255, 0.3);
+    border-left: 3px solid var(--accent-bright);
+    border-radius: 3px;
+    color: var(--text-dim);
+    font-size: 11.5px;
+    line-height: 1.5;
+}
+.server-info b { color: var(--accent-bright); font-family: "Consolas", monospace; }
+
 .start-menu {
     position: fixed;
     left: 0; bottom: var(--taskbar-h);
@@ -1031,6 +1108,7 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
                     <li data-file="targets">📇 Картотека целей</li>
                     <li data-file="log">🗂 Журнал наблюдений</li>
                     <li data-file="transport">🚗 Транспортный лист</li>
+                    <li data-file="names">📒 Имена</li>
                     <li data-file="experiment" class="restricted">🔒 Детали эксперимента</li>
                     <li data-file="settings">⚙ Параметры терминала</li>
                 </ul>
@@ -1290,6 +1368,66 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
                         <div class="deny-title">ACCESS DENIED</div>
                         <div class="deny-sub">НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП · УРОВЕНЬ 5</div>
                         <div class="deny-meta">Запрос зафиксирован · СБ APEX · табельный №08812</div>
+                    </div>
+                </div>
+
+                <!-- NAMES (separate auth) -->
+                <div class="pane" data-pane="names" hidden>
+                    <!-- Login state -->
+                    <div id="namesLogin">
+                        <div class="content-head">
+                            <h1>📒 Имена · защищённый блокнот</h1>
+                            <p>Доступ только по имени. Журнал шифруется локально.</p>
+                        </div>
+                        <div class="doc" style="max-width:420px;margin-top:14px">
+                            <div class="doc-stamp">ВТОРИЧНАЯ АВТОРИЗАЦИЯ</div>
+                            <form id="namesForm" autocomplete="off">
+                                <label class="field" style="margin-top:10px">
+                                    <span class="field-label">Введите имя</span>
+                                    <div class="input-wrap">
+                                        <svg class="input-icon" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-3.3 0-8 1.7-8 5v3h16v-3c0-3.3-4.7-5-8-5Z"/></svg>
+                                        <input type="text" id="namesInput" placeholder="имя" spellcheck="false" required>
+                                    </div>
+                                </label>
+                                <div class="error-banner" id="namesError" hidden style="margin-top:10px">
+                                    <svg viewBox="0 0 24 24" width="16" height="16"><path fill="#c43c3c" d="M12 2 1 21h22L12 2Zm-1 6h2v8h-2V8Zm0 10h2v2h-2v-2Z"/></svg>
+                                    <span>Имя не из списка допуска.</span>
+                                </div>
+                                <button type="submit" class="btn-primary" style="width:100%;margin-top:12px">
+                                    <span class="btn-label">Открыть журнал</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Authed state -->
+                    <div id="namesAuthed" hidden>
+                        <div class="content-head" style="display:flex;justify-content:space-between;align-items:center">
+                            <div>
+                                <h1>📒 Журнал · <span id="namesWho" style="color:var(--accent-bright)">—</span></h1>
+                                <p>Записи сохраняются локально (JSON · localStorage)</p>
+                            </div>
+                            <button id="namesLogout" class="sm-fbtn" style="max-width:140px">⏻ Выйти</button>
+                        </div>
+
+                        <div class="server-info">
+                            <span>🌐</span>
+                            <span>Журнал загружается с сервера (<b>apex.json</b>). Ваши локальные правки видны только вам — экспортируйте файл и загрузите его на сайт, чтобы запись увидели все.</span>
+                        </div>
+
+                        <form id="noteForm" class="note-form">
+                            <textarea id="noteText" placeholder="Записать наблюдение, имя, контакт…" rows="3"></textarea>
+                            <div class="note-actions">
+                                <span class="muted-info" id="noteCount">0 записей</span>
+                                <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+                                    <button type="button" id="noteReload" class="sm-fbtn" style="max-width:170px">↻ С сервера</button>
+                                    <button type="button" id="noteExport" class="sm-fbtn" style="max-width:170px">⇩ apex.json</button>
+                                    <button type="submit" class="btn-primary" style="max-width:170px">+ Добавить</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="notes-feed" id="notesFeed"></div>
                     </div>
                 </div>
 
@@ -1824,6 +1962,7 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
             targets:    "Картотека целей — Ковальски",
             log:        "Журнал наблюдений",
             transport:  "Транспортный лист — Aegis Executive Transport",
+            names:      "📒 Имена — защищённый блокнот",
             experiment: "⚠ Детали эксперимента — НЕТ ДОСТУПА",
             settings:   "Параметры терминала"
         };
@@ -1867,6 +2006,169 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
             while (logBody.children.length > 30) logBody.removeChild(logBody.firstChild);
         }, 3500);
 
+        // ===== Names notebook (separate auth + JSON localStorage) =====
+        const NAMES_KEY = "apex_names_notes_v1";
+        const ALLOWED_NAMES = ["svyatoslavovich", "igor"];
+        const namesLoginEl = document.getElementById("namesLogin");
+        const namesAuthedEl = document.getElementById("namesAuthed");
+        const namesForm = document.getElementById("namesForm");
+        const namesInput = document.getElementById("namesInput");
+        const namesError = document.getElementById("namesError");
+        const namesWho = document.getElementById("namesWho");
+        const namesLogoutBtn = document.getElementById("namesLogout");
+        const noteForm = document.getElementById("noteForm");
+        const noteText = document.getElementById("noteText");
+        const noteCount = document.getElementById("noteCount");
+        const noteExport = document.getElementById("noteExport");
+        const noteReload = document.getElementById("noteReload");
+        const notesFeed = document.getElementById("notesFeed");
+        let currentAuthor = null;
+
+        function loadNotes() {
+            try { return JSON.parse(localStorage.getItem(NAMES_KEY) || "[]"); }
+            catch { return []; }
+        }
+        function saveNotes(arr) {
+            localStorage.setItem(NAMES_KEY, JSON.stringify(arr));
+        }
+        function renderNotes() {
+            const notes = loadNotes();
+            noteCount.textContent = `${notes.length} ${notes.length === 1 ? "запись" : (notes.length >= 2 && notes.length <= 4 ? "записи" : "записей")}`;
+            if (!notes.length) {
+                notesFeed.innerHTML = `<div class="empty-feed">Журнал пуст. Добавьте первую запись.</div>`;
+                return;
+            }
+            notesFeed.innerHTML = "";
+            notes.slice().reverse().forEach(n => {
+                const card = document.createElement("div");
+                const cls = n.author.toLowerCase().startsWith("svyat") ? "svya" : "igor";
+                card.className = `note-card ${cls}`;
+                const dt = new Date(n.ts);
+                const stamp = `${pad(dt.getDate())}.${pad(dt.getMonth()+1)}.${dt.getFullYear()} ${pad(dt.getHours())}:${pad(dt.getMinutes())}`;
+                card.innerHTML = `
+                    <div class="note-head">
+                        <span><b>${n.author}</b> · ${stamp}</span>
+                        <button class="note-del" data-id="${n.id}">удалить</button>
+                    </div>
+                    <div class="note-text"></div>
+                `;
+                card.querySelector(".note-text").textContent = n.text;
+                notesFeed.appendChild(card);
+            });
+            notesFeed.querySelectorAll(".note-del").forEach(b => {
+                b.addEventListener("click", () => {
+                    const id = b.dataset.id;
+                    saveNotes(loadNotes().filter(x => x.id !== id));
+                    renderNotes();
+                });
+            });
+        }
+        function showNamesLogin() {
+            namesAuthedEl.hidden = true;
+            namesLoginEl.hidden = false;
+            namesError.hidden = true;
+            namesInput.value = "";
+            currentAuthor = null;
+        }
+        function showNamesAuthed(name) {
+            currentAuthor = name;
+            namesWho.textContent = name;
+            namesLoginEl.hidden = true;
+            namesAuthedEl.hidden = false;
+            renderNotes();
+        }
+        namesForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const v = namesInput.value.trim();
+            const low = v.toLowerCase();
+            if (ALLOWED_NAMES.includes(low)) {
+                const display = low === "svyatoslavovich" ? "Svyatoslavovich" : "Igor";
+                showNamesAuthed(display);
+            } else {
+                namesError.hidden = false;
+                namesInput.value = "";
+                namesInput.focus();
+            }
+        });
+        namesLogoutBtn.addEventListener("click", showNamesLogin);
+        noteForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const txt = noteText.value.trim();
+            if (!txt || !currentAuthor) return;
+            const arr = loadNotes();
+            arr.push({
+                id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+                author: currentAuthor,
+                text: txt,
+                ts: Date.now()
+            });
+            saveNotes(arr);
+            noteText.value = "";
+            renderNotes();
+        });
+        noteExport.addEventListener("click", () => {
+            const data = JSON.stringify(loadNotes(), null, 2);
+            const blob = new Blob([data], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "apex.json";
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        // Build apex.json URL relative to the actual document location.
+        // Handles: /apex, /apex/, /apex/index.html, / (root), and subpaths.
+        function apexJsonUrl() {
+            let path = location.pathname;
+            if (!path.endsWith("/")) {
+                const last = path.split("/").pop();
+                if (last && last.includes(".")) {
+                    // it's a file (e.g. index.html) — strip to its directory
+                    path = path.substring(0, path.lastIndexOf("/") + 1);
+                } else {
+                    // no extension — assume directory served without trailing slash
+                    path += "/";
+                }
+            }
+            return path + "apex.json?ts=" + Date.now();
+        }
+
+        async function fetchApexJson() {
+            const res = await fetch(apexJsonUrl(), { cache: "no-store" });
+            if (!res.ok) throw new Error("fetch failed: " + res.status);
+            const arr = await res.json();
+            if (!Array.isArray(arr)) throw new Error("invalid format");
+            return arr;
+        }
+
+        // On first visit (empty localStorage), seed from apex.json
+        (async function initialSeed() {
+            try {
+                if (loadNotes().length > 0) return;
+                const arr = await fetchApexJson();
+                if (arr.length > 0) {
+                    saveNotes(arr);
+                    if (!namesAuthedEl.hidden) renderNotes();
+                }
+            } catch (_) { /* file:// fetch CORS block — ignore */ }
+        })();
+
+        // Manual reload from server (overwrites local working copy)
+        noteReload.addEventListener("click", async () => {
+            if (loadNotes().length > 0 &&
+                !confirm("Загрузить журнал с сервера? Локальные правки, которые не были экспортированы, будут потеряны.")) {
+                return;
+            }
+            try {
+                const arr = await fetchApexJson();
+                saveNotes(arr);
+                renderNotes();
+            } catch (e) {
+                alert("Не удалось загрузить apex.json с сервера.\n\nПри открытии HTML напрямую (file://) браузер может блокировать загрузку. На сайте через http(s) это работает.");
+            }
+        });
+
         statTimer = setInterval(() => {
             document.querySelectorAll(".stat-bar span").forEach((b, i) => {
                 const base = [62, 4, 78, 18][i] || 50;
@@ -1876,9 +2178,12 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
         }, 2000);
     }
 
-    // Prevent text selection except inputs
+    // Prevent text selection except in form fields / notes
     document.addEventListener("selectstart", (e) => {
-        if (e.target.tagName !== "INPUT") e.preventDefault();
+        const t = e.target;
+        if (t.tagName === "INPUT" || t.tagName === "TEXTAREA") return;
+        if (t.closest && t.closest(".note-text, .note-card, .doc, .data-table, .log-body, .terminal-body")) return;
+        e.preventDefault();
     });
 
     console.log("%cAPEX SECURE TERMINAL", "color:#5aa1ff;font-size:18px;font-weight:bold;letter-spacing:6px;");
