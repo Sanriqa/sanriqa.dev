@@ -400,7 +400,53 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
 .side li:hover { color: #fff; background: rgba(90, 161, 255, 0.08); }
 .side li.active { color: #fff; background: rgba(90, 161, 255, 0.18); border-left-color: var(--accent-bright); }
 
-.content { flex: 1; padding: 18px 22px; overflow-y: auto; }
+.content { flex: 1; padding: 18px 22px; overflow-y: auto; position: relative; }
+
+.access-denied-overlay {
+    position: absolute;
+    inset: 0;
+    background: #c41e1e;
+    display: none;
+    place-items: center;
+    z-index: 20;
+    pointer-events: none;
+    color: #fff;
+    text-align: center;
+    animation: deny-flash 4s steps(1, end) infinite;
+    box-shadow: inset 0 0 80px rgba(0,0,0,0.5);
+}
+.content.show-deny .access-denied-overlay { display: grid; }
+@keyframes deny-flash {
+    0%   { opacity: 1; }
+    50%  { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+.deny-inner {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    text-shadow: 0 0 14px rgba(0,0,0,0.5);
+}
+.deny-icon { font-size: 64px; line-height: 1; }
+.deny-title {
+    font-size: 56px; font-weight: 900;
+    letter-spacing: 14px;
+    color: #fff;
+    text-shadow: 0 0 16px #000, 0 0 4px #fff;
+    border: 3px solid #fff;
+    padding: 4px 18px 6px;
+    margin: 6px 0;
+}
+.deny-sub {
+    font-size: 13px; letter-spacing: 3px;
+    font-family: "Consolas", monospace;
+    color: #ffdcdc;
+}
+.deny-meta {
+    font-size: 11px; letter-spacing: 1.5px;
+    margin-top: 10px;
+    font-family: "Consolas", monospace;
+    color: #ffb0b0;
+}
 .content-head h1 { font-size: 22px; font-weight: 400; color: #fff; margin-bottom: 4px; }
 .content-head h1 span { color: var(--accent-bright); font-weight: 600; text-transform: capitalize; }
 .content-head p { font-size: 12px; color: var(--text-dim); }
@@ -901,6 +947,7 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
                     <li data-file="dna">🧬 Образцы ДНК</li>
                     <li data-file="targets">📇 Картотека целей</li>
                     <li data-file="log">🗂 Журнал наблюдений</li>
+                    <li data-file="transport">🚗 Транспортный лист</li>
                     <li data-file="experiment" class="restricted">🔒 Детали эксперимента</li>
                     <li data-file="settings">⚙ Параметры терминала</li>
                 </ul>
@@ -972,7 +1019,7 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
                 <div class="pane" data-pane="targets" hidden>
                     <div class="content-head">
                         <h1>Картотека · подтверждённые цели</h1>
-                        <p>Передано в группу изъятия. <b>Не контактировать.</b></p>
+                        <p>Передано <b>Ковальски</b> — последнее слово за ним. APEX: только безопасность и сбор информации. <b>Не контактировать.</b></p>
                     </div>
                     <div class="cards">
                         <div class="t-card">
@@ -981,7 +1028,7 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
                             <div class="t-row"><span>пол</span><b>м</b></div>
                             <div class="t-row"><span>район</span><b>4-Б, кв. 17</b></div>
                             <div class="t-row"><span>совмест.</span><b>97.4%</b></div>
-                            <div class="t-status hot">передано в Л-2</div>
+                            <div class="t-status hot">передано Ковальски</div>
                         </div>
                         <div class="t-card">
                             <div class="t-id">№035 · ★</div>
@@ -989,7 +1036,7 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
                             <div class="t-row"><span>пол</span><b>ж</b></div>
                             <div class="t-row"><span>район</span><b>школа №7</b></div>
                             <div class="t-row"><span>совмест.</span><b>91.8%</b></div>
-                            <div class="t-status hot">передано в Л-2</div>
+                            <div class="t-status hot">передано Ковальски</div>
                         </div>
                         <div class="t-card">
                             <div class="t-id">№047</div>
@@ -1021,6 +1068,111 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
                     </div>
                 </div>
 
+                <!-- TRANSPORT -->
+                <div class="pane" data-pane="transport" hidden>
+                    <div class="content-head">
+                        <h1>Транспортный лист · смена 14.03</h1>
+                        <p>Подрядчик: <b>Aegis Executive Transport</b> · Los Santos division · контракт AET-2016/04</p>
+                    </div>
+
+                    <div class="doc">
+                        <div class="doc-stamp">ПАРТНЁРСКОЕ СОГЛАШЕНИЕ · УРОВЕНЬ 3</div>
+                        <p>APEX совместно с <b>Aegis Executive Transport</b> обеспечивает дискретную перевозку состоятельных клиентов и сотрудников высшего звена по округу Los Santos. Машины — бронированные, без опознавательных знаков. Шофёры с допуском NDA-A.</p>
+                        <p>Все клиенты ниже — <b>VIP-уровень</b>. Маршрут заканчивается у <b>пирса (Pier 96)</b>, далее — яхта «Северная Звезда». Принять достойно: шампанское, икра, конверт.</p>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>№</th><th>Клиент</th><th>Точка посадки</th><th>Авто</th><th>Время</th><th>Статус</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td><td><b>Mr. Holloway</b></td>
+                                <td>Vinewood Hills</td>
+                                <td>Cognoscenti (бронь.)</td>
+                                <td>14:20</td>
+                                <td><span class="tag hot">★ VIP</span></td>
+                            </tr>
+                            <tr>
+                                <td>02</td><td><b>Mr. Devereaux</b></td>
+                                <td>Rockford Hills, N. Sheldon Ave.</td>
+                                <td>Schafter LWB</td>
+                                <td>14:45</td>
+                                <td><span class="tag hot">★ VIP</span></td>
+                            </tr>
+                            <tr>
+                                <td>03</td><td><b>Mrs. Ashcroft</b></td>
+                                <td>Richman Mansion</td>
+                                <td>Stretch (бронь.)</td>
+                                <td>15:05</td>
+                                <td><span class="tag hot">★ VIP</span></td>
+                            </tr>
+                            <tr>
+                                <td>04</td><td><b>Mr. Sterling</b></td>
+                                <td>Eclipse Towers, пент-хаус 3</td>
+                                <td>Baller LE LWB</td>
+                                <td>15:30</td>
+                                <td><span class="tag warn">в пути</span></td>
+                            </tr>
+                            <tr>
+                                <td>05</td><td><b>Ms. Vandermeer</b></td>
+                                <td>Tongva Hills</td>
+                                <td>Cognoscenti Cabrio</td>
+                                <td>15:55</td>
+                                <td><span class="tag warn">в пути</span></td>
+                            </tr>
+                            <tr>
+                                <td>06</td><td><b>Mr. Whitlock</b></td>
+                                <td>West Vinewood, Eclipse Bvd.</td>
+                                <td>Turreted Limo</td>
+                                <td>16:15</td>
+                                <td><span class="tag warn">подтверждение</span></td>
+                            </tr>
+                            <tr>
+                                <td>07</td><td><b>Mr. Calloway</b></td>
+                                <td>Pacific Bluffs Country Club</td>
+                                <td>Schafter LWB (б/б)</td>
+                                <td>16:40</td>
+                                <td><span class="tag warn">подтверждение</span></td>
+                            </tr>
+                            <tr>
+                                <td>08</td><td><b>Mr. Brennan</b></td>
+                                <td>Del Perro Heights, кв. 4</td>
+                                <td>Cognoscenti</td>
+                                <td>16:55</td>
+                                <td><span class="tag none">ожидает</span></td>
+                            </tr>
+                            <tr>
+                                <td>09</td><td><b>Mr. Kessler</b></td>
+                                <td>Banham Canyon Drive</td>
+                                <td>Baller LE</td>
+                                <td>17:10</td>
+                                <td><span class="tag none">ожидает</span></td>
+                            </tr>
+                            <tr>
+                                <td>10</td><td><b>Mrs. Lowell</b></td>
+                                <td>Mirror Park, Nikola Ave.</td>
+                                <td>Stretch</td>
+                                <td>17:25</td>
+                                <td><span class="tag none">ожидает</span></td>
+                            </tr>
+                            <tr style="background:rgba(255,206,107,0.06)">
+                                <td>—</td><td colspan="4"><b style="color:#ffce6b">КОНЕЧНАЯ ТОЧКА · Pier 96 · яхта «Северная Звезда»</b></td>
+                                <td>17:30</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="doc" style="margin-top:14px">
+                        <div class="doc-stamp">ИНСТРУКЦИЯ ДЛЯ ОПЕРАТИВНИКА</div>
+                        <p>• Подъезд только со стороны <b>Del Perro Freeway</b>, выход на <b>Pier 96</b>.</p>
+                        <p>• Прибытие самых состоятельных клиентов — <b>последним</b>, чтобы остальные были уже на палубе.</p>
+                        <p>• Контакт у трапа: позывной <b>«Маяк»</b>. Кодовая фраза: «Северная погода чище южной».</p>
+                        <p>• Никаких отпечатков на корпусе авто. Перчатки обязательны.</p>
+                        <p class="muted">Aegis Executive Transport · Los Santos HQ · Maze Bank Tower, 42 этаж</p>
+                    </div>
+                </div>
+
                 <!-- EXPERIMENT (restricted) -->
                 <div class="pane" data-pane="experiment" hidden>
                     <div class="restricted-banner">
@@ -1041,10 +1193,20 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
                             <li><b>Предпочтительный возраст: 7–12 лет.</b> На этом возрастном диапазоне внутренние показатели программы существенно выше — данные приведены в приложении А.</li>
                             <li>Низкая социальная заметность (детдом, неполная семья, район 4-Б).</li>
                         </ul>
-                        <p><b>Обоснование возрастного диапазона.</b> Аналитика отдела Л-2 за период 2014–2015 гг. указывает, что у несовершеннолетних носителей наблюдается более высокая приживаемость и стабильность результатов программы. Старший возраст даёт значительный отсев на этапе адаптации.</p>
-                        <p><b>Процедура передачи.</b> Оперативник доставляет совпавший образец в Л-2. Дальнейший контакт с носителем — только через группу изъятия. Оперативнику <b>знать имя носителя запрещено</b>.</p>
+                        <p><b>Обоснование возрастного диапазона.</b> Аналитика Ковальски за период 2014–2015 гг. указывает, что у несовершеннолетних носителей наблюдается более высокая приживаемость и стабильность результатов программы. Старший возраст даёт значительный отсев на этапе адаптации.</p>
+                        <p><b>Процедура передачи.</b> Оперативник доставляет совпавший образец <b>Ковальски</b>. Дальнейший контакт с носителем — только через его людей. Оперативнику <b>знать имя носителя запрещено</b>.</p>
+                        <p><b>Зона ответственности APEX.</b> Работаем с <b>Ковальски</b>. Последнее слово — за ним. APEX отвечает <b>только</b> за безопасность и сбор информации. Всё, что идёт дальше — не наша зона.</p>
                         <p class="muted">Подпись: Профессор · печать APEX-Х · 02.2016</p>
                         <p class="muted">Документ дублирован для архива «Кремль-Узел-7».</p>
+                    </div>
+                </div>
+
+                <div class="access-denied-overlay" id="denyOverlay" aria-hidden="true">
+                    <div class="deny-inner">
+                        <div class="deny-icon">⛔</div>
+                        <div class="deny-title">ACCESS DENIED</div>
+                        <div class="deny-sub">НЕСАНКЦИОНИРОВАННЫЙ ДОСТУП · УРОВЕНЬ 5</div>
+                        <div class="deny-meta">Запрос зафиксирован · СБ APEX · табельный №08812</div>
                     </div>
                 </div>
 
@@ -1277,11 +1439,13 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
         const FILE_TITLES = {
             brief:      "APEX Полевой Терминал — [ОПЕРАТИВНИК-3]",
             dna:        "Образцы ДНК — кейс №08",
-            targets:    "Картотека целей — Л-2",
+            targets:    "Картотека целей — Ковальски",
             log:        "Журнал наблюдений",
+            transport:  "Транспортный лист — Aegis Executive Transport",
             experiment: "⚠ Детали эксперимента — НЕТ ДОСТУПА",
             settings:   "Параметры терминала"
         };
+        const contentEl = document.getElementById("content");
         document.querySelectorAll("#fileList li").forEach(li => {
             li.addEventListener("click", () => {
                 const f = li.dataset.file;
@@ -1289,7 +1453,8 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
                 li.classList.add("active");
                 document.querySelectorAll(".pane").forEach(p => p.hidden = (p.dataset.pane !== f));
                 winTitle.textContent = FILE_TITLES[f] || winTitle.textContent;
-                document.getElementById("content").scrollTop = 0;
+                contentEl.classList.toggle("show-deny", f === "experiment");
+                contentEl.scrollTop = 0;
             });
         });
 
@@ -1297,7 +1462,7 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
         const logBody = document.getElementById("logBody");
         const LOG_POOL = [
             { lvl: "info", msg: "Маршрут 4-Б · точка контроля №3 пройдена." },
-            { lvl: "ok",   msg: "Образец отправлен в Л-2 на анализ." },
+            { lvl: "ok",   msg: "Образец отправлен Ковальски на анализ." },
             { lvl: "info", msg: "Связной у пирса подтвердил время — 17:30." },
             { lvl: "warn", msg: "Серая «Волга» снова в зеркале. Меняю маршрут." },
             { lvl: "ok",   msg: "Прикрытие «корреспондент» — проверка пройдена." },
