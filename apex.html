@@ -339,10 +339,11 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
 
 .window {
     position: absolute;
-    top: 70px; left: 50%;
-    transform: translateX(-45%);
-    width: 780px; max-width: calc(100vw - 60px);
-    height: 520px; max-height: calc(100vh - var(--taskbar-h) - 90px);
+    top: 70px; left: 80px;
+    width: 800px; min-width: 360px;
+    height: 540px; min-height: 240px;
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vh - var(--taskbar-h) - 10px);
     background: var(--card);
     border: 1px solid var(--card-edge);
     border-radius: 4px;
@@ -350,8 +351,28 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
     box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06);
     display: flex; flex-direction: column;
     overflow: hidden;
+    z-index: 10;
 }
-.window.hidden { display: none; }
+.window.hidden, .window.minimized { display: none !important; }
+.window.maximized {
+    top: 0 !important; left: 0 !important;
+    width: 100vw !important;
+    height: calc(100vh - var(--taskbar-h)) !important;
+    border-radius: 0;
+    max-width: none; max-height: none;
+}
+.window.focused { box-shadow: 0 30px 90px rgba(0,0,0,0.75), 0 0 0 1px rgba(90,161,255,0.5); }
+
+.window-resize {
+    position: absolute;
+    right: 0; bottom: 0;
+    width: 16px; height: 16px;
+    cursor: nwse-resize;
+    z-index: 5;
+    background:
+        linear-gradient(135deg, transparent 0 55%, rgba(120,170,230,0.45) 55% 62%, transparent 62% 70%, rgba(120,170,230,0.45) 70% 77%, transparent 77% 85%, rgba(120,170,230,0.45) 85% 92%, transparent 92%);
+}
+.window.maximized .window-resize { display: none; }
 
 .window-title {
     display: flex; align-items: center; justify-content: space-between;
@@ -360,6 +381,14 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
     background: linear-gradient(180deg, #143d7d, #0a2553);
     border-bottom: 1px solid #2d5a9c;
     font-size: 12px; letter-spacing: 0.4px;
+    cursor: grab;
+    user-select: none;
+}
+.window-title:active { cursor: grabbing; }
+.window.maximized .window-title { cursor: default; }
+.window:not(.focused) .window-title {
+    background: linear-gradient(180deg, #0e2c5c, #06183a);
+    filter: grayscale(0.3) brightness(0.85);
 }
 .wt-left { display: flex; align-items: center; gap: 8px; color: #fff; }
 .wt-buttons { display: flex; }
@@ -592,6 +621,49 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
 }
 .settings-row b { color: #fff; font-family: "Consolas", monospace; letter-spacing: 0.5px; }
 
+.drives { display: grid; gap: 8px; margin-top: 12px; }
+.drive {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 14px;
+    background: rgba(5, 14, 32, 0.55);
+    border: 1px solid var(--card-edge);
+    border-radius: 3px;
+}
+.drive:hover { background: rgba(90, 161, 255, 0.08); border-color: var(--accent-bright); }
+.drive.restricted-drive { border-color: rgba(196, 60, 60, 0.5); }
+.drive-icon { font-size: 28px; line-height: 1; }
+.drive-info { flex: 1; }
+.drive-name { color: #fff; font-size: 14px; font-weight: 600; }
+.drive-meta { color: var(--text-dim); font-size: 11.5px; margin: 4px 0 6px; }
+.drive-bar { height: 5px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+.drive-bar span { display: block; height: 100%; background: var(--accent-bright); }
+
+.empty-state {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 60px 20px;
+    color: var(--text-dim);
+    text-align: center;
+}
+.empty-ico { font-size: 64px; opacity: 0.5; margin-bottom: 14px; }
+.empty-text { font-size: 18px; color: #fff; font-weight: 300; }
+.empty-sub { font-size: 12px; margin-top: 6px; font-family: "Consolas", monospace; letter-spacing: 0.5px; }
+
+.terminal-body {
+    flex: 1;
+    background: #020812;
+    color: #c8d4e4;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 14px 16px;
+    overflow-y: auto;
+}
+.term-line { white-space: pre-wrap; }
+.term-line b { color: var(--accent-bright); font-weight: 400; }
+.term-prompt { color: #4ad17a; }
+.term-cursor { display: inline-block; color: #c8d4e4; animation: term-blink 1s steps(1) infinite; }
+@keyframes term-blink { 50% { opacity: 0; } }
+
 .start-menu {
     position: fixed;
     left: 0; bottom: var(--taskbar-h);
@@ -681,17 +753,27 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
 }
 .search-box input::placeholder { color: #4d6587; }
 
-.tasks { display: flex; gap: 2px; margin-left: 6px; }
+.tasks { display: flex; gap: 2px; margin-left: 6px; flex: 1; min-width: 0; overflow: hidden; }
 .task {
-    width: 40px; height: calc(var(--taskbar-h) - 6px);
+    height: calc(var(--taskbar-h) - 6px);
+    min-width: 40px; max-width: 200px;
+    padding: 0 10px;
     background: transparent; border: 0;
     border-bottom: 2px solid transparent;
     cursor: pointer;
-    display: grid; place-items: center;
+    display: flex; align-items: center; gap: 8px;
     border-radius: 3px 3px 0 0;
+    color: var(--text-dim);
+    font-family: inherit;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.task:hover { background: rgba(90, 161, 255, 0.15); }
-.task.active { background: rgba(90, 161, 255, 0.22); border-bottom-color: var(--accent-bright); }
+.task:hover { background: rgba(90, 161, 255, 0.15); color: #fff; }
+.task.active { background: rgba(90, 161, 255, 0.22); border-bottom-color: var(--accent-bright); color: #fff; }
+.task svg, .task .task-emoji { flex: 0 0 auto; font-size: 13px; }
+.task .task-label { overflow: hidden; text-overflow: ellipsis; }
 
 .tray { margin-left: auto; display: flex; align-items: center; gap: 6px; padding-right: 8px; }
 .tray-item {
@@ -924,7 +1006,8 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
         </div>
     </div>
 
-    <div class="window" id="appWindow">
+    <div class="window focused" id="appWindow" data-app="files">
+        <div class="window-resize"></div>
         <div class="window-title">
             <div class="wt-left">
                 <svg viewBox="0 0 16 16" width="14" height="14"><path fill="#5aa1ff" d="M8 1 14 14h-2L8 6 4 14H2L8 1Z"/></svg>
@@ -1250,6 +1333,104 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
         </div>
     </div>
 
+    <!-- App templates (cloned by Window Manager) -->
+    <template id="tmpl-computer">
+        <div class="content">
+            <div class="content-head">
+                <h1>Этот компьютер</h1>
+                <p>Локальные и сетевые носители · APEX-08812</p>
+            </div>
+            <div class="drives">
+                <div class="drive">
+                    <div class="drive-icon">💽</div>
+                    <div class="drive-info">
+                        <div class="drive-name">Система APEX (C:)</div>
+                        <div class="drive-meta">Свободно 35,2 ГБ из 80 ГБ</div>
+                        <div class="drive-bar"><span style="width:56%"></span></div>
+                    </div>
+                </div>
+                <div class="drive">
+                    <div class="drive-icon">📂</div>
+                    <div class="drive-info">
+                        <div class="drive-name">Полевые файлы (D:)</div>
+                        <div class="drive-meta">Свободно 119 ГБ из 240 ГБ</div>
+                        <div class="drive-bar"><span style="width:50%"></span></div>
+                    </div>
+                </div>
+                <div class="drive">
+                    <div class="drive-icon">🛰</div>
+                    <div class="drive-info">
+                        <div class="drive-name">Кремль-Узел-7 (Z:) · сетевой</div>
+                        <div class="drive-meta">Подключено через AES-256</div>
+                        <div class="drive-bar"><span style="width:12%;background:#ffce6b"></span></div>
+                    </div>
+                </div>
+                <div class="drive restricted-drive">
+                    <div class="drive-icon">🔒</div>
+                    <div class="drive-info">
+                        <div class="drive-name">Архив Ковальски (X:)</div>
+                        <div class="drive-meta">НЕТ ДОСТУПА · уровень 5</div>
+                        <div class="drive-bar"><span style="width:100%;background:#c43c3c"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tmpl-recycle">
+        <div class="content">
+            <div class="content-head">
+                <h1>Корзина</h1>
+                <p>Содержимое уничтожается каждые 4 часа в целях безопасности</p>
+            </div>
+            <div class="empty-state">
+                <div class="empty-ico">🗑</div>
+                <div class="empty-text">Корзина пуста.</div>
+                <div class="empty-sub">Последняя очистка: 14.03.2016 04:00 · автоматически</div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tmpl-secret">
+        <div class="content">
+            <div class="content-head">
+                <h1>СОВ. СЕКРЕТНО</h1>
+                <p>Только для оперативников с допуском 4+. Ваш допуск: <b style="color:#ff9b9b">3</b></p>
+            </div>
+            <div class="restricted-banner">
+                <div class="rb-head">⚠ ОГРАНИЧЕННЫЙ ПРОСМОТР</div>
+                <div class="rb-body">Имена файлов видны. Содержимое — нет. Запросы фиксируются.</div>
+            </div>
+            <table class="data-table">
+                <thead><tr><th>Файл</th><th>Размер</th><th>Изменён</th><th>Доступ</th></tr></thead>
+                <tbody>
+                    <tr><td>📄 протокол_АПЕКС-Х.docx</td><td>2.4 МБ</td><td>02.02.2016</td><td><span class="tag hot">5</span></td></tr>
+                    <tr><td>📄 список_носителей_Q1.xls</td><td>880 КБ</td><td>11.03.2016</td><td><span class="tag hot">5</span></td></tr>
+                    <tr><td>📄 переписка_Ковальски.eml</td><td>1.1 МБ</td><td>13.03.2016</td><td><span class="tag hot">5</span></td></tr>
+                    <tr><td>📄 финансы_яхта.xlsx</td><td>340 КБ</td><td>10.03.2016</td><td><span class="tag warn">4</span></td></tr>
+                    <tr><td>📄 карта_города_4-Б.png</td><td>5.8 МБ</td><td>14.03.2016</td><td><span class="tag none">3</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+    <template id="tmpl-terminal">
+        <div class="terminal-body">
+            <div class="term-line">APEX Secure Shell · v6.2.1840 · build 14393.2016</div>
+            <div class="term-line">Подключено к узлу <b>RU-MSK-DC3</b> через AES-256.</div>
+            <div class="term-line">&nbsp;</div>
+            <div class="term-line"><span class="term-prompt">i.morozov@apex:~$</span> whoami</div>
+            <div class="term-line">Игорь Морозов · ОПЕРАТИВНИК-3 · табельный №08812</div>
+            <div class="term-line"><span class="term-prompt">i.morozov@apex:~$</span> uname -a</div>
+            <div class="term-line">APEX-OS 6.2 (CoreFrost) · ru_RU.UTF-8 · 2016-03-14</div>
+            <div class="term-line"><span class="term-prompt">i.morozov@apex:~$</span> apex-status</div>
+            <div class="term-line"><span style="color:#4ad17a">[OK]</span> канал · <span style="color:#4ad17a">[OK]</span> токен · <span style="color:#ffce6b">[!]</span> возможный хвост</div>
+            <div class="term-line"><span class="term-prompt">i.morozov@apex:~$</span> sudo cat /opt/apex/experiment.dat</div>
+            <div class="term-line" style="color:#ff7d7d">access denied: уровень 5 требуется (ваш: 3)</div>
+            <div class="term-line"><span class="term-prompt">i.morozov@apex:~$</span> <span class="term-cursor">▋</span></div>
+        </div>
+    </template>
+
     <div class="taskbar">
         <button class="start-btn" id="startBtn">
             <svg viewBox="0 0 32 32" width="20" height="20"><path d="M16 3 L29 28 L21 28 L16 17 L11 28 L3 28 Z" fill="#fff"/><path d="M13 22 L19 22 L17 26 L15 26 Z" fill="#0a3a78"/></svg>
@@ -1258,17 +1439,7 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
             <svg viewBox="0 0 24 24" width="14" height="14"><path fill="#9ab2d4" d="M10 2a8 8 0 1 0 5.3 14l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z"/></svg>
             <input type="text" placeholder="Поиск в APEX…" spellcheck="false">
         </div>
-        <div class="tasks">
-            <button class="task active" id="taskAppBtn">
-                <svg viewBox="0 0 16 16" width="14" height="14"><path fill="#5aa1ff" d="M8 1 14 14h-2L8 6 4 14H2L8 1Z"/></svg>
-            </button>
-            <button class="task">
-                <svg viewBox="0 0 24 24" width="14" height="14"><rect x="3" y="5" width="18" height="14" rx="1" fill="#2d5a9c" stroke="#5aa1ff"/></svg>
-            </button>
-            <button class="task">
-                <svg viewBox="0 0 24 24" width="14" height="14"><path fill="#e8b340" d="M3 7h7l2 2h9v11H3z"/></svg>
-            </button>
-        </div>
+        <div class="tasks" id="tasks"></div>
         <div class="tray">
             <span class="tray-item" title="Сеть">🛰</span>
             <span class="tray-item" title="Шифр">🔐</span>
@@ -1287,7 +1458,7 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
 (function () {
     "use strict";
 
-    const CREDENTIALS = { username: "i.morozov", password: "i.morozov" };
+    const CREDENTIALS = { username: "i.morozov", password: "igor1234" };
 
     const MONTHS_RU = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
     const DAYS_RU = ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"];
@@ -1416,10 +1587,218 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
         document.getElementById("logoutBtn").addEventListener("click", () => location.reload());
         document.getElementById("lockBtn").addEventListener("click", () => location.reload());
 
-        // Window controls
-        const win = document.getElementById("appWindow");
-        document.getElementById("closeWin").addEventListener("click", () => win.classList.add("hidden"));
-        document.getElementById("taskAppBtn").addEventListener("click", () => win.classList.toggle("hidden"));
+        // ===== Window Manager =====
+        const tasksEl = document.getElementById("tasks");
+        let topZ = 10;
+        const WINDOWS = new Map(); // appId -> { win, taskBtn }
+
+        const APP_DEFS = {
+            files:    { title: "APEX Полевой Терминал — [ОПЕРАТИВНИК-3]", emoji: "⚡", w: 820, h: 540 },
+            computer: { title: "Этот компьютер",                          emoji: "💻", w: 560, h: 400 },
+            recycle:  { title: "Корзина",                                 emoji: "🗑", w: 500, h: 340 },
+            secret:   { title: "СОВ. СЕКРЕТНО — ограниченная папка",     emoji: "🔴", w: 640, h: 440 },
+            terminal: { title: "APEX Терминал — i.morozov@apex",         emoji: ">_", w: 600, h: 380 }
+        };
+
+        function focusWindow(win) {
+            document.querySelectorAll(".window.focused").forEach(w => w.classList.remove("focused"));
+            win.classList.add("focused");
+            win.classList.remove("minimized");
+            win.style.zIndex = ++topZ;
+            WINDOWS.forEach(({ win: w, taskBtn }) => taskBtn.classList.toggle("active", w === win));
+        }
+
+        function closeWindow(appId) {
+            const rec = WINDOWS.get(appId);
+            if (!rec) return;
+            if (appId === "files") {
+                // main window: just hide, keep state for re-open
+                rec.win.classList.add("minimized");
+                rec.taskBtn.classList.remove("active");
+            } else {
+                rec.win.remove();
+                rec.taskBtn.remove();
+                WINDOWS.delete(appId);
+            }
+        }
+
+        function toggleMaximize(win) {
+            if (win.classList.contains("maximized")) {
+                win.classList.remove("maximized");
+                Object.assign(win.style, win._restore || {});
+            } else {
+                win._restore = {
+                    top: win.style.top, left: win.style.left,
+                    width: win.style.width, height: win.style.height
+                };
+                win.classList.add("maximized");
+                ["top","left","width","height"].forEach(k => win.style[k] = "");
+            }
+        }
+
+        function makeDraggable(win) {
+            const title = win.querySelector(".window-title");
+            let dx = 0, dy = 0, dragging = false;
+            title.addEventListener("mousedown", (e) => {
+                if (e.target.closest(".wt-buttons")) return;
+                if (win.classList.contains("maximized")) return;
+                dragging = true;
+                const r = win.getBoundingClientRect();
+                dx = e.clientX - r.left;
+                dy = e.clientY - r.top;
+                focusWindow(win);
+                document.body.style.userSelect = "none";
+                e.preventDefault();
+            });
+            title.addEventListener("dblclick", (e) => {
+                if (e.target.closest(".wt-buttons")) return;
+                toggleMaximize(win);
+            });
+            document.addEventListener("mousemove", (e) => {
+                if (!dragging) return;
+                const tbH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--taskbar-h")) || 46;
+                const nx = Math.max(-win.offsetWidth + 80, Math.min(window.innerWidth - 80, e.clientX - dx));
+                const ny = Math.max(0, Math.min(window.innerHeight - tbH - 32, e.clientY - dy));
+                win.style.left = nx + "px";
+                win.style.top = ny + "px";
+            });
+            document.addEventListener("mouseup", () => {
+                dragging = false;
+                document.body.style.userSelect = "";
+            });
+        }
+
+        function makeResizable(win) {
+            const handle = win.querySelector(".window-resize");
+            if (!handle) return;
+            let sx, sy, sw, sh, resizing = false;
+            handle.addEventListener("mousedown", (e) => {
+                if (win.classList.contains("maximized")) return;
+                resizing = true;
+                sx = e.clientX; sy = e.clientY;
+                const r = win.getBoundingClientRect();
+                sw = r.width; sh = r.height;
+                focusWindow(win);
+                e.preventDefault();
+                e.stopPropagation();
+            });
+            document.addEventListener("mousemove", (e) => {
+                if (!resizing) return;
+                const nw = Math.max(360, Math.min(window.innerWidth - 20, sw + (e.clientX - sx)));
+                const nh = Math.max(240, Math.min(window.innerHeight - 60, sh + (e.clientY - sy)));
+                win.style.width = nw + "px";
+                win.style.height = nh + "px";
+            });
+            document.addEventListener("mouseup", () => resizing = false);
+        }
+
+        function wireWindowButtons(win, appId) {
+            const buttons = win.querySelector(".wt-buttons");
+            if (!buttons) return;
+            const [minBtn, maxBtn, closeBtn] = buttons.querySelectorAll(".wt-btn");
+            if (minBtn) minBtn.addEventListener("click", () => {
+                win.classList.add("minimized");
+                const rec = WINDOWS.get(appId);
+                if (rec) rec.taskBtn.classList.remove("active");
+            });
+            if (maxBtn) maxBtn.addEventListener("click", () => toggleMaximize(win));
+            if (closeBtn) closeBtn.addEventListener("click", () => closeWindow(appId));
+            win.addEventListener("mousedown", () => focusWindow(win));
+        }
+
+        function createTaskButton(appId, def) {
+            const btn = document.createElement("button");
+            btn.className = "task";
+            btn.innerHTML = `<span class="task-emoji">${def.emoji}</span><span class="task-label">${def.title.split(" — ")[0]}</span>`;
+            btn.addEventListener("click", () => {
+                const rec = WINDOWS.get(appId);
+                if (!rec) return;
+                if (rec.win.classList.contains("minimized") || !rec.win.classList.contains("focused")) {
+                    focusWindow(rec.win);
+                } else {
+                    rec.win.classList.add("minimized");
+                    btn.classList.remove("active");
+                }
+            });
+            tasksEl.appendChild(btn);
+            return btn;
+        }
+
+        function buildWindowFromTemplate(appId, def) {
+            const tmpl = document.getElementById(`tmpl-${appId}`);
+            const win = document.createElement("div");
+            win.className = "window";
+            win.dataset.app = appId;
+            const offset = WINDOWS.size * 26;
+            win.style.left = (90 + offset) + "px";
+            win.style.top = (60 + offset) + "px";
+            win.style.width = def.w + "px";
+            win.style.height = def.h + "px";
+            win.innerHTML = `
+                <div class="window-resize"></div>
+                <div class="window-title">
+                    <div class="wt-left">
+                        <span style="font-size:14px">${def.emoji}</span>
+                        <span>${def.title}</span>
+                    </div>
+                    <div class="wt-buttons">
+                        <button class="wt-btn min">—</button>
+                        <button class="wt-btn max">▢</button>
+                        <button class="wt-btn close">✕</button>
+                    </div>
+                </div>
+                <div class="window-body"></div>
+            `;
+            win.querySelector(".window-body").appendChild(tmpl.content.cloneNode(true));
+            document.getElementById("desktop").appendChild(win);
+            return win;
+        }
+
+        function openApp(appId) {
+            const def = APP_DEFS[appId];
+            if (!def) return;
+            let rec = WINDOWS.get(appId);
+            if (rec) { focusWindow(rec.win); return; }
+
+            let win;
+            if (appId === "files") {
+                win = document.getElementById("appWindow");
+            } else {
+                win = buildWindowFromTemplate(appId, def);
+                makeDraggable(win);
+                makeResizable(win);
+                wireWindowButtons(win, appId);
+            }
+            const taskBtn = createTaskButton(appId, def);
+            WINDOWS.set(appId, { win, taskBtn });
+            focusWindow(win);
+        }
+
+        // Register existing main window
+        const mainWin = document.getElementById("appWindow");
+        makeDraggable(mainWin);
+        makeResizable(mainWin);
+        const mainCloseBtn = document.getElementById("closeWin");
+        if (mainCloseBtn) mainCloseBtn.addEventListener("click", () => closeWindow("files"));
+        mainWin.querySelectorAll(".wt-btn.min").forEach(b => b.addEventListener("click", () => {
+            mainWin.classList.add("minimized");
+            const rec = WINDOWS.get("files");
+            if (rec) rec.taskBtn.classList.remove("active");
+        }));
+        mainWin.querySelectorAll(".wt-btn.max").forEach(b => b.addEventListener("click", () => toggleMaximize(mainWin)));
+        mainWin.addEventListener("mousedown", () => focusWindow(mainWin));
+
+        // Open files by default
+        openApp("files");
+
+        // Desktop icon → app mapping
+        const ICON_APP = {
+            computer: "computer",
+            files:    "files",
+            recycle:  "recycle",
+            briefing: "secret",
+            terminal: "terminal"
+        };
 
         // Icons
         document.querySelectorAll(".icon").forEach(ic => {
@@ -1428,7 +1807,10 @@ html, body { height: 100%; font-family: "Segoe UI", "Tahoma", "Arial", sans-seri
                 document.querySelectorAll(".icon.selected").forEach(s => s.classList.remove("selected"));
                 ic.classList.add("selected");
             });
-            ic.addEventListener("dblclick", () => win.classList.remove("hidden"));
+            ic.addEventListener("dblclick", () => {
+                const app = ICON_APP[ic.dataset.app];
+                if (app) openApp(app);
+            });
         });
         document.addEventListener("click", () => {
             document.querySelectorAll(".icon.selected").forEach(s => s.classList.remove("selected"));
