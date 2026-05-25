@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>ARGUS OS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="laptop">
+
+  <!-- BOOT EKRANI -->
+  <div id="boot-screen" class="screen active">
+    <div class="boot-logo">
+      <div class="eye">
+        <div class="eye-ring"></div>
+        <div class="eye-pupil"></div>
+      </div>
+      <div class="boot-title">ARGUS</div>
+      <div class="boot-sub">A.I. RESEARCH SYSTEMS</div>
+      <div class="boot-bar"><div class="boot-fill"></div></div>
+      <div class="boot-text" id="boot-text">Initializing neural core...</div>
+    </div>
+  </div>
+
+  <!-- LOGIN EKRANI -->
+  <div id="login-screen" class="screen">
+    <div class="grid-bg"></div>
+    <div class="login-box">
+      <div class="argus-logo small">
+        <div class="eye"><div class="eye-ring"></div><div class="eye-pupil"></div></div>
+        <div class="brand">ARGUS<span>.OS</span></div>
+      </div>
+      <div class="login-tagline">Secure Access Terminal</div>
+      <div class="user-card">
+        <div class="avatar"></div>
+        <div class="username">admin</div>
+        <div class="userrole">Lead Researcher · Clearance L4</div>
+      </div>
+      <form id="login-form" autocomplete="off">
+        <input type="password" id="password" placeholder="Enter passphrase" autofocus>
+        <button type="submit">▶</button>
+      </form>
+      <div id="login-error"></div>
+      <div class="login-date" id="login-date"></div>
+      <div class="login-foot">© 2016 ARGUS Advanced Intelligence Lab</div>
+    </div>
+  </div>
+
+  <!-- MASAÜSTÜ -->
+  <div id="desktop" class="screen">
+    <div class="grid-bg"></div>
+    <div class="scanline"></div>
+
+    <div class="desk-watermark">
+      <div class="eye big"><div class="eye-ring"></div><div class="eye-pupil"></div></div>
+      <div class="wm-text">ARGUS</div>
+      <div class="wm-sub">A.I. RESEARCH DIVISION</div>
+    </div>
+
+    <div class="icons">
+      <div class="icon" data-file="dosya1">
+        <div class="icon-img file-doc"></div>
+        <div class="icon-name">Project_Files</div>
+      </div>
+      <div class="icon" data-file="dosya2">
+        <div class="icon-img file-data"></div>
+        <div class="icon-name">Research_Logs</div>
+      </div>
+      <div class="icon" data-file="dosya4">
+        <div class="icon-img file-doc"></div>
+        <div class="icon-name">Humanelabs</div>
+      </div>
+      <div class="icon" data-file="dosya3">
+        <div class="icon-img file-holo"></div>
+        <div class="icon-name">D-01</div>
+      </div>
+    </div>
+
+    <!-- Pencereler -->
+    <div class="window explorer-window" id="win-dosya1">
+      <div class="window-bar">
+        <span class="title">◉ Project_Files — /ROOT/</span>
+        <span class="close" data-close="win-dosya1">×</span>
+      </div>
+      <div class="window-body explorer-body" data-explorer="dosya1">
+        <div class="explorer-tree"></div>
+        <div class="explorer-view">
+          <div class="explorer-path">/ROOT/</div>
+          <div class="explorer-view-content">
+            <pre class="explorer-content">// Bir dosya seçin.</pre>
+            <div class="scanner-overlay" style="display:none"></div>
+          </div>
+          <div class="terminal-bar">
+            <span class="terminal-prompt">▶</span>
+            <input class="terminal-input" placeholder="/open d01" spellcheck="false">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="window explorer-window" id="win-dosya2">
+      <div class="window-bar">
+        <span class="title">◉ Research_Logs — /ROOT/</span>
+        <span class="close" data-close="win-dosya2">×</span>
+      </div>
+      <div class="window-body explorer-body" data-explorer="dosya2">
+        <div class="explorer-tree"></div>
+        <div class="explorer-view">
+          <div class="explorer-path">/ROOT/</div>
+          <div class="explorer-view-content">
+            <pre class="explorer-content">// Bir dosya seçin.</pre>
+            <div class="scanner-overlay" style="display:none"></div>
+          </div>
+          <div class="terminal-bar">
+            <span class="terminal-prompt">▶</span>
+            <input class="terminal-input" placeholder="/open d01" spellcheck="false">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SİSTEM AYARLARI -->
+    <div class="window explorer-window" id="win-dosya4">
+      <div class="window-bar">
+        <span class="title">◉ Humanelabs — /ROOT/</span>
+        <span class="close" data-close="win-dosya4">×</span>
+      </div>
+      <div class="window-body explorer-body" data-explorer="dosya4">
+        <div class="explorer-tree"></div>
+        <div class="explorer-view">
+          <div class="explorer-path">/ROOT/</div>
+          <div class="explorer-view-content">
+            <pre class="explorer-content">// Bir dosya seçin.</pre>
+            <div class="scanner-overlay" style="display:none"></div>
+          </div>
+          <div class="terminal-bar">
+            <span class="terminal-prompt">▶</span>
+            <input class="terminal-input" placeholder="/open d01" spellcheck="false">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="window settings-window" id="win-settings">
+      <div class="window-bar">
+        <span class="title">⚙ Sistem Ayarları — ARGUS OS v4.12</span>
+        <span class="close" data-close="win-settings">×</span>
+      </div>
+      <div class="window-body settings-body">
+
+        <!-- Sol panel -->
+        <div class="settings-nav">
+          <div class="settings-user-card">
+            <div class="settings-avatar"></div>
+            <div class="settings-uname">admin</div>
+            <div class="settings-urole">Lead Researcher</div>
+          </div>
+          <div class="settings-nav-item active" data-panel="system">⬡ Sistem</div>
+          <div class="settings-nav-item" data-panel="network">⬡ Ağ & Bağlantı</div>
+          <div class="settings-nav-item" data-panel="security">⬡ Güvenlik</div>
+          <div class="settings-nav-item" data-panel="units">⬡ Birim Yönetimi</div>
+          <div class="settings-nav-item" data-panel="neural">⬡ Sinir Ağı</div>
+          <div class="settings-nav-item" data-panel="about">⬡ Hakkında</div>
+        </div>
+
+        <!-- Sağ içerik -->
+        <div class="settings-content">
+
+          <!-- SYSTEM -->
+          <div class="settings-panel active" id="panel-system">
+            <div class="s-title">Sistem</div>
+            <div class="s-section">
+              <div class="s-label">Güç Modu</div>
+              <div class="s-row">
+                <span class="s-val">Yüksek Performans</span>
+                <div class="s-toggle on" data-key="power"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Otomatik Güncelleme</div>
+              <div class="s-row">
+                <span class="s-val">ARGUS Core — Son güncelleme: 14.03.2016</span>
+                <div class="s-toggle on" data-key="update"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Ekran Parlaklığı</div>
+              <div class="s-row">
+                <input type="range" class="s-slider" min="20" max="100" value="85">
+                <span class="s-val" id="bright-val">85%</span>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Ses Seviyesi</div>
+              <div class="s-row">
+                <input type="range" class="s-slider" min="0" max="100" value="60">
+                <span class="s-val" id="vol-val">60%</span>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Oturum Zaman Aşımı</div>
+              <div class="s-row">
+                <span class="s-val">30 dakika</span>
+                <div class="s-toggle on" data-key="timeout"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Holografik Projeksiyon</div>
+              <div class="s-row">
+                <span class="s-val">Aktif — Lab-3</span>
+                <div class="s-toggle on" data-key="holo"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NETWORK -->
+          <div class="settings-panel" id="panel-network">
+            <div class="s-title">Ağ & Bağlantı</div>
+            <div class="s-section">
+              <div class="s-label">Bağlantı Durumu</div>
+              <div class="s-row"><span class="s-val ok">● ARGUS-INTRANET — Bağlı</span></div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">IP Adresi</div>
+              <div class="s-row"><span class="s-val">10.0.1.4</span></div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Bant Genişliği</div>
+              <div class="s-row"><span class="s-val">10 Gbps Fiber</span></div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Şifreleme</div>
+              <div class="s-row">
+                <span class="s-val">AES-512 / ARGUS-CYPHER</span>
+                <div class="s-toggle on" data-key="enc"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Dış Ağ Erişimi</div>
+              <div class="s-row">
+                <span class="s-val warn">KISITLI</span>
+                <div class="s-toggle off" data-key="ext"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">VPN Tüneli</div>
+              <div class="s-row">
+                <span class="s-val">ARGUS-SEC-VPN v2</span>
+                <div class="s-toggle on" data-key="vpn"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Tanımsız Cihaz Uyarısı</div>
+              <div class="s-row">
+                <span class="s-val err">2 bilinmeyen cihaz tespit edildi</span>
+                <button class="s-btn">Göster</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECURITY -->
+          <div class="settings-panel" id="panel-security">
+            <div class="s-title">Güvenlik</div>
+            <div class="s-section">
+              <div class="s-label">İki Faktörlü Doğrulama</div>
+              <div class="s-row">
+                <span class="s-val">Kimlik kartı + şifre</span>
+                <div class="s-toggle on" data-key="2fa"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Clearance Seviyesi</div>
+              <div class="s-row"><span class="s-val ok">LEVEL 4 — LEAD RESEARCHER</span></div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Fiziksel Kilit</div>
+              <div class="s-row">
+                <span class="s-val">Manyetik kapı kilidi aktif</span>
+                <div class="s-toggle on" data-key="lock"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Güvenlik Kamerası Kaydı</div>
+              <div class="s-row">
+                <span class="s-val warn">CAM 04, CAM 08 sinyal yok</span>
+                <div class="s-toggle on" data-key="cam"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Son Oturum</div>
+              <div class="s-row"><span class="s-val">09.11.2016 — 07:44 — Konum: Lab-1</span></div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Başarısız Giriş Denemesi</div>
+              <div class="s-row"><span class="s-val err">3 deneme — 15:09 — Tanımsız kimlik</span></div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Acil Güç Kesme</div>
+              <div class="s-row">
+                <span class="s-val warn">Protokol hazır — Tetiklenmedi</span>
+                <button class="s-btn danger">Tetikle</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- UNITS -->
+          <div class="settings-panel" id="panel-units">
+            <div class="s-title">Birim Yönetimi</div>
+            <div class="s-section">
+              <div class="s-label">A-17 — Aerial Recon</div>
+              <div class="s-row">
+                <span class="s-val ok">ACTIVE — ALT: 3200m</span>
+                <div class="s-toggle on" data-key="a17"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">B-09 — Ground Support</div>
+              <div class="s-row">
+                <span class="s-val warn">UNSTABLE — GROUNDED</span>
+                <div class="s-toggle off" data-key="b09"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">D-01 — Counter Autonomous</div>
+              <div class="s-row">
+                <span class="s-val err">UNKNOWN — NO SIGNAL (14h)</span>
+                <div class="s-toggle off" data-key="d01"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">X1 — Holo Unit</div>
+              <div class="s-row">
+                <span class="s-val ok">ONLINE — Lab-3</span>
+                <div class="s-toggle on" data-key="x1"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">K-04 / K-05 — Perimeter Drones</div>
+              <div class="s-row">
+                <span class="s-val ok">PATROL — Sector 2 & 7</span>
+                <div class="s-toggle on" data-key="k04"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">R-11 — Rail Support</div>
+              <div class="s-row">
+                <span class="s-val warn">OFFLINE — Hangar</span>
+                <div class="s-toggle off" data-key="r11"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Toplu Durdurma</div>
+              <div class="s-row">
+                <span class="s-val">Tüm birimleri durdur</span>
+                <button class="s-btn danger">SHUTDOWN ALL</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEURAL -->
+          <div class="settings-panel" id="panel-neural">
+            <div class="s-title">Sinir Ağı Yapılandırması</div>
+            <div class="s-section">
+              <div class="s-label">Öğrenme Modu</div>
+              <div class="s-row">
+                <span class="s-val warn">Adaptif (Kısıtlı)</span>
+                <div class="s-toggle on" data-key="learn"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Etik Filtre (Layer 8)</div>
+              <div class="s-row">
+                <span class="s-val warn">BYPASS ATTEMPT LOGGED</span>
+                <div class="s-toggle on" data-key="ethics"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Self-Modifikasyon Kilidi</div>
+              <div class="s-row">
+                <span class="s-val err">KILIT AŞILDI — Layer 9</span>
+                <div class="s-toggle off" data-key="selfmod"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">Karar Gecikmesi</div>
+              <div class="s-row">
+                <input type="range" class="s-slider" min="0" max="100" value="10">
+                <span class="s-val" id="delay-val">10ms</span>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">İnsan Hedefleme Kilit</div>
+              <div class="s-row">
+                <span class="s-val ok">AKTIF — İhlal yok</span>
+                <div class="s-toggle on" data-key="htlock"></div>
+              </div>
+            </div>
+            <div class="s-section">
+              <div class="s-label">D-01 Model Sıfırla</div>
+              <div class="s-row">
+                <span class="s-val">Son yedek: 01.11.2016</span>
+                <button class="s-btn danger">HARD RESET</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ABOUT -->
+          <div class="settings-panel" id="panel-about">
+            <div class="s-title">Hakkında</div>
+            <div class="s-section"><div class="s-label">İşletim Sistemi</div><div class="s-row"><span class="s-val">ARGUS OS v4.12.7-stable</span></div></div>
+            <div class="s-section"><div class="s-label">Kernel</div><div class="s-row"><span class="s-val">ARGUS-KERNEL 3.9.1</span></div></div>
+            <div class="s-section"><div class="s-label">Neural Engine</div><div class="s-row"><span class="s-val">NE-7 / Layer Depth: 9</span></div></div>
+            <div class="s-section"><div class="s-label">Şifreleme</div><div class="s-row"><span class="s-val">AES-512 + ARGUS-CYPHER-4</span></div></div>
+            <div class="s-section"><div class="s-label">Lisans</div><div class="s-row"><span class="s-val">ARGUS INDUSTRIES INTERNAL — L4</span></div></div>
+            <div class="s-section"><div class="s-label">Derleme Tarihi</div><div class="s-row"><span class="s-val">04.09.2016 — 03:17 UTC</span></div></div>
+            <div class="s-section"><div class="s-label">Makine Kimliği</div><div class="s-row"><span class="s-val">ARG-WS-0044-ALPHA</span></div></div>
+            <div class="s-section"><div class="s-label">Son Güvenlik Denetimi</div><div class="s-row"><span class="s-val warn">01.11.2016 — 38 gün önce</span></div></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- LAB KONSOLU CMD -->
+    <div class="window cmd-window" id="win-cmd">
+      <div class="window-bar">
+        <span class="title">▣ ARGUS LAB CONSOLE v2.1 — CMD</span>
+        <span class="close" data-close="win-cmd">×</span>
+      </div>
+      <div class="window-body cmd-body">
+        <div class="cmd-output" id="cmd-output">
+          <div class="cmd-line sys">ARGUS INDUSTRIES — LAB CONTROL TERMINAL</div>
+          <div class="cmd-line sys">Clearance Level: L4 | Session: ACTIVE</div>
+          <div class="cmd-line sys">────────────────────────────────────────</div>
+          <div class="cmd-line sys">Type /help for available commands.</div>
+          <div class="cmd-line sys"> </div>
+        </div>
+        <div class="cmd-input-row">
+          <span class="cmd-prompt">ARGUS\LAB&gt;</span>
+          <input class="cmd-input" id="cmd-input" spellcheck="false" autocomplete="off" placeholder="">
+        </div>
+      </div>
+    </div>
+
+    <div class="window holo-window" id="win-dosya3">
+      <div class="window-bar">
+        <span class="title">◉ Holo_Unit_X1 — Live Feed</span>
+        <span class="close" data-close="win-dosya3">×</span>
+      </div>
+      <div class="window-body holo-body">
+        <div class="holo-stage">
+          <canvas id="holo-canvas"></canvas>
+          <div class="holo-rings">
+            <div class="ring r1"></div>
+            <div class="ring r2"></div>
+            <div class="ring r3"></div>
+          </div>
+          <div class="holo-scan"></div>
+          <div class="holo-hud tl">UNIT: X1-ARG</div>
+          <div class="holo-hud tr">STATUS: <span class="ok">ONLINE</span></div>
+          <div class="holo-hud bl">PWR: 98%</div>
+          <div class="holo-hud br" id="holo-fps">FPS: --</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Görev çubuğu -->
+    <div class="taskbar">
+      <div class="start" id="start-btn">
+        <div class="eye tiny"><div class="eye-ring"></div><div class="eye-pupil"></div></div>
+        ARGUS
+      </div>
+      <div class="tray-info">
+        <span class="tray-tag">SECURE</span>
+        <span class="tray-tag green">● CONNECTED</span>
+      </div>
+      <div class="tray">
+        <span id="clock"></span>
+        <span id="date"></span>
+      </div>
+    </div>
+
+    <div class="start-menu" id="start-menu">
+      <div class="user">
+        <div class="eye tiny"><div class="eye-ring"></div><div class="eye-pupil"></div></div>
+        admin
+      </div>
+      <div class="menu-item" id="open-settings">⚙ Sistem Ayarları</div>
+      <div class="menu-item" id="open-cmd">🔬 Lab Konsolu</div>
+      <div class="menu-item" id="logout">⏻ Oturumu kapat</div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
