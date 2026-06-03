@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -1470,6 +1470,235 @@
             }
         }
 
+        /* --- YAPTIĞIM SİTELER & TECH STACK --- */
+        .built-sites-section .about-section-header,
+        .tech-stack-section .about-section-header {
+            margin-bottom: 3.5rem;
+        }
+
+        .sites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .site-card {
+            background-color: rgb(17, 17, 17);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            box-shadow: rgba(0, 0, 0, 0.4) 16px 24px 20px 8px, rgba(184, 180, 180, 0.08) 0px 2px 0px 0px inset;
+        }
+
+        .site-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .browser-mockup {
+            background: #0a0a0a;
+        }
+
+        .browser-bar {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .browser-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .browser-dot.red {
+            background: #ff5f56;
+        }
+
+        .browser-dot.yellow {
+            background: #ffbd2e;
+        }
+
+        .browser-dot.green {
+            background: #27c93f;
+        }
+
+        .browser-url {
+            margin-left: 12px;
+            flex: 1;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            color: #aaa;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .browser-url i {
+            font-size: 0.7rem;
+            color: #4ade80;
+        }
+
+        .browser-body {
+            height: 210px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.07), transparent 60%),
+                repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.015) 0 10px, transparent 10px 20px);
+            transition: background 0.4s ease;
+        }
+
+        .browser-icon {
+            font-size: 3.5rem;
+            color: #fff;
+            opacity: 0.85;
+            transition: transform 0.4s ease;
+        }
+
+        .site-card:hover .browser-icon {
+            transform: scale(1.08);
+        }
+
+        .browser-body-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .browser-shot {
+            max-width: 78%;
+            max-height: 150px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .site-card:hover .browser-shot {
+            transform: scale(1.06);
+        }
+
+        .site-card:hover .browser-body {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.13), transparent 65%),
+                repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0 10px, transparent 10px 20px);
+        }
+
+        .site-info {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .site-info h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .site-info p {
+            color: #999;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .site-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.3rem;
+        }
+
+        .site-tag {
+            font-size: 0.75rem;
+            color: #aaa;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #0a0a0a;
+            border-radius: 6px;
+            padding: 0.35rem 0.7rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .site-visit {
+            margin-top: 0.8rem;
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: letter-spacing 0.3s ease;
+        }
+
+        .site-card:hover .site-visit {
+            letter-spacing: 0.5px;
+        }
+
+        .stack-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .stack-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 1.5rem;
+            background-color: rgb(17, 17, 17);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ccc;
+            font-size: 0.95rem;
+            font-weight: 500;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            box-shadow: rgba(184, 180, 180, 0.08) 0px 2px 0px 0px inset;
+            transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .stack-badge:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #fff;
+        }
+
+        .stack-badge i {
+            font-size: 1.3rem;
+        }
+
+        @media (max-width: 600px) {
+            .sites-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 900px) {
             .bento-grid {
                 grid-template-columns: 1fr;
@@ -2518,6 +2747,8 @@
         <div class="scroll-dots-container">
             <a href="#hero" class="scroll-dot active" data-target="hero" data-tooltip="Giriş"></a>
             <a href="#projects" class="scroll-dot" data-target="projects" data-tooltip="Projeler"></a>
+            <a href="#built-sites" class="scroll-dot" data-target="built-sites" data-tooltip="Yaptığım Siteler"></a>
+            <a href="#tech-stack" class="scroll-dot" data-target="tech-stack" data-tooltip="Teknolojiler"></a>
             <a href="#services" class="scroll-dot" data-target="services" data-tooltip="Hakkımda"></a>
             <a href="#design-services" class="scroll-dot" data-target="design-services" data-tooltip="Hizmetler"></a>
             <a href="#testimonials" class="scroll-dot" data-target="testimonials" data-tooltip="Yorumlar"></a>
@@ -2535,6 +2766,7 @@
             </a>
             <ul class="nav-links">
                 <li><a href="#projects" data-lang="nav_projects">Projelerim</a></li>
+                <li><a href="#built-sites" data-lang="nav_sites">Siteler</a></li>
                 <li><a href="#services" data-lang="nav_about">Hakkımda</a></li>
                 <li><a href="#testimonials" data-lang="nav_reviews">Yorumlar</a></li>
                 <li><a href="#why-me" data-lang="nav_whyme">Neden Ben</a></li>
@@ -2543,7 +2775,7 @@
 
             <div class="language-selector">
                 <div class="current-lang" onclick="toggleLanguageMenu()">
-                    <img id="header-lang-flag" src="https://flagcdn.com/w40/tr.png" alt="TR">
+                    <img id="header-lang-flag" src="https://flagcdn.com/w40/gb.png" alt="EN">
                 </div>
                 <div class="lang-dropdown" id="lang-menu">
                     <div class="lang-item" onclick="setLanguage('tr')">
@@ -2576,7 +2808,7 @@
         <div class="hero-content">
             <div class="tag" data-lang="hero_tag"
                 style="background-color: rgb(17, 17, 17); border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.4) 16px 24px 20px 8px, rgba(184, 180, 180, 0.08) 0px 2px 0px 0px inset;">
-                UI/UX & Grafik Tasarımcısı</div>
+                ● Web Developer & Designer</div>
 
             <h1 class="hero-title">
                 Sanriqa
@@ -2588,9 +2820,8 @@
 
 
             <p class="hero-desc" data-lang="hero_desc">
-                Ben, işletmenizi büyütmeye yardımcı olmak için grafik, web ve ürün tasarımı alanlarında uzmanlaşmış çok
-                yönlü bir tasarımcıyım.
-                Hadi birlikte harika bir şey ortaya çıkaralım.
+                Ben Sanriqa; fikirleri hem tasarlayan hem de kodlayan bir web geliştirici ve tasarımcıyım. Modern, hızlı
+                ve kullanıcı odaklı web siteleri geliştiriyorum. Hadi birlikte bir şeyler inşa edelim.
             </p>
             <div class="hero-buttons">
                 <a href="#projects" class="btn btn-primary" data-lang="btn_all_projects">Tüm Projelerim</a>
@@ -2654,12 +2885,121 @@
             </a>
         </div>
 
+        <!-- YAPTIĞIM SİTELER -->
+        <section id="built-sites" class="section built-sites-section">
+            <div class="about-section-header reveal-on-scroll">
+                <div class="expert-badge" data-lang="sites_tag">● Canlı Projeler</div>
+                <h2 class="about-main-title" data-lang="sites_title">Yaptığım Siteler</h2>
+                <p class="about-subtext" data-lang="sites_sub">Tasarlayıp kodladığım, şu anda yayında olan web siteleri.
+                </p>
+            </div>
+
+            <div class="sites-grid">
+                <a href="https://bitolgayasor.com" target="_blank" rel="noopener"
+                    class="site-card reveal-on-scroll delay-100">
+                    <div class="browser-mockup">
+                        <div class="browser-bar">
+                            <span class="browser-dot red"></span>
+                            <span class="browser-dot yellow"></span>
+                            <span class="browser-dot green"></span>
+                            <div class="browser-url"><i class="fa-solid fa-lock"></i> bitolgayasor.com</div>
+                        </div>
+                        <div class="browser-body">
+                            <img src="bitolga.png" alt="bitolgayasor.com" class="browser-shot">
+                        </div>
+                    </div>
+                    <div class="site-info">
+                        <h3 data-lang="site_1_title">Tatil & Ev Kiralama Platformu</h3>
+                        <p data-lang="site_1_desc">Tatilini planlayıp ev kiralamak isteyenler için tasarlanmış,
+                            rezervasyon odaklı bir tatil evi kiralama sitesi.</p>
+                        <div class="site-tags">
+                            <span class="site-tag">HTML</span>
+                            <span class="site-tag">CSS</span>
+                            <span class="site-tag">PHP</span>
+                        </div>
+                        <span class="site-visit" data-lang="site_visit">Siteyi Ziyaret Et →</span>
+                    </div>
+                </a>
+
+                <a href="https://musepilates.de" target="_blank" rel="noopener"
+                    class="site-card reveal-on-scroll delay-300">
+                    <div class="browser-mockup">
+                        <div class="browser-bar">
+                            <span class="browser-dot red"></span>
+                            <span class="browser-dot yellow"></span>
+                            <span class="browser-dot green"></span>
+                            <div class="browser-url"><i class="fa-solid fa-lock"></i> musepilates.de</div>
+                        </div>
+                        <div class="browser-body">
+                            <img src="muse.png" alt="musepilates.de" class="browser-shot">
+                        </div>
+                    </div>
+                    <div class="site-info">
+                        <h3 data-lang="site_2_title">Evde Pilates Hizmeti Sitesi</h3>
+                        <p data-lang="site_2_desc">Evde birebir pilates hizmeti veren bir eğitmen için hazırlanmış;
+                            randevu ve hizmet tanıtımına odaklı modern bir web sitesi.</p>
+                        <div class="site-tags">
+                            <span class="site-tag">HTML</span>
+                            <span class="site-tag">CSS</span>
+                            <span class="site-tag">PHP</span>
+                        </div>
+                        <span class="site-visit" data-lang="site_visit">Siteyi Ziyaret Et →</span>
+                    </div>
+                </a>
+
+                <a href="https://doomcommunity.com" target="_blank" rel="noopener"
+                    class="site-card reveal-on-scroll delay-500">
+                    <div class="browser-mockup">
+                        <div class="browser-bar">
+                            <span class="browser-dot red"></span>
+                            <span class="browser-dot yellow"></span>
+                            <span class="browser-dot green"></span>
+                            <div class="browser-url"><i class="fa-solid fa-lock"></i> doomcommunity.com</div>
+                        </div>
+                        <div class="browser-body">
+                            <img src="doom.png" alt="doomcommunity.com" class="browser-shot">
+                        </div>
+                    </div>
+                    <div class="site-info">
+                        <h3 data-lang="site_3_title">FiveM Roleplay Topluluk & Admin Paneli</h3>
+                        <p data-lang="site_3_desc">Bir FiveM roleplay sunucusu için başvuru, bilgilendirme ve yönetim
+                            (admin) panelini bir araya getiren topluluk web sitesi.</p>
+                        <div class="site-tags">
+                            <span class="site-tag">Lua</span>
+                            <span class="site-tag">C#</span>
+                            <span class="site-tag">PHP</span>
+                        </div>
+                        <span class="site-visit" data-lang="site_visit">Siteyi Ziyaret Et →</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- TECH STACK -->
+        <section id="tech-stack" class="section tech-stack-section">
+            <div class="about-section-header reveal-on-scroll">
+                <div class="expert-badge" data-lang="stack_tag">● Teknolojiler</div>
+                <h2 class="about-main-title" data-lang="stack_title">Kullandığım Teknolojiler</h2>
+                <p class="about-subtext" data-lang="stack_sub">Web projelerimi hayata geçirirken kullandığım araç ve
+                    teknolojiler.</p>
+            </div>
+
+            <div class="stack-grid reveal-on-scroll delay-100">
+                <div class="stack-badge"><i class="fa-brands fa-html5"></i> HTML</div>
+                <div class="stack-badge"><i class="fa-brands fa-css3-alt"></i> CSS</div>
+                <div class="stack-badge"><i class="fa-brands fa-java"></i> Java</div>
+                <div class="stack-badge"><i class="fa-brands fa-php"></i> PHP</div>
+                <div class="stack-badge"><i class="fa-solid fa-moon"></i> Lua</div>
+                <div class="stack-badge"><i class="fa-solid fa-hashtag"></i> C#</div>
+            </div>
+        </section>
 
         <section id="services" class="section">
             <div class="about-section-header reveal-on-scroll">
-                <div class="expert-badge" data-lang="about_badge">● Uzman Tasarımcı</div>
-                <h2 class="about-main-title" data-lang="about_title">Sanriqa, Tasarımcınız</h2>
-                <p class="about-subtext" data-lang="about_sub">Kendim ve geçmiş deneyimlerim hakkında kısa bir tanıtım.
+                <div class="expert-badge" data-lang="about_badge">● Developer & Designer</div>
+                <h2 class="about-main-title" data-lang="about_title">Sanriqa, Geliştirici & Tasarımcı</h2>
+                <p class="about-subtext" data-lang="about_sub">Kendim, kullandığım teknolojiler ve geçmiş deneyimlerim
+                    hakkında kısa bir tanıtım.
                 </p>
             </div>
 
@@ -2703,9 +3043,9 @@
 
                 <div class="about-card details-card reveal-on-scroll delay-300">
                     <p class="bio-text" data-lang="about_bio">
-                        Ben Sanriqa, dijital deneyimler yaratma konusunda tutkulu bir Web Tasarımcısı ve Geliştiriciyim.
-                        Yaratıcı tasarımı, kusursuz teknik uygulamalarla birleştirerek markanız için istisnai dijital
-                        ürünler ortaya çıkarıyorum.
+                        Ben Sanriqa; dijital deneyimleri tasarlamaya ve kodlamaya tutkulu bir web geliştirici ve
+                        tasarımcıyım. Temiz kod ile yaratıcı tasarımı birleştirerek, fikirden yayına kadar uçtan uca web
+                        projeleri geliştiriyorum.
                     </p>
 
                     <div class="tags-container">
@@ -2960,7 +3300,7 @@
         <section id="why-me">
             <div class="why-me-header reveal-on-scroll">
                 <div class="why-me-tag" data-lang="whyme_tag">● Neden beni seçmelisin?</div>
-                <h2 class="why-me-title" data-lang="whyme_title">Neden <span>Tasarım Ortağınız</span> Olarak Ben?</h2>
+                <h2 class="why-me-title" data-lang="whyme_title">Neden <span>Geliştirici & Tasarımcı</span> Olarak Ben?</h2>
                 <p class="section-desc" data-lang="whyme_desc">Tasarım mükemmelliği için benimle ortaklık kurmanın
                     farkını keşfedin.</p>
             </div>
@@ -3107,23 +3447,37 @@
                     nav_reviews: "Yorumlar",
                     nav_whyme: "Neden Ben",
                     nav_contact: "İletişim",
-                    hero_tag: "● UI/UX & Grafik Tasarımcısı & Geliştirici",
+                    nav_sites: "Siteler",
+                    hero_tag: "● Web Developer & Designer",
                     hero_title_sub: "hakkımda",
-                    hero_desc: "Ben, işletmenizi büyütmeye yardımcı olmak için grafik, web ve ürün tasarımı alanlarında uzmanlaşmış çok yönlü bir tasarımcıyım. Hadi birlikte harika bir şey ortaya çıkaralım.",
+                    hero_desc: "Ben Sanriqa; fikirleri hem tasarlayan hem de kodlayan bir web geliştirici ve tasarımcıyım. Modern, hızlı ve kullanıcı odaklı web siteleri geliştiriyorum. Hadi birlikte bir şeyler inşa edelim.",
                     btn_all_projects: "Tüm Projelerim",
                     btn_contact: "İletişime Geç",
                     bubble_1_text: "“Onunla çalışmak oyunu tamamen değiştirdi!”",
                     bubble_1_author: "- Alesta",
                     bubble_2_text: "“Dönüşlerimizi 200% artırdı.”",
                     bubble_2_author: "- DrPlague",
-                    about_badge: "● Uzman Tasarımcı",
-                    about_title: "Sanriqa, Tasarımcınız",
-                    about_sub: "Kendim ve geçmiş deneyimlerim hakkında kısa bir tanıtım.",
+                    about_badge: "● Developer & Designer",
+                    about_title: "Sanriqa, Geliştirici & Tasarımcı",
+                    about_sub: "Kendim, kullandığım teknolojiler ve geçmiş deneyimlerim hakkında kısa bir tanıtım.",
                     about_status_badge: "<span class='dot'></span> İş için uygun",
                     about_hello: "Merhaba ben Sanriqa",
                     about_role: "Game & Web Developer & Graphic Designer TR / DE",
                     about_connect: "Benimle İletişime Geç",
-                    about_bio: "Ben Sanriqa, dijital deneyimler yaratma konusunda tutkulu bir Web Tasarımcısı ve Geliştiriciyim. Yaratıcı tasarımı, kusursuz teknik uygulamalarla birleştirerek markanız için istisnai dijital ürünler ortaya çıkarıyorum.",
+                    about_bio: "Ben Sanriqa; dijital deneyimleri tasarlamaya ve kodlamaya tutkulu bir web geliştirici ve tasarımcıyım. Temiz kod ile yaratıcı tasarımı birleştirerek, fikirden yayına kadar uçtan uca web projeleri geliştiriyorum.",
+                    sites_tag: "● Canlı Projeler",
+                    sites_title: "Yaptığım Siteler",
+                    sites_sub: "Tasarlayıp kodladığım, şu anda yayında olan web siteleri.",
+                    site_1_title: "Tatil & Ev Kiralama Platformu",
+                    site_1_desc: "Tatilini planlayıp ev kiralamak isteyenler için tasarlanmış, rezervasyon odaklı bir tatil evi kiralama sitesi.",
+                    site_2_title: "Evde Pilates Hizmeti Sitesi",
+                    site_2_desc: "Evde birebir pilates hizmeti veren bir eğitmen için hazırlanmış; randevu ve hizmet tanıtımına odaklı modern bir web sitesi.",
+                    site_3_title: "FiveM Roleplay Topluluk & Admin Paneli",
+                    site_3_desc: "Bir FiveM roleplay sunucusu için başvuru, bilgilendirme ve yönetim (admin) panelini bir araya getiren topluluk web sitesi.",
+                    site_visit: "Siteyi Ziyaret Et →",
+                    stack_tag: "● Teknolojiler",
+                    stack_title: "Kullandığım Teknolojiler",
+                    stack_sub: "Web projelerimi hayata geçirirken kullandığım araç ve teknolojiler.",
                     tag_product: "Product Design",
                     tag_ux: "UX Design",
                     tag_ui: "UI Design",
@@ -3166,7 +3520,7 @@
                     review_6_text: "\"Sanriqa ile çalışmak projemizin kaderini değiştirdi. Tasarım gözü inanılmaz ve teknik bilgisi sayesinde kusursuz bir iş çıkardı.\"",
                     review_role_founder: "Kurucu, MusePilates",
                     whyme_tag: "● Neden beni seçmelisin?",
-                    whyme_title: "Neden <span>Tasarım Ortağınız</span> Olarak Ben?",
+                    whyme_title: "Neden <span>Geliştirici & Tasarımcı</span> Olarak Ben?",
                     whyme_desc: "Tasarım mükemmelliği için benimle ortaklık kurmanın farkını keşfedin.",
                     whyme_1_pos_title: "Müşteri Odaklı İşbirliği",
                     whyme_1_pos_desc: "Vizyonunuz yol gösterir ve fikirlerinizi hassasiyetle hayata geçiririm.",
@@ -3194,23 +3548,37 @@
                     nav_reviews: "Reviews",
                     nav_whyme: "Why Me",
                     nav_contact: "Contact",
-                    hero_tag: "● UI/UX Graphic Designer & Developer",
+                    nav_sites: "Sites",
+                    hero_tag: "● Web Developer & Designer",
                     hero_title_sub: "about me",
-                    hero_desc: "I am a versatile designer specializing in graphic, web, and product design to help grow your business. Let's create something amazing together.",
+                    hero_desc: "I'm Sanriqa, a web developer and designer who both designs and codes ideas into reality. I build modern, fast, and user-focused websites. Let's build something great together.",
                     btn_all_projects: "All Projects",
                     btn_contact: "Get in Touch",
                     bubble_1_text: "“Working with him changed the game entirely!”",
                     bubble_1_author: "- Alesta",
                     bubble_2_text: "“We increased our conversions by 200%.”",
                     bubble_2_author: "- DrPlague",
-                    about_badge: "● Expert Designer",
-                    about_title: "Sanriqa, Your Designer",
-                    about_sub: "A brief introduction about myself and my past experiences.",
+                    about_badge: "● Developer & Designer",
+                    about_title: "Sanriqa, Developer & Designer",
+                    about_sub: "A brief intro about me, the technologies I use, and my past experience.",
                     about_status_badge: "<span class='dot'></span> Available for work",
                     about_hello: "Hello, I'm Sanriqa",
                     about_role: "Game & Web Developer & Graphic Designer TR / DE",
                     about_connect: "Connect With Me",
-                    about_bio: "I am Sanriqa, a Web Designer and Developer passionate about creating digital experiences. I create exceptional digital products for your brand by combining creative design with flawless technical execution.",
+                    about_bio: "I'm Sanriqa, a web developer and designer passionate about designing and coding digital experiences. By combining clean code with creative design, I build web projects end-to-end, from idea to launch.",
+                    sites_tag: "● Live Projects",
+                    sites_title: "Websites I Built",
+                    sites_sub: "Websites I designed and coded that are currently live.",
+                    site_1_title: "Holiday & Home Rental Platform",
+                    site_1_desc: "A booking-focused holiday home rental site designed for people who want to plan their vacation and rent a place to stay.",
+                    site_2_title: "In-Home Pilates Service Site",
+                    site_2_desc: "A modern website built for an instructor offering one-on-one in-home pilates sessions, focused on appointments and showcasing services.",
+                    site_3_title: "FiveM Roleplay Community & Admin Panel",
+                    site_3_desc: "A community website for a FiveM roleplay server, combining applications, information, and a management (admin) panel in one place.",
+                    site_visit: "Visit Site →",
+                    stack_tag: "● Tech Stack",
+                    stack_title: "Technologies I Use",
+                    stack_sub: "The tools and technologies I use to bring my web projects to life.",
                     tag_product: "Product Design",
                     tag_ux: "UX Design",
                     tag_ui: "UI Design",
@@ -3253,7 +3621,7 @@
                     review_6_text: "\"Working with Sanriqa changed the destiny of our project. His design eye is incredible and his technical knowledge delivered flawless work.\"",
                     review_role_founder: "Founder, MusePilates",
                     whyme_tag: "● Why choose me?",
-                    whyme_title: "Why Me As Your <span>Design Partner?</span>",
+                    whyme_title: "Why Me As Your <span>Developer & Designer?</span>",
                     whyme_desc: "Discover the difference of partnering with me for design excellence.",
                     whyme_1_pos_title: "Client-Centric Collaboration",
                     whyme_1_pos_desc: "Your vision guides the way, and I bring your ideas to life with precision.",
@@ -3281,23 +3649,37 @@
                     nav_reviews: "Bewertungen",
                     nav_whyme: "Warum Ich",
                     nav_contact: "Kontakt",
-                    hero_tag: "● UI/UX Grafikdesigner & Developer",
+                    nav_sites: "Webseiten",
+                    hero_tag: "● Web Developer & Designer",
                     hero_title_sub: "über mich",
-                    hero_desc: "Ich bin ein vielseitiger Designer, spezialisiert auf Grafik-, Web- und Produktdesign. Lassen Sie uns gemeinsam etwas Großartiges schaffen.",
+                    hero_desc: "Ich bin Sanriqa, ein Webentwickler und Designer, der Ideen sowohl gestaltet als auch programmiert. Ich entwickle moderne, schnelle und nutzerorientierte Websites. Lass uns gemeinsam etwas Großartiges bauen.",
                     btn_all_projects: "Alle Projekte",
                     btn_contact: "Kontaktieren",
                     bubble_1_text: "“Die Zusammenarbeit mit ihm hat alles verändert!”",
                     bubble_1_author: "- Alesta",
                     bubble_2_text: "“Wir haben unsere Conversions um 200% gesteigert.”",
                     bubble_2_author: "- DrPlague",
-                    about_badge: "● Experten Designer",
-                    about_title: "Sanriqa, Ihr Designer",
-                    about_sub: "Eine kurze Einführung über mich und meine bisherigen Erfahrungen.",
+                    about_badge: "● Developer & Designer",
+                    about_title: "Sanriqa, Developer & Designer",
+                    about_sub: "Eine kurze Einführung über mich, die von mir genutzten Technologien und meine Erfahrungen.",
                     about_status_badge: "<span class='dot'></span> Verfügbar für Arbeit",
                     about_hello: "Hallo, ich bin Sanriqa",
                     about_role: "Game & Web Developer & Graphic Designer TR / DE",
                     about_connect: "Verbinde dich mit mir",
-                    about_bio: "Ich bin Sanriqa, ein Webdesigner und Entwickler mit einer Leidenschaft für digitale Erlebnisse. Ich erstelle außergewöhnliche digitale Produkte für Ihre Marke, indem ich kreatives Design mit makelloser technischer Ausführung kombiniere.",
+                    about_bio: "Ich bin Sanriqa, ein Webentwickler und Designer mit einer Leidenschaft für das Gestalten und Programmieren digitaler Erlebnisse. Durch die Kombination von sauberem Code und kreativem Design entwickle ich Webprojekte von der Idee bis zum Launch.",
+                    sites_tag: "● Live-Projekte",
+                    sites_title: "Meine Webseiten",
+                    sites_sub: "Webseiten, die ich gestaltet und programmiert habe und die derzeit online sind.",
+                    site_1_title: "Ferien- & Mietwohnungs-Plattform",
+                    site_1_desc: "Eine buchungsorientierte Ferienhaus-Vermietungsseite für Menschen, die ihren Urlaub planen und eine Unterkunft mieten möchten.",
+                    site_2_title: "Pilates-zu-Hause Website",
+                    site_2_desc: "Eine moderne Website für eine Trainerin, die individuelle Pilates-Einheiten zu Hause anbietet, mit Fokus auf Termine und Leistungen.",
+                    site_3_title: "FiveM Roleplay Community & Admin-Panel",
+                    site_3_desc: "Eine Community-Website für einen FiveM-Roleplay-Server, die Bewerbungen, Informationen und ein Verwaltungs-Panel (Admin) an einem Ort vereint.",
+                    site_visit: "Website Besuchen →",
+                    stack_tag: "● Tech Stack",
+                    stack_title: "Verwendete Technologien",
+                    stack_sub: "Die Werkzeuge und Technologien, mit denen ich meine Webprojekte umsetze.",
                     tag_product: "Produktdesign",
                     tag_ux: "UX Design",
                     tag_ui: "UI Design",
@@ -3340,7 +3722,7 @@
                     review_6_text: "\"Die Zusammenarbeit mit Sanriqa hat das Schicksal unseres Projekts verändert. Sein technisches Wissen lieferte makellose Arbeit.\"",
                     review_role_founder: "Gründer, MusePilates",
                     whyme_tag: "● Warum ich?",
-                    whyme_title: "Warum Ich Als Ihr <span>Designpartner?</span>",
+                    whyme_title: "Warum Ich Als Ihr <span>Developer & Designer?</span>",
                     whyme_desc: "Entdecken Sie den Unterschied einer Partnerschaft mit mir für Design-Exzellenz.",
                     whyme_1_pos_title: "Kundenorientierte Zusammenarbeit",
                     whyme_1_pos_desc: "Ihre Vision weist den Weg, und ich setze Ihre Ideen präzise um.",
@@ -3412,7 +3794,7 @@
             }
 
             document.addEventListener('DOMContentLoaded', () => {
-                const savedLang = localStorage.getItem('selectedLanguage') || 'tr';
+                const savedLang = localStorage.getItem('selectedLanguage') || 'en';
 
                 const elements = document.querySelectorAll('[data-lang]');
                 elements.forEach(el => {
@@ -3868,7 +4250,7 @@
                     modalTitle.innerText = "UYUM.APP";
                     arrows.forEach(arrow => arrow.style.display = 'none');
 
-                    const lang = localStorage.getItem('selectedLanguage') || 'tr';
+                    const lang = localStorage.getItem('selectedLanguage') || 'en';
                     const t = uyumAppContent[lang] || uyumAppContent['tr'];
 
                     modalGrid.innerHTML = `
@@ -3910,7 +4292,7 @@
                     modalTitle.innerText = "FIVEM PROJECTS";
                     arrows.forEach(arrow => arrow.style.display = 'none');
 
-                    const lang = localStorage.getItem('selectedLanguage') || 'tr';
+                    const lang = localStorage.getItem('selectedLanguage') || 'en';
                     const t = fivemContent[lang] || fivemContent['tr'];
 
                     modalGrid.innerHTML = `
@@ -3963,7 +4345,7 @@
                     modalTitle.innerText = "LUDO TOYS PROJECT";
                     arrows.forEach(arrow => arrow.style.display = 'none');
 
-                    const lang = localStorage.getItem('selectedLanguage') || 'tr';
+                    const lang = localStorage.getItem('selectedLanguage') || 'en';
                     const t = ludoContent[lang] || ludoContent['tr'];
 
                     modalGrid.innerHTML = `
