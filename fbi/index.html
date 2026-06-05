@@ -1222,6 +1222,45 @@ input {
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32);
 }
 
+.folder-icon span {
+    position: relative;
+    width: 48px;
+    height: 36px;
+    aspect-ratio: auto;
+    border-color: rgba(214, 168, 75, 0.5);
+    border-radius: 5px;
+    background:
+        linear-gradient(180deg, rgba(247, 210, 123, 0.30), rgba(214, 168, 75, 0.14)),
+        rgba(2, 7, 13, 0.86);
+    color: #ffe5a3;
+}
+
+.folder-icon span::before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: -7px;
+    width: 22px;
+    height: 10px;
+    border: 1px solid rgba(214, 168, 75, 0.52);
+    border-bottom: 0;
+    border-radius: 5px 5px 0 0;
+    background: rgba(214, 168, 75, 0.22);
+}
+
+.folder-icon.restricted span {
+    border-color: rgba(207, 47, 54, 0.58);
+    background:
+        linear-gradient(180deg, rgba(207, 47, 54, 0.25), rgba(84, 18, 24, 0.28)),
+        rgba(2, 7, 13, 0.86);
+    color: #ffc8cb;
+}
+
+.folder-icon.restricted span::before {
+    border-color: rgba(207, 47, 54, 0.58);
+    background: rgba(207, 47, 54, 0.18);
+}
+
 .desktop-icon b {
     color: #dbe9f8;
     font-size: 11px;
@@ -1277,6 +1316,11 @@ input {
     transition: opacity 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
 }
 
+.pc-window.boot-hidden {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
 .pc-window.focused {
     border-color: rgba(90, 167, 255, 0.64);
     box-shadow:
@@ -1301,6 +1345,94 @@ input {
 .pc-window .window-bar {
     cursor: move;
     user-select: none;
+}
+
+.pc-boot {
+    position: absolute;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    place-items: center;
+    background:
+        radial-gradient(circle at 50% 30%, rgba(31, 102, 194, 0.20), transparent 34%),
+        rgba(2, 6, 11, 0.96);
+    backdrop-filter: blur(8px);
+}
+
+.pc-boot.show {
+    display: grid;
+}
+
+.boot-card {
+    width: min(620px, calc(100vw - 34px));
+    border: 1px solid rgba(90, 167, 255, 0.36);
+    border-radius: 8px;
+    background: rgba(3, 8, 14, 0.92);
+    box-shadow: 0 32px 110px rgba(0, 0, 0, 0.72);
+    overflow: hidden;
+}
+
+.boot-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(180, 205, 235, 0.16);
+    padding: 16px;
+}
+
+.boot-head b {
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.boot-head span,
+.boot-lines,
+.boot-status {
+    color: var(--muted);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.boot-lines {
+    display: grid;
+    gap: 8px;
+    min-height: 170px;
+    padding: 16px;
+    color: #9ed0ff;
+}
+
+.boot-lines div.ok {
+    color: #b9ffcf;
+}
+
+.boot-lines div.warn {
+    color: #f7d27b;
+}
+
+.boot-bar {
+    height: 8px;
+    margin: 0 16px 14px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.10);
+}
+
+.boot-bar span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue-soft), #49cf82);
+    box-shadow: 0 0 16px rgba(90, 167, 255, 0.55);
+    transition: width 0.22s ease;
+}
+
+.boot-status {
+    padding: 0 16px 16px;
+    color: #d7e1ed;
 }
 
 .window-controls button {
@@ -1337,6 +1469,144 @@ input {
 .file-item:hover {
     border-color: rgba(90, 167, 255, 0.42);
     background: rgba(31, 102, 194, 0.16);
+}
+
+.case-gallery-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 14px;
+    border-top: 1px solid rgba(180, 205, 235, 0.14);
+    padding-top: 14px;
+}
+
+.case-gallery-head span {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.case-gallery-head b {
+    color: #fff;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.case-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.photo-tile {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(150, 180, 215, 0.16);
+    border-radius: 5px;
+    background: rgba(3, 8, 14, 0.48);
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+}
+
+.photo-tile:hover,
+.photo-tile:focus-visible {
+    border-color: rgba(90, 167, 255, 0.58);
+    box-shadow: 0 0 0 3px rgba(90, 167, 255, 0.11);
+    outline: 0;
+}
+
+.photo-tile img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: rgba(0, 0, 0, 0.32);
+}
+
+.photo-tile span {
+    display: block;
+    padding: 8px;
+    color: #d7e1ed;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.photo-viewer {
+    position: absolute;
+    inset: 0;
+    z-index: 1600;
+    display: none;
+    place-items: center;
+    background: rgba(2, 5, 10, 0.78);
+    backdrop-filter: blur(5px);
+    padding: 18px;
+}
+
+.photo-viewer.show {
+    display: grid;
+}
+
+.photo-card {
+    width: min(900px, calc(100vw - 40px));
+    max-height: calc(100vh - 116px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    overflow: hidden;
+    border: 1px solid rgba(130, 165, 205, 0.38);
+    border-radius: 8px;
+    background: rgba(3, 8, 14, 0.96);
+    box-shadow: 0 32px 110px rgba(0, 0, 0, 0.78);
+}
+
+.photo-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid rgba(180, 205, 235, 0.16);
+    padding: 12px 14px;
+}
+
+.photo-card-head b {
+    min-width: 0;
+    color: #fff;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.photo-card-head button {
+    flex: 0 0 auto;
+    border: 1px solid rgba(207, 47, 54, 0.58);
+    border-radius: 4px;
+    background: rgba(207, 47, 54, 0.14);
+    color: #fff;
+    cursor: pointer;
+    font-family: Consolas, "Courier New", monospace;
+    padding: 7px 10px;
+    text-transform: uppercase;
+}
+
+.photo-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: calc(100vh - 176px);
+    object-fit: contain;
+    background: #02050a;
 }
 
 .mail-list {
@@ -1400,6 +1670,225 @@ input {
     display: block;
     margin-top: 6px;
     font-size: 16px;
+}
+
+.access-denied-panel {
+    position: absolute;
+    inset: 0;
+    z-index: 1500;
+    display: none;
+    place-items: center;
+    background: rgba(3, 5, 9, 0.42);
+    backdrop-filter: blur(3px);
+}
+
+.access-denied-panel.show {
+    display: grid;
+}
+
+.denied-card {
+    width: min(440px, calc(100vw - 34px));
+    border: 1px solid rgba(207, 47, 54, 0.72);
+    border-radius: 8px;
+    background: rgba(12, 7, 10, 0.94);
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.72);
+    padding: 22px;
+    text-align: center;
+}
+
+.denied-card span {
+    color: var(--red);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 11px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
+.denied-card h3 {
+    margin-top: 8px;
+    color: #fff;
+    font-size: 28px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.denied-card p {
+    margin-top: 10px;
+    color: #ffc8cb;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.denied-card button {
+    margin-top: 16px;
+    border: 1px solid rgba(207, 47, 54, 0.62);
+    border-radius: 4px;
+    background: rgba(207, 47, 54, 0.16);
+    color: #fff;
+    cursor: pointer;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 9px 14px;
+    text-transform: uppercase;
+}
+
+.folder-game-panel {
+    position: absolute;
+    inset: 0;
+    z-index: 1550;
+    display: none;
+    place-items: center;
+    background: rgba(2, 5, 10, 0.70);
+    backdrop-filter: blur(5px);
+    padding: 18px;
+}
+
+.folder-game-panel.show {
+    display: grid;
+}
+
+.folder-game-card {
+    width: min(620px, calc(100vw - 34px));
+    overflow: hidden;
+    border: 1px solid rgba(90, 167, 255, 0.44);
+    border-radius: 8px;
+    background: rgba(3, 8, 14, 0.96);
+    box-shadow: 0 32px 110px rgba(0, 0, 0, 0.78);
+}
+
+.folder-game-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid rgba(180, 205, 235, 0.16);
+    padding: 14px;
+}
+
+.folder-game-head span {
+    color: var(--muted);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 10px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.folder-game-head b {
+    display: block;
+    margin-top: 4px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.folder-game-close {
+    border: 1px solid rgba(207, 47, 54, 0.58);
+    border-radius: 4px;
+    background: rgba(207, 47, 54, 0.14);
+    color: #fff;
+    cursor: pointer;
+    font-family: Consolas, "Courier New", monospace;
+    padding: 7px 10px;
+    text-transform: uppercase;
+}
+
+.folder-game-body {
+    display: grid;
+    gap: 13px;
+    padding: 16px;
+}
+
+.folder-game-note {
+    border-left: 3px solid var(--gold);
+    background: rgba(214, 168, 75, 0.09);
+    color: #f6dfac;
+    padding: 11px 12px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.folder-command {
+    border: 1px solid rgba(73, 207, 130, 0.28);
+    border-radius: 5px;
+    background: rgba(1, 5, 8, 0.82);
+    color: #b9ffcf;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
+    line-height: 1.55;
+    min-height: 82px;
+    padding: 13px;
+    user-select: text;
+}
+
+.folder-game-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+}
+
+.folder-game-row input {
+    min-width: 0;
+    border: 1px solid rgba(150, 180, 215, 0.22);
+    border-radius: 4px;
+    outline: 0;
+    background: rgba(3, 8, 14, 0.72);
+    color: #fff;
+    font-family: Consolas, "Courier New", monospace;
+    padding: 10px 11px;
+}
+
+.folder-game-row button {
+    border: 1px solid rgba(90, 167, 255, 0.48);
+    border-radius: 4px;
+    background: rgba(31, 102, 194, 0.20);
+    color: #dbe9f8;
+    cursor: pointer;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 0 13px;
+    text-transform: uppercase;
+}
+
+.folder-game-row button:disabled,
+.folder-game-row input:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.folder-game-meter {
+    height: 8px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.10);
+}
+
+.folder-game-meter span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #49cf82, var(--blue-soft), var(--gold));
+    transition: width 0.16s linear;
+}
+
+.folder-game-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--muted);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.folder-game-status.good {
+    color: #b9ffcf;
+}
+
+.folder-game-status.bad {
+    color: #ffc8cb;
 }
 
 .start-menu {
@@ -1735,6 +2224,10 @@ input {
     .task-apps button {
         min-width: 92px;
     }
+
+    .folder-game-row {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 </head>
@@ -1860,6 +2353,23 @@ input {
     </footer>
 
     <section class="laptop-screen pc-os" id="laptopScreen" aria-hidden="true">
+        <div class="pc-boot" id="pcBoot" aria-hidden="true">
+            <div class="boot-card">
+                <div class="boot-head">
+                    <div class="mini-seal" aria-hidden="true">FBI</div>
+                    <div>
+                        <b>FBI FieldOS Boot</b>
+                        <span>Secure laptop session initializing</span>
+                    </div>
+                </div>
+                <div class="boot-lines" id="bootLines"></div>
+                <div class="boot-bar" aria-label="Boot progress">
+                    <span id="bootFill"></span>
+                </div>
+                <div class="boot-status" id="bootStatus">BOOT: WAITING</div>
+            </div>
+        </div>
+
         <header class="pc-topbar">
             <div class="pc-brand">
                 <div class="mini-seal" aria-hidden="true">FBI</div>
@@ -1877,29 +2387,25 @@ input {
 
         <section class="pc-desktop-area" id="pcDesktop" aria-label="FBI FieldOS masaustu">
             <div class="desktop-icons" aria-label="Masaustu ikonlari">
-                <button class="desktop-icon" type="button" data-window="cases">
-                    <span>CD</span>
-                    <b>CaseDesk</b>
+                <button class="desktop-icon folder-icon" type="button" data-window="cases">
+                    <span>01</span>
+                    <b>Case Files</b>
                 </button>
-                <button class="desktop-icon" type="button" data-window="files">
-                    <span>FL</span>
-                    <b>Secure Files</b>
+                <button class="desktop-icon folder-icon restricted" type="button" data-denied-folder="Evidence Vault">
+                    <span>EV</span>
+                    <b>Evidence Vault</b>
                 </button>
-                <button class="desktop-icon" type="button" data-window="map">
-                    <span>MP</span>
-                    <b>Field Map</b>
+                <button class="desktop-icon folder-icon restricted" type="button" data-denied-folder="Personnel DB">
+                    <span>PD</span>
+                    <b>Personnel DB</b>
                 </button>
-                <button class="desktop-icon" type="button" data-window="mail">
-                    <span>MX</span>
-                    <b>Intel Mail</b>
+                <button class="desktop-icon folder-icon restricted" type="button" data-denied-folder="Black Archive">
+                    <span>BA</span>
+                    <b>Black Archive</b>
                 </button>
-                <button class="desktop-icon" type="button" data-window="terminal">
-                    <span>TM</span>
-                    <b>Terminal</b>
-                </button>
-                <button class="desktop-icon" type="button" data-window="settings">
-                    <span>ST</span>
-                    <b>Settings</b>
+                <button class="desktop-icon folder-icon restricted" type="button" data-denied-folder="Surveillance">
+                    <span>SV</span>
+                    <b>Surveillance</b>
                 </button>
             </div>
 
@@ -1909,9 +2415,9 @@ input {
                 <p>Encrypted network online. Evidence sync active.</p>
             </aside>
 
-            <article class="desktop-window pc-window" data-window="cases" style="left: 160px; top: 72px; width: 640px; height: 470px;">
+            <article class="desktop-window pc-window hidden" data-window="cases" style="left: 150px; top: 68px; width: 760px; height: 560px;">
                 <div class="window-bar">
-                    <div class="window-title">CaseDesk / Operation Night Signal</div>
+                    <div class="window-title">Case Files / Authorized Folder</div>
                     <div class="window-controls">
                         <button type="button" data-action="minimize" aria-label="Minimize"></button>
                         <button type="button" data-action="maximize" aria-label="Maximize"></button>
@@ -1923,8 +2429,8 @@ input {
                         <span>Active agent: <b id="laptopAgent">AGENT PENDING</b></span>
                         <h2>Operation Night Signal</h2>
                         <p>
-                            Saha laptopu acildi. Dosyalar, sinyaller, harita ve terminal ayni
-                            FieldOS oturumunda kontrol ediliyor.
+                            Bu oturumda yalnizca Case Files klasoru acik. Diger FBI arsivleri
+                            ek yetki olmadan kilitli kalir.
                         </p>
                         <div class="progress-track" aria-label="Dava ilerleme yuzdesi">
                             <span></span>
@@ -1946,6 +2452,16 @@ input {
                         </div>
                     </div>
 
+                    <div class="case-gallery-head">
+                        <div>
+                            <span>Authorized folder</span>
+                            <b>PHOTO EVIDENCE / LOCAL PATH</b>
+                        </div>
+                        <span id="casePhotoCount">0 images</span>
+                    </div>
+
+                    <div class="case-gallery" id="caseGallery" aria-label="Case Files foto galerisi"></div>
+
                     <div class="intel-list">
                         <div class="intel-row">
                             <span>21:08 Z</span>
@@ -1963,7 +2479,7 @@ input {
                 </div>
             </article>
 
-            <article class="desktop-window pc-window" data-window="files" style="left: 840px; top: 86px; width: 430px; height: 360px;">
+            <article class="desktop-window pc-window hidden" data-window="files" style="left: 840px; top: 86px; width: 430px; height: 360px;">
                 <div class="window-bar">
                     <div class="window-title">Secure Files</div>
                     <div class="window-controls">
@@ -2056,7 +2572,7 @@ input {
                 </div>
             </article>
 
-            <article class="desktop-window pc-window terminal-window" data-window="terminal" style="left: 520px; top: 420px; width: 520px; height: 260px;">
+            <article class="desktop-window pc-window terminal-window hidden" data-window="terminal" style="left: 520px; top: 420px; width: 520px; height: 260px;">
                 <div class="window-bar">
                     <div class="window-title">Command Terminal</div>
                     <div class="window-controls">
@@ -2114,12 +2630,63 @@ input {
                     </div>
                 </div>
                 <div class="start-apps">
-                    <button type="button" data-window="cases">CaseDesk</button>
-                    <button type="button" data-window="files">Secure Files</button>
+                    <button type="button" data-window="cases">Case Files</button>
                     <button type="button" data-window="map">Field Map</button>
                     <button type="button" data-window="mail">Intel Mail</button>
                     <button type="button" data-window="terminal">Terminal</button>
                     <button type="button" data-window="settings">Settings</button>
+                </div>
+            </div>
+
+            <div class="access-denied-panel" id="accessDeniedPanel" aria-hidden="true">
+                <div class="denied-card">
+                    <span>Restricted folder</span>
+                    <h3>Access Denied</h3>
+                    <p>
+                        <b id="deniedFolderName">Folder</b> icin clearance 00124 yetersiz.
+                        Ek saha yetkisi olmadan bu klasor acilamaz.
+                    </p>
+                    <button id="deniedClose" type="button">Close alert</button>
+                </div>
+            </div>
+
+            <div class="folder-game-panel" id="folderGamePanel" aria-hidden="true">
+                <div class="folder-game-card">
+                    <div class="folder-game-head">
+                        <div>
+                            <span>Folder security challenge</span>
+                            <b>Case Files Access Check</b>
+                        </div>
+                        <button class="folder-game-close" id="folderGameClose" type="button">Abort</button>
+                    </div>
+                    <div class="folder-game-body">
+                        <div class="folder-game-note">
+                            Photo evidence klasoru sifreli. Komutu birebir yazarsan Case Files
+                            acilacak. Prompt kismini yazsan da olur. Sure uzun tutuldu: 90 saniye.
+                        </div>
+                        <div class="folder-command" id="folderGameCommand">Waiting for challenge...</div>
+                        <div class="folder-game-row">
+                            <input id="folderGameInput" type="text" autocomplete="off" spellcheck="false" placeholder="type command exactly">
+                            <button id="folderGameSubmit" type="button">Verify</button>
+                        </div>
+                        <div class="folder-game-meter" aria-label="Challenge timer">
+                            <span id="folderGameMeter"></span>
+                        </div>
+                        <div class="folder-game-meta">
+                            <span id="folderGameTimer">90s</span>
+                            <span class="folder-game-status" id="folderGameStatus">READY</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photo-viewer" id="photoViewer" aria-hidden="true">
+                <div class="photo-card">
+                    <div class="photo-card-head">
+                        <b id="photoViewerTitle">PHOTO</b>
+                        <button id="photoViewerClose" type="button">Close</button>
+                    </div>
+                    <img id="photoViewerImage" src="" alt="">
                 </div>
             </div>
         </section>
@@ -2127,8 +2694,7 @@ input {
         <footer class="pc-taskbar">
             <button class="start-button" id="startButton" type="button" aria-expanded="false">FBI</button>
             <div class="task-apps" aria-label="Acik uygulamalar">
-                <button type="button" data-window="cases">CaseDesk</button>
-                <button type="button" data-window="files">Files</button>
+                <button type="button" data-window="cases">Case</button>
                 <button type="button" data-window="map">Map</button>
                 <button type="button" data-window="mail">Mail</button>
                 <button type="button" data-window="terminal">Terminal</button>
@@ -2178,13 +2744,35 @@ input {
     const laptopAgent = document.getElementById("laptopAgent");
     const pcAgent = document.getElementById("pcAgent");
     const pcDesktop = document.getElementById("pcDesktop");
+    const pcBoot = document.getElementById("pcBoot");
+    const bootLines = document.getElementById("bootLines");
+    const bootFill = document.getElementById("bootFill");
+    const bootStatus = document.getElementById("bootStatus");
     const startButton = document.getElementById("startButton");
     const startMenu = document.getElementById("startMenu");
+    const accessDeniedPanel = document.getElementById("accessDeniedPanel");
+    const deniedFolderName = document.getElementById("deniedFolderName");
+    const deniedClose = document.getElementById("deniedClose");
+    const deniedFolderButtons = Array.from(document.querySelectorAll("[data-denied-folder]"));
+    const caseGallery = document.getElementById("caseGallery");
+    const casePhotoCount = document.getElementById("casePhotoCount");
+    const photoViewer = document.getElementById("photoViewer");
+    const photoViewerImage = document.getElementById("photoViewerImage");
+    const photoViewerTitle = document.getElementById("photoViewerTitle");
+    const photoViewerClose = document.getElementById("photoViewerClose");
+    const folderGamePanel = document.getElementById("folderGamePanel");
+    const folderGameClose = document.getElementById("folderGameClose");
+    const folderGameCommand = document.getElementById("folderGameCommand");
+    const folderGameInput = document.getElementById("folderGameInput");
+    const folderGameSubmit = document.getElementById("folderGameSubmit");
+    const folderGameMeter = document.getElementById("folderGameMeter");
+    const folderGameTimer = document.getElementById("folderGameTimer");
+    const folderGameStatus = document.getElementById("folderGameStatus");
     const appButtons = Array.from(document.querySelectorAll("button[data-window]"));
     const taskButtons = Array.from(document.querySelectorAll(".task-apps button[data-window]"));
     const pcWindows = Array.from(document.querySelectorAll(".pc-window"));
     const windowNames = {
-        cases: "CaseDesk",
+        cases: "Case Files",
         files: "Secure Files",
         map: "Field Map",
         mail: "Intel Mail",
@@ -2192,6 +2780,48 @@ input {
         settings: "Settings"
     };
     let topWindowZ = 20;
+    let caseFolderUnlocked = false;
+    let folderGameAnswer = "";
+    let folderGameTimerId = null;
+    let folderGameStartedAt = 0;
+    const FOLDER_GAME_DURATION = 90000;
+    const folderGameCommands = [
+        "decrypt photo-evidence --case NIGHT-SIGNAL --key 00124",
+        "mount case-files --volume FB-07A --clearance 00124",
+        "verify archive-token --agent ARES-KRAWN --folder photos",
+        "unlock evidence-photos --node TR-IST-01 --session secure"
+    ];
+    const casePhotos = [
+        "0431DEEE-8CC7-4375-B421-237583CCE260.png",
+        "10F29CD0-6DDB-4005-9995-7319F8E41A9F.png",
+        "169F9A03-0E50-42C5-9F9F-A89CE7509E6A.png",
+        "1D71E01F-0DE3-44EC-967F-46D757520684.png",
+        "20D89A2E-2514-42E5-A73D-1397B2930544.png",
+        "212204EE-A643-490F-94A4-ECBA6FF7B8EF.png",
+        "2897A0F5-5666-44A2-8891-BBC38404D1DF.png",
+        "30BDD741-4DA9-439A-9440-D76B2122CCD4.png",
+        "396A08E7-2A28-4046-8F7A-ECDB8F1714E5.png",
+        "47FA048A-B627-4380-9851-281905477C1E.png",
+        "52B607CE-C33E-4C95-BA8E-CE6EB7C48FDC.png",
+        "5371FC14-11DB-4320-A25D-84240C777656.png",
+        "539161B5-EEED-45A6-A9B8-C9B662CD12B2.png",
+        "7E02AEB5-C757-4F7A-B172-1CBCA12B0FA1.png",
+        "9572D56F-E3F9-4455-B5FE-780080FCBF0E.png",
+        "9E9409A7-1B79-45AA-A450-D3BFB45F292B.png",
+        "A515295E-0153-4AA3-8C45-1BE10DAE5284.png",
+        "A61D0A6B-8C2A-4DD2-ACC2-30FC85D996E7.png",
+        "B3266F6C-A00C-4065-84F9-99429E0A8999.png",
+        "BA37B3F6-D777-4851-90D5-4C0404502CD8.png",
+        "C62C542D-56B1-4C0A-94D4-9E51A879DFC4.png",
+        "C83AC784-B639-483B-A764-BD0B6D1715F4.png",
+        "E71FBBC8-6210-47FF-8854-8AAE576EFFA0.png",
+        "F3C08DA0-72E7-41BA-A985-3FCC599C3BAE.png",
+        "F59C1A3B-15F0-4C41-93A4-C0555CBB31C1.png",
+        "F79DC7B7-E2D8-42F4-B1B0-8F07EA647AF4.png",
+        "FAE3D9D2-51D4-46E5-878B-A4D07B610872.png",
+        "FCE4FAD9-82E4-4261-B9BA-10BFDD8AEC61.png",
+        "FD92DBC2-B2F0-493E-85BF-944DD9A243BE.png"
+    ];
 
     function pad(n) {
         return String(n).padStart(2, "0");
@@ -2241,6 +2871,215 @@ input {
         lockout.setAttribute("aria-hidden", "false");
     }
 
+    function runBootSequence(onReady) {
+        const lines = [
+            { text: "POST: secure laptop hardware check", cls: "ok" },
+            { text: "MOUNT: encrypted field volume FB-07A", cls: "ok" },
+            { text: "AUTH: clearance token 00124 accepted", cls: "ok" },
+            { text: "NET: TR-IST-01 encrypted uplink online", cls: "ok" },
+            { text: "WARN: restricted archives remain locked", cls: "warn" },
+            { text: "DESKTOP: FieldOS session ready", cls: "ok" }
+        ];
+        let index = 0;
+
+        bootLines.innerHTML = "";
+        bootFill.style.width = "0%";
+        bootStatus.textContent = "BOOT: INITIALIZING";
+        pcBoot.classList.add("show");
+        pcBoot.setAttribute("aria-hidden", "false");
+        pcWindows.forEach((win) => win.classList.add("boot-hidden"));
+
+        function addLine() {
+            const item = lines[index];
+            const line = document.createElement("div");
+            line.className = item.cls;
+            line.textContent = `[${pad(index + 1)}] ${item.text}`;
+            bootLines.appendChild(line);
+
+            const pct = Math.round(((index + 1) / lines.length) * 100);
+            bootFill.style.width = `${pct}%`;
+            bootStatus.textContent = `BOOT: ${pct}%`;
+            index += 1;
+
+            if (index < lines.length) {
+                window.setTimeout(addLine, 260);
+            } else {
+                bootStatus.textContent = "BOOT: READY";
+                window.setTimeout(() => {
+                    pcBoot.classList.remove("show");
+                    pcBoot.setAttribute("aria-hidden", "true");
+                    pcWindows.forEach((win) => win.classList.remove("boot-hidden"));
+                    onReady();
+                }, 520);
+            }
+        }
+
+        window.setTimeout(addLine, 240);
+    }
+
+    function showAccessDenied(folderName) {
+        deniedFolderName.textContent = folderName;
+        accessDeniedPanel.classList.add("show");
+        accessDeniedPanel.setAttribute("aria-hidden", "false");
+        eventLine.textContent = `ACCESS DENIED: ${folderName.toUpperCase()}`;
+    }
+
+    function hideAccessDenied() {
+        accessDeniedPanel.classList.remove("show");
+        accessDeniedPanel.setAttribute("aria-hidden", "true");
+    }
+
+    function formatPhotoLabel(fileName, index) {
+        return `PHOTO-${String(index + 1).padStart(3, "0")} / ${fileName.slice(0, 8)}`;
+    }
+
+    function openPhoto(fileName, label) {
+        photoViewerImage.src = fileName;
+        photoViewerImage.alt = label;
+        photoViewerTitle.textContent = label;
+        photoViewer.classList.add("show");
+        photoViewer.setAttribute("aria-hidden", "false");
+        eventLine.textContent = `PHOTO OPENED: ${label}`;
+    }
+
+    function closePhoto() {
+        photoViewer.classList.remove("show");
+        photoViewer.setAttribute("aria-hidden", "true");
+        photoViewerImage.removeAttribute("src");
+        photoViewerImage.alt = "";
+    }
+
+    function renderCasePhotos() {
+        casePhotoCount.textContent = `${casePhotos.length} images`;
+        caseGallery.innerHTML = "";
+
+        casePhotos.forEach((fileName, index) => {
+            const label = formatPhotoLabel(fileName, index);
+            const button = document.createElement("button");
+            const image = document.createElement("img");
+            const caption = document.createElement("span");
+
+            button.className = "photo-tile";
+            button.type = "button";
+            image.src = fileName;
+            image.alt = label;
+            image.loading = "lazy";
+            caption.textContent = label;
+
+            button.append(image, caption);
+            button.addEventListener("click", () => openPhoto(fileName, label));
+            caseGallery.appendChild(button);
+        });
+    }
+
+    function resetFolderGameStatus(className, message) {
+        folderGameStatus.className = `folder-game-status${className ? ` ${className}` : ""}`;
+        folderGameStatus.textContent = message;
+    }
+
+    function closeFolderGame() {
+        window.clearInterval(folderGameTimerId);
+        folderGameTimerId = null;
+        folderGamePanel.classList.remove("show");
+        folderGamePanel.setAttribute("aria-hidden", "true");
+        folderGameInput.value = "";
+        folderGameInput.disabled = false;
+        folderGameSubmit.disabled = false;
+        folderGameMeter.style.width = "100%";
+        folderGameTimer.textContent = "90s";
+        resetFolderGameStatus("", "READY");
+    }
+
+    function failFolderGame(message) {
+        window.clearInterval(folderGameTimerId);
+        folderGameTimerId = null;
+        folderGameInput.disabled = true;
+        folderGameSubmit.disabled = true;
+        folderGameMeter.style.width = "0%";
+        resetFolderGameStatus("bad", message);
+        eventLine.textContent = "CASE FILES: CHALLENGE FAILED";
+
+        window.setTimeout(() => {
+            closeFolderGame();
+            showAccessDenied("Case Files");
+        }, 850);
+    }
+
+    function unlockCaseFolder() {
+        window.clearInterval(folderGameTimerId);
+        folderGameTimerId = null;
+        caseFolderUnlocked = true;
+        folderGameInput.disabled = true;
+        folderGameSubmit.disabled = true;
+        folderGameMeter.style.width = "100%";
+        resetFolderGameStatus("good", "ACCESS GRANTED");
+        eventLine.textContent = "CASE FILES: PHOTO EVIDENCE UNLOCKED";
+
+        window.setTimeout(() => {
+            closeFolderGame();
+            openWindow("cases");
+        }, 650);
+    }
+
+    function startFolderGame() {
+        hideStartMenu();
+        hideAccessDenied();
+        closePhoto();
+
+        folderGameAnswer = folderGameCommands[Math.floor(Math.random() * folderGameCommands.length)];
+        folderGameStartedAt = Date.now();
+        folderGameCommand.textContent = `fbi@field-os:~$ ${folderGameAnswer}`;
+        folderGameInput.value = "";
+        folderGameInput.disabled = false;
+        folderGameSubmit.disabled = false;
+        folderGameMeter.style.width = "100%";
+        folderGameTimer.textContent = "90s";
+        resetFolderGameStatus("", "TYPE COMMAND / PROMPT OPTIONAL");
+        folderGamePanel.classList.add("show");
+        folderGamePanel.setAttribute("aria-hidden", "false");
+        eventLine.textContent = "CASE FILES: CHALLENGE STARTED";
+
+        window.clearInterval(folderGameTimerId);
+        folderGameTimerId = window.setInterval(() => {
+            const elapsed = Date.now() - folderGameStartedAt;
+            const remaining = Math.max(0, FOLDER_GAME_DURATION - elapsed);
+            const pct = Math.max(0, Math.round((remaining / FOLDER_GAME_DURATION) * 100));
+
+            folderGameMeter.style.width = `${pct}%`;
+            folderGameTimer.textContent = `${Math.ceil(remaining / 1000)}s`;
+
+            if (remaining <= 0) {
+                failFolderGame("TIMEOUT");
+            }
+        }, 160);
+
+        window.setTimeout(() => folderGameInput.focus(), 60);
+    }
+
+    function normalizeFolderCommand(value) {
+        return value
+            .replace(/^.*?\$\s*/, "")
+            .replace(/[–—]/g, "-")
+            .replace(/[“”]/g, '"')
+            .replace(/[‘’]/g, "'")
+            .replace(/\s+/g, " ")
+            .trim()
+            .toLowerCase();
+    }
+
+    function submitFolderGame() {
+        if (!folderGameAnswer) return;
+
+        const typedCommand = normalizeFolderCommand(folderGameInput.value);
+        const targetCommand = normalizeFolderCommand(folderGameAnswer);
+
+        if (typedCommand === targetCommand) {
+            unlockCaseFolder();
+        } else {
+            failFolderGame("COMMAND MISMATCH");
+        }
+    }
+
     function getWindow(windowId) {
         return pcWindows.find((item) => item.dataset.window === windowId);
     }
@@ -2281,6 +3120,15 @@ input {
         hideStartMenu();
     }
 
+    function requestWindowOpen(windowId) {
+        if (windowId === "cases" && !caseFolderUnlocked) {
+            startFolderGame();
+            return;
+        }
+
+        openWindow(windowId);
+    }
+
     function closeWindow(windowId) {
         const win = getWindow(windowId);
         if (!win) return;
@@ -2315,8 +3163,10 @@ input {
         pcAgent.textContent = user.toUpperCase();
         laptopScreen.classList.add("show");
         laptopScreen.setAttribute("aria-hidden", "false");
-        openWindow("cases");
-        openWindow("terminal");
+        runBootSequence(() => {
+            syncTaskButtons("");
+            eventLine.textContent = "DESKTOP READY: ALL APPLICATIONS CLOSED";
+        });
     }
 
     function grantAccess(user) {
@@ -2343,8 +3193,35 @@ input {
     appButtons.forEach((button) => {
         button.addEventListener("click", (event) => {
             event.stopPropagation();
-            openWindow(button.dataset.window);
+            requestWindowOpen(button.dataset.window);
         });
+    });
+
+    deniedFolderButtons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            event.stopPropagation();
+            hideStartMenu();
+            showAccessDenied(button.dataset.deniedFolder);
+        });
+    });
+
+    deniedClose.addEventListener("click", hideAccessDenied);
+    accessDeniedPanel.addEventListener("click", (event) => {
+        if (event.target === accessDeniedPanel) hideAccessDenied();
+    });
+
+    photoViewerClose.addEventListener("click", closePhoto);
+    photoViewer.addEventListener("click", (event) => {
+        if (event.target === photoViewer) closePhoto();
+    });
+
+    folderGameClose.addEventListener("click", closeFolderGame);
+    folderGamePanel.addEventListener("click", (event) => {
+        if (event.target === folderGamePanel) closeFolderGame();
+    });
+    folderGameSubmit.addEventListener("click", submitFolderGame);
+    folderGameInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") submitFolderGame();
     });
 
     pcWindows.forEach((win) => {
@@ -2429,6 +3306,7 @@ input {
         }
     });
 
+    renderCasePhotos();
     tick();
     updateAttempts();
     window.setInterval(tick, 1000);
