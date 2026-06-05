@@ -29,6 +29,8 @@ html,
 body {
     width: 100%;
     min-height: 100%;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 body {
@@ -41,6 +43,12 @@ body {
 button,
 input {
     font: inherit;
+}
+
+input,
+textarea {
+    -webkit-user-select: text;
+    user-select: text;
 }
 
 .screen {
@@ -1817,7 +1825,8 @@ input {
     line-height: 1.55;
     min-height: 82px;
     padding: 13px;
-    user-select: text;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .folder-game-row {
