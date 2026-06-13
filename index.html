@@ -895,7 +895,7 @@
         }
 
         .col-left .project-card:nth-child(3) .project-image-container {
-            height: 320px;
+            height: 450px;
         }
 
         .col-right .project-card:nth-child(1) .project-image-container {
@@ -917,6 +917,77 @@
         .project-card:hover .project-image {
             transform: scale(1.05);
             filter: grayscale(0%);
+        }
+
+        .project-image-container.laptop-preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 26px 30px 42px;
+            background: radial-gradient(circle at 50% 12%, rgba(255, 255, 255, 0.12), transparent 34%), #050505;
+        }
+
+        .project-laptop {
+            position: relative;
+            width: min(92%, 620px);
+            aspect-ratio: 16 / 10;
+            border: 3px solid rgba(255, 255, 255, 0.18);
+            border-bottom-width: 12px;
+            border-radius: 18px 18px 10px 10px;
+            background: #050505;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 24px 35px rgba(0, 0, 0, 0.55);
+        }
+
+        .project-laptop::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 8px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.18);
+            z-index: 3;
+        }
+
+        .project-laptop::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -18px;
+            width: 112%;
+            height: 10px;
+            border-radius: 0 0 28px 28px;
+            transform: translateX(-50%);
+            background: linear-gradient(180deg, #777, #242424 52%, #070707);
+            box-shadow: 0 8px 14px rgba(0, 0, 0, 0.45);
+        }
+
+        .project-laptop .project-image {
+            position: absolute;
+            left: 4%;
+            top: 9%;
+            width: 92%;
+            height: 76%;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        .project-card:hover .project-laptop .project-image {
+            transform: scale(1.02);
+        }
+
+        .project-label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            z-index: 10;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .project-arrow {
@@ -3005,11 +3076,11 @@
 
                     <div class="card project-card reveal-on-scroll delay-500" onclick="openModal('NexaStore')"
                         style="--delay: 0.45s;">
-                        <div class="project-image-container">
-                            <img src="nexa.png" alt="Nexa Store" class="project-image" loading="lazy">
-                            <span
-                                style="position: absolute; bottom: 20px; left: 20px; font-size: 1.5rem; font-weight: 700; color: #fff; z-index: 10; text-shadow: 0 2px 10px rgba(0,0,0,0.8); font-family: 'Plus Jakarta Sans', sans-serif;">Nexa
-                                Store</span>
+                        <div class="project-image-container laptop-preview">
+                            <div class="project-laptop">
+                                <img src="nexa.png" alt="Nexa Store" class="project-image" loading="lazy">
+                            </div>
+                            <span class="project-label">Nexa Store</span>
                             <span class="project-arrow">→</span>
                         </div>
                     </div>
@@ -3036,7 +3107,7 @@
                         style="--delay: 0.4s;">
                         <div class="project-image-container">
                             <img src="uyum.app.png" alt="Uyum.app" class="project-image" loading="lazy">
-                            <span style="position: absolute; bottom: 20px; left: 20px; font-size: 1.5rem; font-weight: 700; color: #fff; z-index: 10; text-shadow: 0 2px 10px rgba(0,0,0,0.8); font-family: 'Plus Jakarta Sans', sans-serif;">uyum.app</span>
+                            <span class="project-label">uyum.app</span>
                             <span class="project-arrow">→</span>
                         </div>
                     </div>
@@ -3298,6 +3369,11 @@
                         <div class="timeline-item reveal-on-scroll delay-500">
                             <span class="timeline-role" data-lang="timeline_role_5">Founder & Developer</span>
                             <span class="timeline-company">uyum.app</span>
+                            <span class="timeline-year">2026</span>
+                        </div>
+                        <div class="timeline-item reveal-on-scroll delay-500">
+                            <span class="timeline-role" data-lang="timeline_role_5">Founder & Developer</span>
+                            <span class="timeline-company">Nexa Store</span>
                             <span class="timeline-year">2026</span>
                         </div>
                     </div>
