@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="loading">
 
 <head>
     <meta charset="UTF-8">
@@ -90,6 +90,20 @@
             overscroll-behavior: none;
         }
 
+        html.loading,
+        body.loading {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            overscroll-behavior: none;
+            touch-action: none;
+        }
+
+        body.loading {
+            position: fixed;
+            inset: 0;
+        }
+
         .fa,
         .fas,
         .fa-solid,
@@ -107,13 +121,14 @@
         /* 2. YÜKLEME EKRANI (SPLASH SCREEN) - DÜZELTİLDİ */
         .loader-wrapper {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             width: 100%;
             height: 100vh;
+            height: 100svh;
             height: 100dvh;
+            min-height: 100vh;
+            min-height: 100svh;
+            min-height: 100dvh;
             background-color: #000;
             z-index: 999999;
             display: flex;
@@ -906,6 +921,10 @@
             height: 450px;
         }
 
+        .col-right .project-card:nth-child(3) .project-image-container {
+            height: 450px;
+        }
+
         .project-image {
             width: 100%;
             height: 100%;
@@ -917,6 +936,24 @@
         .project-card:hover .project-image {
             transform: scale(1.05);
             filter: grayscale(0%);
+        }
+
+        .project-image-container.website-preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 26px 30px 42px;
+            background: radial-gradient(circle at 50% 12%, rgba(255, 255, 255, 0.12), transparent 34%), #050505;
+        }
+
+        .project-image-container.website-preview .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .project-card:hover .project-image-container.website-preview .project-image {
+            transform: scale(1.03);
         }
 
         .project-image-container.laptop-preview {
@@ -1334,7 +1371,7 @@
         }
 
         .cursor-dot.project-hover::after {
-            content: "View project";
+            content: var(--cursor-project-label, "View project");
             display: block;
             white-space: nowrap;
             font-size: 14px;
@@ -2952,7 +2989,7 @@
     </style>
 </head>
 
-<body>
+<body class="loading">
     <video id="background-video" autoplay loop muted playsinline>
         <source src="arka3.mp4" type="video/mp4">
     </video>
@@ -3076,10 +3113,8 @@
 
                     <div class="card project-card reveal-on-scroll delay-500" onclick="openModal('NexaStore')"
                         style="--delay: 0.45s;">
-                        <div class="project-image-container laptop-preview">
-                            <div class="project-laptop">
-                                <img src="nexa.png" alt="Nexa Store" class="project-image" loading="lazy">
-                            </div>
+                        <div class="project-image-container website-preview">
+                            <img src="nexa.png" alt="Nexa Store" class="project-image" loading="lazy">
                             <span class="project-label">Nexa Store</span>
                             <span class="project-arrow">→</span>
                         </div>
@@ -3105,7 +3140,7 @@
 
                     <div class="card project-card reveal-on-scroll delay-500" onclick="openModal('UyumApp')"
                         style="--delay: 0.4s;">
-                        <div class="project-image-container">
+                        <div class="project-image-container website-preview">
                             <img src="uyum.app.png" alt="Uyum.app" class="project-image" loading="lazy">
                             <span class="project-label">uyum.app</span>
                             <span class="project-arrow">→</span>
@@ -3747,13 +3782,21 @@
 
         <script>
             // Site yükleme animasyonu ve overflow kontrolü
-            document.body.style.overflow = 'hidden';
+            document.documentElement.classList.add('loading');
+            document.body.classList.add('loading');
 
             window.addEventListener('load', () => {
                 const loader = document.getElementById('loader');
+                if (loader) {
+                    loader.addEventListener('touchmove', (event) => event.preventDefault(), { passive: false });
+                }
+
                 setTimeout(() => {
-                    loader.classList.add('loader-hide');
-                    document.body.style.overflow = '';
+                    if (loader) loader.classList.add('loader-hide');
+                    setTimeout(() => {
+                        document.documentElement.classList.remove('loading');
+                        document.body.classList.remove('loading');
+                    }, 800);
                 }, 1000);
             });
 
@@ -3800,6 +3843,7 @@
                     site_6_title: "Strangers Topluluk Sitesi",
                     site_6_desc: "Strangers markası için hazırlanmış; topluluk, tanıtım ve dijital deneyim odağında modern bir web sitesi.",
                     site_visit: "Siteyi Ziyaret Et →",
+                    cursor_project_label: "Projeyi Gör",
                     stack_tag: "● Teknolojiler",
                     stack_title: "Kullandığım Teknolojiler",
                     stack_sub: "Web projelerimi hayata geçirirken kullandığım araç ve teknolojiler.",
@@ -3907,6 +3951,7 @@
                     site_6_title: "Strangers Community Website",
                     site_6_desc: "A modern website built for the Strangers brand, focused on community, promotion, and digital experience.",
                     site_visit: "Visit Site →",
+                    cursor_project_label: "View Project",
                     stack_tag: "● Tech Stack",
                     stack_title: "Technologies I Use",
                     stack_sub: "The tools and technologies I use to bring my web projects to life.",
@@ -4014,6 +4059,7 @@
                     site_6_title: "Strangers Community-Website",
                     site_6_desc: "Eine moderne Website für die Marke Strangers mit Fokus auf Community, Präsentation und digitales Erlebnis.",
                     site_visit: "Website Besuchen →",
+                    cursor_project_label: "Projekt Ansehen",
                     stack_tag: "● Tech Stack",
                     stack_title: "Verwendete Technologien",
                     stack_sub: "Die Werkzeuge und Technologien, mit denen ich meine Webprojekte umsetze.",
@@ -4102,6 +4148,8 @@
                         }
                     });
 
+                    updateCursorProjectLabel(lang);
+
                     const flagImg = document.getElementById('header-lang-flag');
                     if (flagImg) {
                         if (lang === 'tr') flagImg.src = 'https://flagcdn.com/w40/tr.png';
@@ -4117,6 +4165,11 @@
 
                 document.getElementById('lang-menu').classList.remove('active');
                 localStorage.setItem('selectedLanguage', lang);
+            }
+
+            function updateCursorProjectLabel(lang) {
+                const label = translations[lang]?.cursor_project_label || translations.en.cursor_project_label;
+                document.documentElement.style.setProperty('--cursor-project-label', JSON.stringify(label));
             }
 
             function copyEmail() {
@@ -4140,6 +4193,7 @@
                         el.innerHTML = translations[savedLang][key];
                     }
                 });
+                updateCursorProjectLabel(savedLang);
                 const flagImg = document.getElementById('header-lang-flag');
                 if (flagImg) {
                     if (savedLang === 'tr') flagImg.src = 'https://flagcdn.com/w40/tr.png';
@@ -4213,7 +4267,7 @@
 
                 const cursorGlow = document.querySelector('.cursor-glow');
                 const cursorDot = document.querySelector('.cursor-dot');
-                const projectCards = document.querySelectorAll('.project-card');
+                const projectCards = document.querySelectorAll('.project-card, .site-card');
 
                 let mouseX = 0, mouseY = 0;
                 let glowX = 0, glowY = 0;
@@ -4263,7 +4317,7 @@
 
                 clickableElements.forEach(el => {
                     el.addEventListener('mouseenter', () => {
-                        if (!el.closest('.project-card')) {
+                        if (!el.closest('.project-card, .site-card')) {
                             cursorGlow.classList.add('interactive-hover');
                         }
                     });
