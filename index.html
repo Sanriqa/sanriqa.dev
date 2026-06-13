@@ -956,6 +956,113 @@
             transform: scale(1.03);
         }
 
+        .project-image-container.uyum-showcase {
+            perspective: 900px;
+            padding: 34px 36px 58px;
+            isolation: isolate;
+            background:
+                radial-gradient(circle at 26% 18%, rgba(255, 80, 156, 0.22), transparent 34%),
+                radial-gradient(circle at 78% 28%, rgba(255, 134, 83, 0.18), transparent 36%),
+                linear-gradient(145deg, #070707, #111 54%, #050505);
+        }
+
+        .uyum-showcase::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border-radius: 24px;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 28px 28px;
+            mask-image: radial-gradient(circle at 50% 50%, black, transparent 72%);
+            -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 72%);
+            opacity: 0.7;
+            z-index: -1;
+        }
+
+        .uyum-scene {
+            position: relative;
+            width: min(96%, 640px);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: rotateX(6deg) rotateY(-7deg);
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .uyum-scene {
+            transform: rotateX(2deg) rotateY(-3deg) translateY(-6px);
+        }
+
+        .uyum-monitor {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 2 / 1;
+            padding: 11px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            background: linear-gradient(145deg, #1b1b1d, #050505);
+            box-shadow:
+                0 26px 50px rgba(0, 0, 0, 0.55),
+                0 0 34px rgba(255, 88, 148, 0.16),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .uyum-monitor::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(115deg, rgba(255, 255, 255, 0.16), transparent 32%, transparent 68%, rgba(255, 255, 255, 0.05));
+            pointer-events: none;
+        }
+
+        .uyum-screen-bar {
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .uyum-screen-bar span:first-child {
+            color: #ff5f9b;
+            font-weight: 700;
+        }
+
+        .project-image-container.uyum-showcase .uyum-monitor .project-image {
+            width: 100%;
+            height: calc(100% - 30px);
+            border-radius: 12px;
+            object-fit: cover;
+            object-position: center;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+        }
+
+        .uyum-stand {
+            width: 92px;
+            height: 42px;
+            background: linear-gradient(90deg, #090909, #373737 45%, #0b0b0b);
+            clip-path: polygon(28% 0, 72% 0, 88% 100%, 12% 100%);
+            margin-top: -2px;
+            box-shadow: 0 18px 26px rgba(0, 0, 0, 0.45);
+        }
+
+        .uyum-base {
+            width: 240px;
+            height: 13px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, transparent, #686868 20%, #1d1d1d 50%, #686868 80%, transparent);
+            box-shadow: 0 14px 22px rgba(0, 0, 0, 0.5);
+        }
+
         .project-image-container.laptop-preview {
             display: flex;
             align-items: center;
@@ -3140,8 +3247,18 @@
 
                     <div class="card project-card reveal-on-scroll delay-500" onclick="openModal('UyumApp')"
                         style="--delay: 0.4s;">
-                        <div class="project-image-container website-preview">
-                            <img src="uyum.app.png" alt="Uyum.app" class="project-image" loading="lazy">
+                        <div class="project-image-container website-preview uyum-showcase">
+                            <div class="uyum-scene">
+                                <div class="uyum-monitor">
+                                    <div class="uyum-screen-bar">
+                                        <span data-lang="project_live_preview">Canlı Önizleme</span>
+                                        <span>uyum.app</span>
+                                    </div>
+                                    <img src="uyum.app.png" alt="Uyum.app" class="project-image" loading="lazy">
+                                </div>
+                                <div class="uyum-stand"></div>
+                                <div class="uyum-base"></div>
+                            </div>
                             <span class="project-label">uyum.app</span>
                             <span class="project-arrow">→</span>
                         </div>
@@ -3815,6 +3932,7 @@
                     hero_desc: "Ben Sanriqa; fikirleri hem tasarlayan hem de kodlayan bir web geliştirici ve tasarımcıyım. Modern, hızlı ve kullanıcı odaklı web siteleri geliştiriyorum. Hadi birlikte bir şeyler inşa edelim.",
                     btn_all_projects: "Tüm Projelerim",
                     btn_contact: "İletişime Geç",
+                    project_live_preview: "Canlı Önizleme",
                     bubble_1_text: "“Onunla çalışmak oyunu tamamen değiştirdi!”",
                     bubble_1_author: "- Alesta",
                     bubble_2_text: "“Dönüşlerimizi 200% artırdı.”",
@@ -3923,6 +4041,7 @@
                     hero_desc: "I'm Sanriqa, a web developer and designer who both designs and codes ideas into reality. I build modern, fast, and user-focused websites. Let's build something great together.",
                     btn_all_projects: "All Projects",
                     btn_contact: "Get in Touch",
+                    project_live_preview: "Live Preview",
                     bubble_1_text: "“Working with him changed the game entirely!”",
                     bubble_1_author: "- Alesta",
                     bubble_2_text: "“We increased our conversions by 200%.”",
@@ -4031,6 +4150,7 @@
                     hero_desc: "Ich bin Sanriqa, ein Webentwickler und Designer, der Ideen sowohl gestaltet als auch programmiert. Ich entwickle moderne, schnelle und nutzerorientierte Websites. Lass uns gemeinsam etwas Großartiges bauen.",
                     btn_all_projects: "Alle Projekte",
                     btn_contact: "Kontaktieren",
+                    project_live_preview: "Live-Vorschau",
                     bubble_1_text: "“Die Zusammenarbeit mit ihm hat alles verändert!”",
                     bubble_1_author: "- Alesta",
                     bubble_2_text: "“Wir haben unsere Conversions um 200% gesteigert.”",
