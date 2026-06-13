@@ -894,6 +894,10 @@
             height: 280px;
         }
 
+        .col-left .project-card:nth-child(3) .project-image-container {
+            height: 320px;
+        }
+
         .col-right .project-card:nth-child(1) .project-image-container {
             height: 280px;
         }
@@ -1693,6 +1697,153 @@
             font-size: 1.3rem;
         }
 
+        /* --- NEXA STORE MODAL --- */
+        .nexa-wrap {
+            width: 92%;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 6px 0 26px;
+            text-align: center;
+        }
+
+        .nexa-hero {
+            position: relative;
+            border-radius: 24px;
+            padding: 2.4rem 1.5rem 2rem;
+            background:
+                radial-gradient(circle at 50% -10%, rgba(124, 92, 255, 0.38), transparent 60%),
+                linear-gradient(180deg, rgba(124, 92, 255, 0.10), rgba(0, 0, 0, 0));
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            overflow: hidden;
+            margin-bottom: 1.6rem;
+        }
+
+        .nexa-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, rgba(124, 92, 255, 0.045) 0 12px, transparent 12px 24px);
+            pointer-events: none;
+        }
+
+        .nexa-logo {
+            position: relative;
+            width: 108px;
+            height: 108px;
+            object-fit: contain;
+            margin-bottom: 0.9rem;
+            filter: drop-shadow(0 0 28px rgba(124, 92, 255, 0.65));
+        }
+
+        .nexa-title {
+            position: relative;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, #ffffff, #b9a6ff 55%, #7c5cff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.7rem;
+        }
+
+        .nexa-tag {
+            position: relative;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #cbbcff;
+            border: 1px solid rgba(124, 92, 255, 0.4);
+            background: rgba(124, 92, 255, 0.12);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+        }
+
+        .nexa-desc {
+            position: relative;
+            color: #aaa;
+            max-width: 520px;
+            margin: 1.1rem auto 0;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .nexa-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .nexa-feature {
+            text-align: left;
+            background: rgb(17, 17, 17);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 1.2rem 1.3rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .nexa-feature:hover {
+            border-color: rgba(124, 92, 255, 0.55);
+            transform: translateY(-4px);
+        }
+
+        .nexa-feature i {
+            color: #8b6dff;
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .nexa-feature h5 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .nexa-feature p {
+            color: #999;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .nexa-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #fff;
+            text-decoration: none;
+            padding: 1rem 2.4rem;
+            border-radius: 100px;
+            background: linear-gradient(180deg, #8b6dff, #6a45e6);
+            box-shadow: 0 8px 30px rgba(124, 92, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nexa-cta:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 42px rgba(124, 92, 255, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        }
+
+        @media (max-width: 600px) {
+            .nexa-features {
+                grid-template-columns: 1fr;
+            }
+
+            .nexa-title {
+                font-size: 2rem;
+            }
+        }
+
         @media (max-width: 600px) {
             .sites-grid {
                 grid-template-columns: 1fr;
@@ -1782,8 +1933,10 @@
 
             .col-left .project-card:nth-child(1) .project-image-container,
             .col-left .project-card:nth-child(2) .project-image-container,
+            .col-left .project-card:nth-child(3) .project-image-container,
             .col-right .project-card:nth-child(1) .project-image-container,
-            .col-right .project-card:nth-child(2) .project-image-container {
+            .col-right .project-card:nth-child(2) .project-image-container,
+            .col-right .project-card:nth-child(3) .project-image-container {
                 height: 300px !important;
             }
 
@@ -2846,6 +2999,17 @@
                         style="--delay: 0.2s;">
                         <div class="project-image-container">
                             <img src="fivem.png" alt="FiveM Projects" class="project-image" loading="lazy">
+                            <span class="project-arrow">→</span>
+                        </div>
+                    </div>
+
+                    <div class="card project-card reveal-on-scroll delay-500" onclick="openModal('NexaStore')"
+                        style="--delay: 0.45s;">
+                        <div class="project-image-container">
+                            <img src="nexa.png" alt="Nexa Store" class="project-image" loading="lazy">
+                            <span
+                                style="position: absolute; bottom: 20px; left: 20px; font-size: 1.5rem; font-weight: 700; color: #fff; z-index: 10; text-shadow: 0 2px 10px rgba(0,0,0,0.8); font-family: 'Plus Jakarta Sans', sans-serif;">Nexa
+                                Store</span>
                             <span class="project-arrow">→</span>
                         </div>
                     </div>
@@ -4286,6 +4450,46 @@
                 }
             };
 
+            // --- NEXA STORE ---
+            // TODO: Mağazanın gerçek linkini buraya yapıştır:
+            const NEXA_STORE_URL = "https://your-nexa-store-link.com";
+
+            const nexaContent = {
+                tr: {
+                    tag: "Premium FiveM Lua Scriptleri",
+                    desc: "FiveM sunucuların için optimize edilmiş, kurması kolay ve sürekli güncellenen premium Lua scriptleri. Nexa Store ile sunucunu bir üst seviyeye taşı.",
+                    features: [
+                        { icon: "fa-solid fa-bolt", title: "Optimize Kod", text: "Düşük kaynak tüketimi, yüksek performans için temiz ve optimize Lua kodu." },
+                        { icon: "fa-solid fa-plug", title: "Kur & Çalıştır", text: "Detaylı dokümantasyon ile dakikalar içinde kurulum." },
+                        { icon: "fa-solid fa-headset", title: "Aktif Destek", text: "Kurulum ve sorunlarında hızlı, aktif destek." },
+                        { icon: "fa-solid fa-rotate", title: "Düzenli Güncelleme", text: "Yeni FiveM sürümleriyle uyumlu, sürekli güncellenen scriptler." }
+                    ],
+                    cta: "Mağazayı Ziyaret Et"
+                },
+                en: {
+                    tag: "Premium FiveM Lua Scripts",
+                    desc: "Optimized, easy-to-install and constantly updated premium Lua scripts for your FiveM servers. Take your server to the next level with Nexa Store.",
+                    features: [
+                        { icon: "fa-solid fa-bolt", title: "Optimized Code", text: "Clean, optimized Lua with low resource usage and high performance." },
+                        { icon: "fa-solid fa-plug", title: "Plug & Play", text: "Set up in minutes with detailed documentation." },
+                        { icon: "fa-solid fa-headset", title: "Active Support", text: "Fast, active support for installation and any issues." },
+                        { icon: "fa-solid fa-rotate", title: "Regular Updates", text: "Continuously updated and compatible with new FiveM builds." }
+                    ],
+                    cta: "Visit Store"
+                },
+                de: {
+                    tag: "Premium FiveM Lua-Skripte",
+                    desc: "Optimierte, einfach zu installierende und ständig aktualisierte Premium-Lua-Skripte für deine FiveM-Server. Bring deinen Server mit Nexa Store auf das nächste Level.",
+                    features: [
+                        { icon: "fa-solid fa-bolt", title: "Optimierter Code", text: "Sauberer, optimierter Lua-Code mit geringem Ressourcenverbrauch." },
+                        { icon: "fa-solid fa-plug", title: "Plug & Play", text: "In wenigen Minuten installiert, mit ausführlicher Dokumentation." },
+                        { icon: "fa-solid fa-headset", title: "Aktiver Support", text: "Schneller, aktiver Support bei Installation und Problemen." },
+                        { icon: "fa-solid fa-rotate", title: "Regelmäßige Updates", text: "Ständig aktualisiert und kompatibel mit neuen FiveM-Builds." }
+                    ],
+                    cta: "Zum Store"
+                }
+            };
+
             // --- MODAL AÇMA FONKSİYONU ---
             function openModal(categoryName) {
                 const arrows = document.querySelectorAll('.nav-arrow');
@@ -4295,7 +4499,7 @@
                 modalGrid.scrollTop = 0;
 
                 // Grid Ayarı
-                if (categoryName === 'FiveM' || categoryName === 'LudoToys' || categoryName === 'UyumApp') {
+                if (categoryName === 'FiveM' || categoryName === 'LudoToys' || categoryName === 'UyumApp' || categoryName === 'NexaStore') {
                     modalGrid.style.display = 'block';
                 } else {
                     modalGrid.style.display = 'grid';
@@ -4347,6 +4551,38 @@
                                     
                                     <img src="uygulama.png" alt="App Preview" style="width: 100%; max-height: 300px; object-fit: contain; margin-top: 20px;">
                                 </div>
+                            </div>
+                        `;
+                    if (scrollIndicator) scrollIndicator.classList.add('hidden');
+
+                } else if (categoryName === 'NexaStore') {
+                    // NEXA STORE
+                    currentMode = 'nexastore';
+                    modalTitle.innerText = "NEXA STORE";
+                    arrows.forEach(arrow => arrow.style.display = 'none');
+
+                    const lang = localStorage.getItem('selectedLanguage') || 'en';
+                    const t = nexaContent[lang] || nexaContent['en'];
+
+                    modalGrid.innerHTML = `
+                            <div class="nexa-wrap">
+                                <div class="nexa-hero">
+                                    <img src="nexa.png" alt="Nexa Store" class="nexa-logo">
+                                    <div class="nexa-title">NEXA STORE</div>
+                                    <div class="nexa-tag">${t.tag}</div>
+                                    <p class="nexa-desc">${t.desc}</p>
+                                </div>
+                                <div class="nexa-features">
+                                    ${t.features.map(f => `
+                                        <div class="nexa-feature">
+                                            <i class="${f.icon}"></i>
+                                            <h5>${f.title}</h5>
+                                            <p>${f.text}</p>
+                                        </div>`).join('')}
+                                </div>
+                                <a href="${NEXA_STORE_URL}" target="_blank" rel="noopener" class="nexa-cta">
+                                    <i class="fa-solid fa-cart-shopping"></i> ${t.cta}
+                                </a>
                             </div>
                         `;
                     if (scrollIndicator) scrollIndicator.classList.add('hidden');
@@ -4491,7 +4727,7 @@
             // --- SCROLL EVENT ---
             const scrollIndicator = document.getElementById('modal-scroll-indicator');
             modalGrid.onscroll = () => {
-                if (currentMode === 'fivem' || currentMode === 'ludotoys' || currentMode === 'uyumapp') return;
+                if (currentMode === 'fivem' || currentMode === 'ludotoys' || currentMode === 'uyumapp' || currentMode === 'nexastore') return;
 
                 if (modalGrid.scrollTop > 50) {
                     if (scrollIndicator) scrollIndicator.classList.add('hidden');
@@ -4506,7 +4742,7 @@
             lightboxModal.addEventListener('click', (e) => { if (e.target === lightboxModal || e.target === lightboxImg) closeLightbox(); });
 
             function changeCategory(direction) {
-                if (currentMode === 'stream' || currentMode === 'fivem' || currentMode === 'ludotoys' || currentMode === 'uyumapp') return;
+                if (currentMode === 'stream' || currentMode === 'fivem' || currentMode === 'ludotoys' || currentMode === 'uyumapp' || currentMode === 'nexastore') return;
 
                 const oldTitle = modalTitle;
                 if (direction > 0) oldTitle.classList.add('title-slide-out-left');
