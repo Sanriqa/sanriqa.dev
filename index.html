@@ -956,7 +956,8 @@
             transform: scale(1.03);
         }
 
-        .project-image-container.uyum-showcase {
+        .project-image-container.uyum-showcase,
+        .project-image-container.nexa-showcase {
             perspective: 900px;
             padding: 34px 36px 58px;
             isolation: isolate;
@@ -966,7 +967,15 @@
                 linear-gradient(145deg, #070707, #111 54%, #050505);
         }
 
-        .uyum-showcase::before {
+        .project-image-container.nexa-showcase {
+            background:
+                radial-gradient(circle at 26% 18%, rgba(178, 92, 255, 0.22), transparent 34%),
+                radial-gradient(circle at 78% 28%, rgba(121, 68, 255, 0.18), transparent 36%),
+                linear-gradient(145deg, #070707, #111 54%, #050505);
+        }
+
+        .uyum-showcase::before,
+        .nexa-showcase::before {
             content: "";
             position: absolute;
             inset: 18px;
@@ -1037,7 +1046,12 @@
             font-weight: 700;
         }
 
-        .project-image-container.uyum-showcase .uyum-monitor .project-image {
+        .nexa-showcase .uyum-screen-bar span:first-child {
+            color: #b976ff;
+        }
+
+        .project-image-container.uyum-showcase .uyum-monitor .project-image,
+        .project-image-container.nexa-showcase .uyum-monitor .project-image {
             width: 100%;
             height: calc(100% - 30px);
             border-radius: 12px;
@@ -3113,15 +3127,15 @@
         <div class="scroll-line-bg"></div>
         <div class="scroll-line-progress" id="scroll-line"></div>
         <div class="scroll-dots-container">
-            <a href="#hero" class="scroll-dot active" data-target="hero" data-tooltip="Giriş"></a>
-            <a href="#projects" class="scroll-dot" data-target="projects" data-tooltip="Projeler"></a>
-            <a href="#built-sites" class="scroll-dot" data-target="built-sites" data-tooltip="Yaptığım Siteler"></a>
-            <a href="#tech-stack" class="scroll-dot" data-target="tech-stack" data-tooltip="Teknolojiler"></a>
-            <a href="#services" class="scroll-dot" data-target="services" data-tooltip="Hakkımda"></a>
-            <a href="#design-services" class="scroll-dot" data-target="design-services" data-tooltip="Hizmetler"></a>
-            <a href="#testimonials" class="scroll-dot" data-target="testimonials" data-tooltip="Yorumlar"></a>
-            <a href="#why-me" class="scroll-dot" data-target="why-me" data-tooltip="Neden Ben?"></a>
-            <a href="#contact" class="scroll-dot" data-target="contact" data-tooltip="İletişim"></a>
+            <a href="#hero" class="scroll-dot active" data-target="hero" data-tooltip-lang="scroll_hero" data-tooltip="Giriş"></a>
+            <a href="#projects" class="scroll-dot" data-target="projects" data-tooltip-lang="scroll_projects" data-tooltip="Projeler"></a>
+            <a href="#built-sites" class="scroll-dot" data-target="built-sites" data-tooltip-lang="scroll_sites" data-tooltip="Yaptığım Siteler"></a>
+            <a href="#tech-stack" class="scroll-dot" data-target="tech-stack" data-tooltip-lang="scroll_stack" data-tooltip="Teknolojiler"></a>
+            <a href="#services" class="scroll-dot" data-target="services" data-tooltip-lang="scroll_about" data-tooltip="Hakkımda"></a>
+            <a href="#design-services" class="scroll-dot" data-target="design-services" data-tooltip-lang="scroll_services" data-tooltip="Hizmetler"></a>
+            <a href="#testimonials" class="scroll-dot" data-target="testimonials" data-tooltip-lang="scroll_reviews" data-tooltip="Yorumlar"></a>
+            <a href="#why-me" class="scroll-dot" data-target="why-me" data-tooltip-lang="scroll_whyme" data-tooltip="Neden Ben?"></a>
+            <a href="#contact" class="scroll-dot" data-target="contact" data-tooltip-lang="scroll_contact" data-tooltip="İletişim"></a>
         </div>
     </div>
 
@@ -3220,8 +3234,18 @@
 
                     <div class="card project-card reveal-on-scroll delay-500" onclick="openModal('NexaStore')"
                         style="--delay: 0.45s;">
-                        <div class="project-image-container website-preview">
-                            <img src="nexa.png" alt="Nexa Store" class="project-image" loading="lazy">
+                        <div class="project-image-container website-preview nexa-showcase">
+                            <div class="uyum-scene">
+                                <div class="uyum-monitor">
+                                    <div class="uyum-screen-bar">
+                                        <span data-lang="project_live_preview">Canlı Önizleme</span>
+                                        <span>Nexa Store</span>
+                                    </div>
+                                    <img src="nexa.png" alt="Nexa Store" class="project-image" loading="lazy">
+                                </div>
+                                <div class="uyum-stand"></div>
+                                <div class="uyum-base"></div>
+                            </div>
                             <span class="project-label">Nexa Store</span>
                             <span class="project-arrow">→</span>
                         </div>
@@ -3933,6 +3957,15 @@
                     btn_all_projects: "Tüm Projelerim",
                     btn_contact: "İletişime Geç",
                     project_live_preview: "Canlı Önizleme",
+                    scroll_hero: "Giriş",
+                    scroll_projects: "Projeler",
+                    scroll_sites: "Yaptığım Siteler",
+                    scroll_stack: "Teknolojiler",
+                    scroll_about: "Hakkımda",
+                    scroll_services: "Hizmetler",
+                    scroll_reviews: "Yorumlar",
+                    scroll_whyme: "Neden Ben?",
+                    scroll_contact: "İletişim",
                     bubble_1_text: "“Onunla çalışmak oyunu tamamen değiştirdi!”",
                     bubble_1_author: "- Alesta",
                     bubble_2_text: "“Dönüşlerimizi 200% artırdı.”",
@@ -4042,6 +4075,15 @@
                     btn_all_projects: "All Projects",
                     btn_contact: "Get in Touch",
                     project_live_preview: "Live Preview",
+                    scroll_hero: "Home",
+                    scroll_projects: "Projects",
+                    scroll_sites: "Sites",
+                    scroll_stack: "Tech Stack",
+                    scroll_about: "About",
+                    scroll_services: "Services",
+                    scroll_reviews: "Reviews",
+                    scroll_whyme: "Why Me?",
+                    scroll_contact: "Contact",
                     bubble_1_text: "“Working with him changed the game entirely!”",
                     bubble_1_author: "- Alesta",
                     bubble_2_text: "“We increased our conversions by 200%.”",
@@ -4151,6 +4193,15 @@
                     btn_all_projects: "Alle Projekte",
                     btn_contact: "Kontaktieren",
                     project_live_preview: "Live-Vorschau",
+                    scroll_hero: "Start",
+                    scroll_projects: "Projekte",
+                    scroll_sites: "Webseiten",
+                    scroll_stack: "Technologien",
+                    scroll_about: "Über Mich",
+                    scroll_services: "Leistungen",
+                    scroll_reviews: "Bewertungen",
+                    scroll_whyme: "Warum Ich?",
+                    scroll_contact: "Kontakt",
                     bubble_1_text: "“Die Zusammenarbeit mit ihm hat alles verändert!”",
                     bubble_1_author: "- Alesta",
                     bubble_2_text: "“Wir haben unsere Conversions um 200% gesteigert.”",
@@ -4269,6 +4320,7 @@
                     });
 
                     updateCursorProjectLabel(lang);
+                    updateScrollTooltips(lang);
 
                     const flagImg = document.getElementById('header-lang-flag');
                     if (flagImg) {
@@ -4290,6 +4342,14 @@
             function updateCursorProjectLabel(lang) {
                 const label = translations[lang]?.cursor_project_label || translations.en.cursor_project_label;
                 document.documentElement.style.setProperty('--cursor-project-label', JSON.stringify(label));
+            }
+
+            function updateScrollTooltips(lang) {
+                document.querySelectorAll('[data-tooltip-lang]').forEach(el => {
+                    const key = el.getAttribute('data-tooltip-lang');
+                    const text = translations[lang]?.[key] || translations.en[key];
+                    if (text) el.setAttribute('data-tooltip', text);
+                });
             }
 
             function copyEmail() {
@@ -4314,6 +4374,7 @@
                     }
                 });
                 updateCursorProjectLabel(savedLang);
+                updateScrollTooltips(savedLang);
                 const flagImg = document.getElementById('header-lang-flag');
                 if (flagImg) {
                     if (savedLang === 'tr') flagImg.src = 'https://flagcdn.com/w40/tr.png';
